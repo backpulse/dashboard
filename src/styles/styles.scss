@@ -1,0 +1,19 @@
+body, html, #root,.app,.app-container {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif
+}
+
+.app {
+    div.page {
+        padding-top: 79px;
+        padding-left: 242px;
+        min-height: calc(100% - 79px);
+    }
+}
+
+a {
+    text-decoration: none!important;
+    color: rgba(0, 0, 0, 0.55)!important;
+}
