@@ -1,0 +1,11 @@
+.page.dashboard-my-sites {
+    padding-left: 0 !important;
+    width: 80%;
+    margin: 0 auto;
+
+    .sites-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}

@@ -17,3 +17,15 @@ a {
     text-decoration: none!important;
     color: rgba(0, 0, 0, 0.55)!important;
 }
+
+.hide-desktop {
+    @media screen and (min-width: 960px) {
+        display: none!important;
+    }
+}
+
+.fab {
+    position: absolute!important;
+    bottom: 15px;
+    right: 15px;
+}

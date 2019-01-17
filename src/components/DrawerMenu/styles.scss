@@ -1,38 +1,27 @@
-.app-bar {
-    z-index: 1201!important;
-}
-
 .root {
     flex-grow: 1;
     height: 440px;
     z-index: 1;
     overflow: hidden;
     position: relative;
-    display: flex; 
+    display: flex;
 }
 
 .drawer-paper {
     position: relative;
     width: 240px;
 
-    div + div {
-        width: 240px!important;
+    div+div {
+        width: 240px !important;
     }
-}
 
-.toolbar {
-    min-height: 64px;
 }
 
 .MuiListItem-root-91 {
-    padding-top: 13px!important;
-    padding-bottom: 13px!important;
+    padding-top: 13px !important;
+    padding-bottom: 13px !important;
 }
 
-.right {
-    position: absolute!important;
-    right: 15px;
-}
 
 .signout-icon {
     g {

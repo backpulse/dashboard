@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 import client from 'services/client';
 import { saveJWT } from '../../../utils/token';
@@ -18,49 +19,86 @@ class Authentication extends React.Component {
         super(props);
         this.state = {
             email: "",
-            password: ""
+            password: "",
+
+            errorMsg: "",
+            error: false,
+            emailHasError: false,
+            passHasError: false
         }
     }
 
     onSubmit = e => {
         e.preventDefault();
-        if(this.props.type === "login") {
-            /* Authentication */
-            client.post('/users/authenticate', {
-                email: this.state.email,
-                password: this.state.password
-            }).then(response => {
-                console.log(response.data);
-            }).catch(err => {
-                //TODO: display error
-                if(err) throw err;
-            });
-        } else {
-            /* Sign up */
-            client.post('/users', {
-                email: this.state.email,
-                password: this.state.password
-            }).then(response => {
-                saveJWT(response.data.payload);
-                window.location = "/";
-            }).catch(err => {
-                //TODO: display error
-                if(err) throw err;
-            });
+
+        client.post(this.props.type === "login" ? "/users/authenticate" : "/users", {
+            email: this.state.email,
+            password: this.state.password
+        }).then(response => {
+            console.log(response.data);
+            saveJWT(response.data.payload);
+            window.location = "/";
+        }).catch(err => {
+            //TODO: display error
+            this.checkError(err);
+            if(err) throw err;
+        });
+    }
+
+    checkError = err => {
+        console.log(err);
+        const errType = err.data.message;
+        switch (errType) {
+            case "password_too_short":
+                this.setState({
+                    errorMsg: strings.PASSWORD_TOO_SHORT,
+                    passHasError: true,
+                    emailHasError: false,
+                    error: true
+                });
+                break;
+            case "password_too_long":
+                this.setState({
+                    errorMsg: strings.PASSWORD_TOO_LONG,
+                    passHasError: true,
+                    emailHasError: false,
+                    error: true
+                });
+                break;
+
+            case "email_exists":
+                this.setState({
+                    errorMsg: strings.EMAIL_EXISTS,
+                    emailHasError: true,
+                    passHasError: false,
+                    error: true
+                });
+                break;
+            
+            case "auth_fail":
+                this.setState({
+                    errorMsg: strings.AUTHENTICATION_FAIL,
+                    emailHasError: true,
+                    passHasError: true,
+                    error: true
+                });
+                break;
+            default:
+                break;
         }
     }
 
     render() {
         return (
-            <div className="page homepage-authentication">
+            <div className="homepage homepage-authentication">
                 <div>
                     <h1>{this.props.type === "login" ? strings.AUTHENTICATION_LOGIN_TO_BACKPULSE : strings.AUTHENICATION_CREATE_BACKPULSE_ACCOUNT}</h1>
-
                     <Paper className="form">
                         <form onSubmit={this.onSubmit}>
                             <FormControl fullWidth>
                                 <TextField
                                     variant="filled"
+                                    error={this.state.emailHasError} 
                                     autoFocus
                                     type="email"
                                     label={strings.AUTHENTICATION_EMAIL_ADDRESS}
@@ -74,6 +112,7 @@ class Authentication extends React.Component {
                             <FormControl fullWidth>
                                 <TextField
                                     variant="filled"
+                                    error={this.state.passHasError}
                                     label={strings.AUTHENTICATION_PASSWORD}
                                     type="password"
                                     margin="normal"
@@ -83,6 +122,9 @@ class Authentication extends React.Component {
                                     })}
                                 />
                             </FormControl>
+                            {this.state.error && <FormHelperText error={true}>
+                                {this.state.errorMsg}
+                            </FormHelperText>}
                             <FormControl fullWidth>
                                 <Button type="submit" variant="contained" color="secondary">
                                     {this.props.type === "login" ? strings.AUTHENTICATION_LOGIN : strings.AUTHENTICATION_SIGN_UP}

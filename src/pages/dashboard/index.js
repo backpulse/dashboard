@@ -1,10 +1,10 @@
 import About from './About';
 import Contact from './Contact';
 import Galleries from './Galleries';
-import Home from './Home';
+import MySites from './MySites';
 
 export {
-    Home,
+    MySites,
     About,
     Contact,
     Galleries,

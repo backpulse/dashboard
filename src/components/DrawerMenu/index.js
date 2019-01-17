@@ -1,15 +1,11 @@
 import React from 'react';
 
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
-
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
 import PhotoAlbumIcon from '@material-ui/icons/PhotoAlbum';
@@ -18,7 +14,6 @@ import ContactIcon from '@material-ui/icons/ContactMail';
 import AboutIcon from '@material-ui/icons/ContactSupport';
 import ExitIcon from '@material-ui/icons/ExitToAppOutlined';
 import HomeIcon from '@material-ui/icons/Home';
-import MenuIcon from '@material-ui/icons/Menu';
 import ImportContacts from '@material-ui/icons/ImportContacts';
 
 import Button from '@material-ui/core/Button';
@@ -36,6 +31,8 @@ import { removeJWT } from 'utils/token';
 
 import './styles.scss';
 
+import strings from 'strings';
+
 const drawer = (
     <div>
         <Divider />
@@ -45,23 +42,7 @@ const drawer = (
                     <ListItemIcon>
                         <HomeIcon />
                     </ListItemIcon>
-                    <ListItemText inset primary="Page d'accueil" />
-                </ListItem>
-            </Link>
-            <Link to="/galleries">
-                <ListItem button>
-                    <ListItemIcon>
-                        <PhotoAlbumIcon />
-                    </ListItemIcon>
-                    <ListItemText inset primary="Galeries" />
-                </ListItem>
-            </Link>
-            <Link to="/work">
-                <ListItem button>
-                    <ListItemIcon>
-                        <ImportContacts />
-                    </ListItemIcon>
-                    <ListItemText inset primary="Publications" />
+                    <ListItemText inset primary={strings.DRAWER_MY_SITES} />
                 </ListItem>
             </Link>
             <Link to="/contact">
@@ -81,17 +62,17 @@ const drawer = (
                 </ListItem>
             </Link>
         </List>
-        {/* <Divider />
+        <Divider />
         <List>
             <Link to="/settings">
                 <ListItem button>
                     <ListItemIcon>
                         <SettingsIcon />
                     </ListItemIcon>
-                    <ListItemText inset primary="Configuration" />
+                    <ListItemText inset primary={strings.DRAWER_SETTINGS} />
                 </ListItem>
             </Link>
-        </List> */}
+        </List>
     </div>
 );
 
@@ -159,25 +140,6 @@ class DrawerMenu extends React.Component {
     render() {
         return (
             <div>
-                <AppBar position="fixed" className="app-bar">
-                    <Toolbar>
-                        <IconButton
-                            className="hide-desktop"
-                            color="inherit"
-                            aria-label="Open drawer"
-                            onClick={this.handleDrawerToggle}>
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography variant="h6" color="inherit" noWrap>
-                            {this.state.appBarTitle}
-                        </Typography>
-                        <IconButton onClick={() => {
-                            this.setState({confirmSignoutAlert: true});
-                        }} className="right signout-icon">
-                            <ExitIcon/>
-                        </IconButton>
-                    </Toolbar>
-                </AppBar>
                 <Hidden mdUp>
                     <Drawer
                         onClick={this.handleMobileClose}

@@ -13,17 +13,17 @@ import {
 } from '@material-ui/core/styles';
 
 import DrawerMenu from 'components/DrawerMenu';
+import AppBar from 'components/AppBar';
 
 import { getJWT, getUser, removeJWT } from 'utils/token';
 
 import {
-    Home as DashboardHome, Galleries, Contact, About
-} from 'pages/dashboard/index.js';
+    MySites, Galleries, Contact, About
+} from 'pages/dashboard';
 
 import {
     Home as HomepageHome, Authentication
 } from 'pages/homepage';
-
 
 const theme = createMuiTheme({
 	typography: {
@@ -31,7 +31,7 @@ const theme = createMuiTheme({
 	},
 	palette: {
 		primary: {
-			main: "#272b35"
+			main: "#0e1e25"
 		},
 		secondary: {
 			main: "#1abc9c",
@@ -75,18 +75,18 @@ class App extends React.Component {
 			<MuiThemeProvider theme={theme}>
 				<Router>
 					<div className="app-container">
-						{!getJWT() && <Switch>
-							<Route exact path="/" render={() => this.noAuth(<HomepageHome />)} />
-							<Route exact path="/signup" render={() => this.noAuth(<Authentication type="signup" />)} />
-							<Route exact path="/login" render={() => this.noAuth(<Authentication type="login" />)} />
-
-							{/* <Route render={() => window.location = "/"}/> */}
-						</Switch>}
 						<div className="app">
+							{getJWT() && <React.Fragment>
+								<AppBar/>
+								{/* <DrawerMenu/> */}
+							</React.Fragment>}
+							<Switch>
+								<Route exact path="/" render={() => getJWT() ? <MySites/> : <HomepageHome/>}/>
+								<Route exact path="/signup" render={() => this.noAuth(<Authentication type="signup" />)} />
+								<Route exact path="/login" render={() => this.noAuth(<Authentication type="login" />)} />
 
-                            {getJWT() && <Switch>
-                                <Route exact path="/" render={() => this.requireAuth(<DashboardHome/>)}/>
-                            </Switch>}
+								<Route render={() => window.location = "/"}/>
+							</Switch>
 						</div>
 					</div>
 				</Router>

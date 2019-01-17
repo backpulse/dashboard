@@ -1,4 +1,4 @@
-.page.homepage-authentication {
+.homepage.homepage-authentication {
     min-height: 100vh;
     background: #0e1e25;
 
@@ -20,6 +20,11 @@
         padding: 32px 40px 40px;
         width: 70%;
         margin: 0 auto;
+
+        p {
+            position: absolute;
+            margin-top: 0;
+        }
 
         button {
             margin-top: 20px;
