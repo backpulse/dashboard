@@ -29,7 +29,15 @@ const strings = {
         "NAME_TOO_SHORT": "Nom trop court.",
         "NAME_TOO_LONG": "Nom trop long.",
         "SITE_EXISTS": "Nom indisponible.",
-        "SITE_NAME_INCORRECT": "Le nom ne doit contenir que des lettres minuscules, des chiffres et des tirets."
+        "SITE_NAME_INCORRECT": "Le nom ne doit contenir que des lettres minuscules, des chiffres et des tirets.",
+        "OPEN": "Ouvrir",
+        "DRAWER_OVERVIEW": "Vue d'ensemble",
+        "DRAWER_PROJECTS": "Projets",
+        "DRAWER_CONTACT": "Contact",
+        "DRAWER_ABOUT": "À propos",
+        "DRAWER_SETTINGS": "Paramètres",
+
+        "PROJECTS_NEW_PROJECT": "Nouveau projet"
     },
     en: {
         "CANCEL": "Cancel",
@@ -57,7 +65,16 @@ const strings = {
         "NAME_TOO_SHORT": "Name too short.",
         "NAME_TOO_LONG": "Name too long.",
         "SITE_EXISTS": "Unavailable name.",
-        "SITE_NAME_INCORRECT": "The name should only contain lowercase letters, numbers, and dashes."
+        "SITE_NAME_INCORRECT": "The name should only contain lowercase letters, numbers, and dashes.",
+        "OPEN": "Open",
+
+        "DRAWER_OVERVIEW": "Overview",
+        "DRAWER_PROJECTS": "My projects",
+        "DRAWER_CONTACT": "Contact",
+        "DRAWER_ABOUT": "About",
+        "DRAWER_SETTINGS": "Settings",
+
+        "PROJECTS_NEW_PROJECT": "New project"
     }
 };
 

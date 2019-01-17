@@ -8,13 +8,15 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 
-import PhotoAlbumIcon from '@material-ui/icons/PhotoAlbum';
+import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ContactIcon from '@material-ui/icons/ContactMail';
-import AboutIcon from '@material-ui/icons/ContactSupport';
+import AboutIcon from '@material-ui/icons/PermIdentity';
 import ExitIcon from '@material-ui/icons/ExitToAppOutlined';
 import HomeIcon from '@material-ui/icons/Home';
+import ArrowBack from '@material-ui/icons/ArrowBack';
 import ImportContacts from '@material-ui/icons/ImportContacts';
+import OverviewIcon from '@material-ui/icons/RemoveRedEye';
 
 import Button from '@material-ui/core/Button';
 
@@ -25,6 +27,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Hidden from '@material-ui/core/Hidden';
 
+
 import {Link, withRouter} from 'react-router-dom';
 
 import { removeJWT } from 'utils/token';
@@ -32,49 +35,8 @@ import { removeJWT } from 'utils/token';
 import './styles.scss';
 
 import strings from 'strings';
+import { map } from 'rsvp';
 
-const drawer = (
-    <div>
-        <Divider />
-        <List>
-            <Link to="/homepage">
-                <ListItem button>
-                    <ListItemIcon>
-                        <HomeIcon />
-                    </ListItemIcon>
-                    <ListItemText inset primary={strings.DRAWER_MY_SITES} />
-                </ListItem>
-            </Link>
-            <Link to="/contact">
-                <ListItem button>
-                    <ListItemIcon>
-                        <ContactIcon />
-                    </ListItemIcon>
-                    <ListItemText inset primary="Page contact" />
-                </ListItem>
-            </Link>
-            <Link to="/about">
-                <ListItem button>
-                    <ListItemIcon>
-                        <AboutIcon />
-                    </ListItemIcon>
-                    <ListItemText inset primary="Page à propos" />
-                </ListItem>
-            </Link>
-        </List>
-        <Divider />
-        <List>
-            <Link to="/settings">
-                <ListItem button>
-                    <ListItemIcon>
-                        <SettingsIcon />
-                    </ListItemIcon>
-                    <ListItemText inset primary={strings.DRAWER_SETTINGS} />
-                </ListItem>
-            </Link>
-        </List>
-    </div>
-);
 
 class DrawerMenu extends React.Component {
 
@@ -85,6 +47,7 @@ class DrawerMenu extends React.Component {
             confirmSignoutAlert: false,
             mobileOpen: false
         }
+        console.log(this.props);
     }
 
     handleClose = () => this.setState({confirmSignoutAlert: false});
@@ -97,6 +60,61 @@ class DrawerMenu extends React.Component {
 
     handleDrawerToggle = () => this.setState({mobileOpen: true});
     handleMobileClose = () => this.setState({mobileOpen: false});
+
+    getDrawer = () => {
+        const routes = [
+            {
+                path: "/site/" + this.props.match.params.name,
+                icon: <OverviewIcon/>,
+                text: strings.DRAWER_OVERVIEW
+            },
+            {
+                path: "/site/" + this.props.match.params.name + "/projects",
+                icon: <LibraryBooks/>,
+                text: strings.DRAWER_PROJECTS
+            },
+            {
+                path: "/site/" + this.props.match.params.name + "/about",
+                icon: <AboutIcon/>,
+                text: strings.DRAWER_ABOUT
+            },
+            {
+                path: "/site/" + this.props.match.params.name + "/contact",
+                icon: <ContactIcon/>,
+                text: strings.DRAWER_CONTACT,
+            },
+            {
+                path: "/site/" + this.props.match.params.name + "/settings",
+                icon: <SettingsIcon/>,
+                text: strings.DRAWER_SETTINGS,
+            },
+            {
+                divider: true
+            },
+            {
+                path: "/",
+                icon: <ArrowBack/>,
+                text: strings.MENU_MY_SITES
+            }
+        ];
+        return (
+            <div>
+                <Divider />
+                <List>
+                    {routes.map((route, i) => route.divider ? <Divider style={{marginBottom: 10, marginTop: 10}} key={i}/> : (
+                        <Link key={i} to={route.path}>
+                            <ListItem className="list-item" button>
+                                <ListItemIcon>
+                                    {route.icon}
+                                </ListItemIcon>
+                                <ListItemText inset primary={route.text} />
+                            </ListItem>
+                        </Link> 
+                    ))}
+                </List>
+            </div>
+        )
+    }
 
     componentDidMount() {
         
@@ -153,7 +171,7 @@ class DrawerMenu extends React.Component {
                           }}
                         >
                         <div className="toolbar"/>
-                        {drawer}
+                        {this.getDrawer()}
                     </Drawer>
                 </Hidden>
                 <Hidden smDown implementation="css">
@@ -161,27 +179,9 @@ class DrawerMenu extends React.Component {
                         variant="permanent"
                         className="drawer-paper">
                         <div className="toolbar"/>
-                        {drawer}
+                        {this.getDrawer()}
                     </Drawer>
                 </Hidden>
-                <Dialog
-                    open={this.state.confirmSignoutAlert}
-                    onClose={this.handleClose}>
-                    <DialogTitle>{"Confirmation"}</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText variant="body1">
-                            Êtes-vous certain de vouloir vous déconnecter ?
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.handleClose} color="primary" autoFocus>
-                            Annuler
-                        </Button>
-                        <Button onClick={this.signOut} color="secondary" >
-                            Se déconnecter
-                        </Button>
-                    </DialogActions>
-                </Dialog>
             </div>
         )
     }

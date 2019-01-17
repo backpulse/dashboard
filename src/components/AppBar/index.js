@@ -12,8 +12,12 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
 import './styles.scss';
+import {withRouter} from 'react-router';
 
 import strings from 'strings';
+import {Link} from 'react-router-dom';
+
+import {signOut} from 'utils/token';
 
 class AppBar extends React.Component {
 
@@ -23,6 +27,7 @@ class AppBar extends React.Component {
             anchorEl: null,
             open: false
         }
+        console.log(this.props)
     }
     
     handleMenu = event => {
@@ -46,7 +51,7 @@ class AppBar extends React.Component {
                             <MenuIcon />
                         </IconButton> */}
                         <Typography style={{marginLeft: 15}} variant="h6" color="inherit" noWrap>
-                            Backpulse
+                            {this.props.title || "Backpulse"}
                         </Typography>
                         <div className="right">
                             <IconButton
@@ -57,6 +62,7 @@ class AppBar extends React.Component {
                                 <AccountCircle />
                             </IconButton>
                             <Menu
+                            className="menu-appbar"
                                 id="menu-appbar"
                                 anchorEl={this.state.anchorEl}
                                 anchorOrigin={{
@@ -69,10 +75,13 @@ class AppBar extends React.Component {
                                 }}
                                 open={this.state.open}
                                 onClose={this.handleClose}>
-                                <MenuItem onClick={this.handleClose}>{strings.MENU_MY_SITES}</MenuItem>
-                                <MenuItem onClick={this.handleClose}>{strings.MENU_MY_ACCOUNT}</MenuItem>
-                                <MenuItem onClick={this.handleClose}>{strings.MENU_LOGOUT}</MenuItem>
-
+                                <Link to="/">
+                                    <MenuItem onClick={this.handleClose}>{strings.MENU_MY_SITES}</MenuItem>
+                                </Link>
+                                <Link to="/account">
+                                    <MenuItem onClick={this.handleClose}>{strings.MENU_MY_ACCOUNT}</MenuItem>
+                                </Link>
+                                <MenuItem onClick={signOut}>{strings.MENU_LOGOUT}</MenuItem>
                             </Menu>
                         </div>
                     </Toolbar>
@@ -82,4 +91,4 @@ class AppBar extends React.Component {
     }
 }
 
-export default AppBar;
+export default withRouter(AppBar);

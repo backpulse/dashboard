@@ -24,6 +24,9 @@ import {toTitleCase} from 'utils';
 
 import strings from 'strings';
 import SiteBox from 'components/SiteBox';
+import { Typography } from '@material-ui/core';
+
+import AppBar from 'components/AppBar';
 
 class MySites extends React.Component {
 
@@ -148,11 +151,13 @@ class MySites extends React.Component {
     render() {
         return (
             <div className="page dashboard-my-sites">
+                <AppBar/>
                 <Fab onClick={this.handleNewSite} className="fab" variant="extended" color="primary" aria-label="Add">
                     <AddIcon />
                     {strings.MY_SITES_ADD_SITE}
                 </Fab>
 
+                <Typography variant="h1">My sites</Typography>
                 <div className="sites-container">
                     {this.state.sites.map((site, i) => (
                         <SiteBox key={i} site={site}/>

@@ -1,11 +1,15 @@
 import About from './About';
 import Contact from './Contact';
-import Galleries from './Galleries';
+import Projects from './Projects';
 import MySites from './MySites';
+import SiteEditor from './SiteEditor';
+import Settings from './Settings';
 
 export {
     MySites,
     About,
     Contact,
-    Galleries,
+    Projects,
+    SiteEditor,
+    Settings
 }
