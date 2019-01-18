@@ -58,7 +58,12 @@ const strings = {
 
         "TITLE": "Titre",
         "TITLES": "Titres",
-        "ADD_TRANSLATION": "Ajouter une traduction"
+        "ADD_TRANSLATION": "Ajouter une traduction",
+        "PROJECT_EDIT": "Modifier le projet",
+        "DESCRIPTIONS": "Descriptions",
+        "DELETE": "Supprimer",
+        "CONFIRM_DELETE_PROJECT_DESCRIPTION": "Êtes-vous certain(e) de vouloir supprimer de projet ?",
+        "DELETE_PROJECT": "Supprimer le projet"
     },
     en: {
         "CANCEL": "Cancel",
@@ -117,7 +122,12 @@ const strings = {
         "TITLE": "Title",
         "TITLES": "Titles",
 
-        "ADD_TRANSLATION": "Add translation"
+        "ADD_TRANSLATION": "Add translation",
+        "PROJECT_EDIT": "Edit project",
+        "DESCRIPTIONS": "Descriptions",
+        "DELETE": "Delete",
+        "CONFIRM_DELETE_PROJECT_DESCRIPTION": "Are you sure you want to permanently remove this project?",
+        "DELETE_PROJECT": "Delete project"
     }
 };
 
