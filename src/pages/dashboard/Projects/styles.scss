@@ -1,4 +1,27 @@
 .page.dashboard-projects {
+    .projects-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-left: -12px
+    }
+}
+
+.dialog-content {
+    margin-top: 15px;
+    margin-left: 15px;
+
+    .remove-button {
+        cursor: pointer;
+    }
+
+    .title-div {
+        display: flex;
+        h1 {
+            display: inline-block!important;
+            margin-right: 15px;
+        }
+    }
 }
 .topbar {
     position: relative!important;

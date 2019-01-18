@@ -54,8 +54,11 @@ const strings = {
         "ADDRESS_TOO_LONG": "Adresse trop longue.",
         "FACEBOOK_TOO_LONG": "URL Facebook trop longue.",
         "INSTAGRAM_TOO_LONG": "URL Instagram trop longue.",
-        "TWITTER_TOO_LONG": "URL Twitter trop longue."
+        "TWITTER_TOO_LONG": "URL Twitter trop longue.",
 
+        "TITLE": "Titre",
+        "TITLES": "Titres",
+        "ADD_TRANSLATION": "Ajouter une traduction"
     },
     en: {
         "CANCEL": "Cancel",
@@ -109,7 +112,12 @@ const strings = {
         "ADDRESS_TOO_LONG": "Address too long.",
         "FACEBOOK_TOO_LONG": "Facebook URL too long.",
         "INSTAGRAM_TOO_LONG": "Instagram URL too long.",
-        "TWITTER_TOO_LONG": "Twitter URL too long."
+        "TWITTER_TOO_LONG": "Twitter URL too long.",
+
+        "TITLE": "Title",
+        "TITLES": "Titles",
+
+        "ADD_TRANSLATION": "Add translation"
     }
 };
 
