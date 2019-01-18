@@ -21,6 +21,9 @@ import {
     Home as HomepageHome, Authentication
 } from 'pages/homepage';
 
+import { AnimatedSwitch } from 'react-router-transition';
+
+
 const theme = createMuiTheme({
 	typography: {
 	  useNextVariants: true,

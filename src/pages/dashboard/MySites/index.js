@@ -24,7 +24,7 @@ import {toTitleCase} from 'utils';
 
 import strings from 'strings';
 import SiteBox from 'components/SiteBox';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
 import AppBar from 'components/AppBar';
 
@@ -56,7 +56,7 @@ class MySites extends React.Component {
     }
 
     fetchTypes = () => {
-        client.get('/sites/types').then(response => {
+        client.get('/constants/site-types').then(response => {
             const types = response.data.payload || [];
             this.setState({types});
         }).catch(err => {
