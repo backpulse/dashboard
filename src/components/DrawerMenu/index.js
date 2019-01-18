@@ -12,19 +12,9 @@ import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ContactIcon from '@material-ui/icons/ContactMail';
 import AboutIcon from '@material-ui/icons/PermIdentity';
-import ExitIcon from '@material-ui/icons/ExitToAppOutlined';
-import HomeIcon from '@material-ui/icons/Home';
 import ArrowBack from '@material-ui/icons/ArrowBack';
-import ImportContacts from '@material-ui/icons/ImportContacts';
 import OverviewIcon from '@material-ui/icons/RemoveRedEye';
 
-import Button from '@material-ui/core/Button';
-
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Hidden from '@material-ui/core/Hidden';
 
 
@@ -35,8 +25,6 @@ import { removeJWT } from 'utils/token';
 import './styles.scss';
 
 import strings from 'strings';
-import { map } from 'rsvp';
-
 
 class DrawerMenu extends React.Component {
 
@@ -47,7 +35,6 @@ class DrawerMenu extends React.Component {
             confirmSignoutAlert: false,
             mobileOpen: false
         }
-        console.log(this.props);
     }
 
     handleClose = () => this.setState({confirmSignoutAlert: false});
@@ -66,27 +53,33 @@ class DrawerMenu extends React.Component {
             {
                 path: "/site/" + this.props.match.params.name,
                 icon: <OverviewIcon/>,
-                text: strings.DRAWER_OVERVIEW
+                text: strings.DRAWER_OVERVIEW,
+                type: "all"
             },
             {
                 path: "/site/" + this.props.match.params.name + "/projects",
                 icon: <LibraryBooks/>,
-                text: strings.DRAWER_PROJECTS
+                text: strings.DRAWER_PROJECTS,
+                type: "portfolio"
+
             },
             {
                 path: "/site/" + this.props.match.params.name + "/about",
                 icon: <AboutIcon/>,
-                text: strings.DRAWER_ABOUT
+                text: strings.DRAWER_ABOUT,
+                type: "all"
             },
             {
                 path: "/site/" + this.props.match.params.name + "/contact",
                 icon: <ContactIcon/>,
                 text: strings.DRAWER_CONTACT,
+                type: "all"
             },
             {
                 path: "/site/" + this.props.match.params.name + "/settings",
                 icon: <SettingsIcon/>,
                 text: strings.DRAWER_SETTINGS,
+                type: "all"
             },
             {
                 divider: true
@@ -94,26 +87,38 @@ class DrawerMenu extends React.Component {
             {
                 path: "/",
                 icon: <ArrowBack/>,
-                text: strings.MENU_MY_SITES
+                text: strings.MENU_MY_SITES,
+                type: "all"
             }
         ];
         return (
             <div>
                 <Divider />
                 <List>
-                    {routes.map((route, i) => route.divider ? <Divider style={{marginBottom: 10, marginTop: 10}} key={i}/> : (
-                        <Link key={i} to={route.path}>
-                            <ListItem className="list-item" button>
-                                <ListItemIcon>
-                                    {route.icon}
-                                </ListItemIcon>
-                                <ListItemText inset primary={route.text} />
-                            </ListItem>
-                        </Link> 
-                    ))}
+                    {routes.map((route, i) => {
+                        if(route.divider) {
+                            return <Divider style={{marginBottom: 10, marginTop: 10}} key={i}/>
+                        } else if(this.props.site.type === route.type || route.type === "all") {
+                            return <Link key={i} to={route.path}>
+                                <ListItem className={["list-item", this.isActive(route) ? "active": ""].join(" ")} button>
+                                    <ListItemIcon>
+                                        {route.icon}
+                                    </ListItemIcon>
+                                    <ListItemText inset primary={route.text} />
+                                </ListItem>
+                            </Link> 
+                        } else {
+                            return null;
+                        }
+                    })}
                 </List>
             </div>
         )
+    }
+
+    isActive = route => {
+        const fullRoute = this.props.location.pathname;
+        return (route.path === fullRoute);
     }
 
     componentDidMount() {

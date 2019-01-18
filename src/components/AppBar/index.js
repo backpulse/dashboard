@@ -2,8 +2,6 @@ import React from 'react';
 import Bar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
-import MenuIcon from '@material-ui/icons/Menu';
-
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -27,7 +25,6 @@ class AppBar extends React.Component {
             anchorEl: null,
             open: false
         }
-        console.log(this.props)
     }
     
     handleMenu = event => {

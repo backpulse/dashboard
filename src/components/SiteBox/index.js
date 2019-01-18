@@ -31,7 +31,7 @@ class SiteBox extends React.Component {
                                 {this.props.site.type === "music" && <MusicNote/>}
                                 {this.props.site.type === "portfolio" && <Portfolio/>}
                             </span>
-                            <Typography variant="p">{this.props.site.name}</Typography>
+                            <Typography variant="body1">{this.props.site.name}</Typography>
                         </div>
 
                         <div className="divider"/>
@@ -39,7 +39,7 @@ class SiteBox extends React.Component {
                 </Link>
                 <div className="bottom">
                     <UpdateIcon fontSize="small"/>
-                    <Typography className="updated-at" variant="p"> {dayjs(this.props.site.updated_at).format("M/MM/YYYY HH:mm")}</Typography>
+                    <Typography className="updated-at" variant="caption"> {dayjs(this.props.site.updated_at).format("M/MM/YYYY HH:mm")}</Typography>
                     <Link className="open-button" to={"/site/" + this.props.site.name}>
                         <Button color="primary" size="small" variant="contained">{strings.OPEN}</Button>
                     </Link> 

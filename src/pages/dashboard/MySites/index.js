@@ -57,7 +57,6 @@ class MySites extends React.Component {
 
     fetchTypes = () => {
         client.get('/sites/types').then(response => {
-            console.log(response.data);
             const types = response.data.payload || [];
             this.setState({types});
         }).catch(err => {
@@ -99,7 +98,6 @@ class MySites extends React.Component {
             name: this.state.siteName,
             type: this.state.siteType
         }).then(response => {
-            console.log(response.data);
             this.fetchSites();
             this.handleNewSiteDialogClose();
         }).catch(err => {

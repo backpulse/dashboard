@@ -35,7 +35,6 @@ class Authentication extends React.Component {
             email: this.state.email,
             password: this.state.password
         }).then(response => {
-            console.log(response.data);
             saveJWT(response.data.payload);
             window.location = "/";
         }).catch(err => {
@@ -46,7 +45,6 @@ class Authentication extends React.Component {
     }
 
     checkError = err => {
-        console.log(err);
         const errType = err.data.message;
         switch (errType) {
             case "password_too_short":

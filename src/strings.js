@@ -37,7 +37,25 @@ const strings = {
         "DRAWER_ABOUT": "À propos",
         "DRAWER_SETTINGS": "Paramètres",
 
-        "PROJECTS_NEW_PROJECT": "Nouveau projet"
+        "PROJECTS_NEW_PROJECT": "Nouveau projet",
+
+        "CONTACT": "Contact",
+        "CONTACT_NAME": "Nom",
+        "CONTACT_PHONE": "Téléphone",
+        "CONTACT_ADDRESS": "Adresse",
+        "CONTACT_EMAIL": "Adresse email",
+        "CONTACT_FACEBOOK_URL": "URL Facebook",
+        "CONTACT_INSTAGRAM_URL": "URL Instagram",
+        "CONTACT_TWITTER_URL": "URL Twitter",
+        "SAVE": "Sauvegarder",
+
+        "PHONE_TOO_LONG": "Numéro de téléphone trop long.",
+        "EMAIL_TOO_LONG": "Adresse email trop longue.",
+        "ADDRESS_TOO_LONG": "Adresse trop longue.",
+        "FACEBOOK_TOO_LONG": "URL Facebook trop longue.",
+        "INSTAGRAM_TOO_LONG": "URL Instagram trop longue.",
+        "TWITTER_TOO_LONG": "URL Twitter trop longue."
+
     },
     en: {
         "CANCEL": "Cancel",
@@ -74,7 +92,24 @@ const strings = {
         "DRAWER_ABOUT": "About",
         "DRAWER_SETTINGS": "Settings",
 
-        "PROJECTS_NEW_PROJECT": "New project"
+        "PROJECTS_NEW_PROJECT": "New project",
+
+        "CONTACT": "Contact",
+        "CONTACT_NAME": "Name",
+        "CONTACT_PHONE": "Phone",
+        "CONTACT_ADDRESS": "Address",
+        "CONTACT_EMAIL": "Email address",
+        "CONTACT_FACEBOOK_URL": "Facebook URL",
+        "CONTACT_INSTAGRAM_URL": "Instagram URL",
+        "CONTACT_TWITTER_URL": "Twitter URL",
+        "SAVE": "Save",
+
+        "PHONE_TOO_LONG": "Phone number too long.",
+        "EMAIL_TOO_LONG": "Email address too long.",
+        "ADDRESS_TOO_LONG": "Address too long.",
+        "FACEBOOK_TOO_LONG": "Facebook URL too long.",
+        "INSTAGRAM_TOO_LONG": "Instagram URL too long.",
+        "TWITTER_TOO_LONG": "Twitter URL too long."
     }
 };
 

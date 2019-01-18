@@ -2,7 +2,6 @@ import React from 'react';
 
 import {
 	BrowserRouter as Router,
-	Switch,
     Route,
     Redirect
 } from 'react-router-dom';
@@ -12,12 +11,10 @@ import {
 	createMuiTheme
 } from '@material-ui/core/styles';
 
-import AppBar from 'components/AppBar';
-
 import { getJWT, getUser, removeJWT } from 'utils/token';
 
 import {
-    MySites, SiteEditor, Projects, Contact, About, Settings
+    MySites, SiteEditor, Projects, Contact, About, Settings, Overview
 } from 'pages/dashboard';
 
 import {
@@ -80,19 +77,22 @@ class App extends React.Component {
 				<Router>
 					<div className="app-container">
 						<div className="app">
-							<Switch ref={this.switch}>
-								<Route exact path="/" render={() => getJWT() ? <MySites/> : <HomepageHome/>}/>
-								<Route exact path="/signup" render={() => this.noAuth(<Authentication type="signup" />)} />
-								<Route exact path="/login" render={() => this.noAuth(<Authentication type="login" />)} />
-								
-								<Route exact path="/site/:name"  render={() => this.requireAuth(<SiteEditor/>)}/>
-								<Route exact path="/site/:name/projects" render={() => this.requireAuth(<Projects/>)}/>
-								<Route exact path="/site/:name/about" render={() => this.requireAuth(<About/>)}/>
-								<Route exact path="/site/:name/contact" render={() => this.requireAuth(<Contact/>)}/>
-								<Route exact path="/site/:name/settings" render={() => this.requireAuth(<Settings/>)}/>
+							<Route exact path="/" render={() => getJWT() ? <MySites/> : <HomepageHome/>}/>
+							<Route path="/signup" render={() => this.noAuth(<Authentication type="signup" />)} />
+							<Route path="/login" render={() => this.noAuth(<Authentication type="login" />)} />
+							
+							<Route path="/site/:name" render={({ match: { url } }) => (
+								<React.Fragment>
+									<Route exact path="/site/:name" render={() => this.requireAuth(<Overview/>)}/>
+									<Route path="/site/:name" render={() => this.requireAuth(<SiteEditor/>)}/>
+									<Route path="/site/:name/projects" render={() => this.requireAuth(<Projects/>)}/>
+									<Route path="/site/:name/about" render={() => this.requireAuth(<About/>)}/>
+									<Route path="/site/:name/contact" render={() => this.requireAuth(<Contact/>)}/>
+									<Route path="/site/:name/settings" render={() => this.requireAuth(<Settings/>)}/>
+								</React.Fragment>
+							)}/>
 
-								{/* <Route render={() => window.location = "/"}/> */}
-							</Switch>
+							{/* <Route render={() => window.location = "/"}/> */}
 						</div>
 					</div>
 				</Router>

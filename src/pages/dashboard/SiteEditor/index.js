@@ -14,14 +14,14 @@ class SiteEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            site: {}
         }
     }
 
     fetchSite = () => {
         client.get('/sites/' + this.props.match.params.name).then(response => {
-            const site = response.data.payload;
-            this.setState({...site});
+            const site = response.data.payload || {};
+            this.setState({site});
         }).catch(err => {
             if(err) throw err;
         });
@@ -33,10 +33,9 @@ class SiteEditor extends React.Component {
 
     render() {
         return (
-            <div className="page dashboard-site-editor">
+            <div className="site-editor">
                 <AppBar title={this.props.match.params.name}/>
-                <DrawerMenu/>
-                <h1>{this.state.name}</h1>
+                <DrawerMenu site={this.state.site}/>
             </div>
         );
     }
