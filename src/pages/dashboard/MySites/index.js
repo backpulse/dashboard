@@ -155,7 +155,7 @@ class MySites extends React.Component {
                     {strings.MY_SITES_ADD_SITE}
                 </Fab>
 
-                <Typography variant="h1">My sites</Typography>
+                <Typography variant="h1">{strings.MENU_MY_SITES}</Typography>
                 <div className="sites-container">
                     {this.state.sites.map((site, i) => (
                         <SiteBox key={i} site={site}/>

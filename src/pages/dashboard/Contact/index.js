@@ -139,6 +139,7 @@ class Contact extends React.Component {
                             error={this.state.errorField === "address"}
                             label={strings.CONTACT_ADDRESS}
                             variant="outlined"
+                            multiline
                             value={this.state.address}
                             onChange={e=>this.setState({address: e.target.value})}
                             margin="normal"

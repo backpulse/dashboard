@@ -11,8 +11,8 @@
     margin-top: 15px;
     margin-left: 15px;
 
-    .remove-button {
-        cursor: pointer;
+    .url-input {
+        width: calc(100% + 8px);
     }
 
     .title-div {
@@ -26,4 +26,8 @@
 }
 .topbar {
     position: relative!important;
+}
+
+.remove-button {
+    cursor: pointer;
 }

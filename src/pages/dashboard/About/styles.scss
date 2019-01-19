@@ -1,0 +1,17 @@
+.page.dashboard-about {
+    textarea {
+        overflow: hidden;
+    }
+    .title-div {
+        display: flex;
+        margin-bottom: 15px;
+        h2 {
+            display: inline-block!important;
+            margin-right: 15px;
+        }
+    }
+
+    .save-button {
+        margin: 25px 0;
+    }
+}

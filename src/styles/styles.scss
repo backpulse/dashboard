@@ -9,6 +9,7 @@ body, html, #root,.app,.app-container {
     div.page {
         padding-top: 85px;
         padding-left: 275px;
+        padding-right: 25px;
         min-height: calc(100% - 85px);
         h1 {
             font-size: 36px;
@@ -18,10 +19,16 @@ body, html, #root,.app,.app-container {
     }
 }
 
-h1 {
-    font-size: 36px;
+h1,h2,h3,h4,h5 {
     font-weight: 300;
     line-height: 48px;
+}
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 30px;
 }
 
 h1,h2,h3,p {

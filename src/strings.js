@@ -63,7 +63,9 @@ const strings = {
         "DESCRIPTIONS": "Descriptions",
         "DELETE": "Supprimer",
         "CONFIRM_DELETE_PROJECT_DESCRIPTION": "Êtes-vous certain(e) de vouloir supprimer de projet ?",
-        "DELETE_PROJECT": "Supprimer le projet"
+        "DELETE_PROJECT": "Supprimer le projet",
+        "PROJECT_URL": "Lien du projet",
+        "ABOUT": "À propos"
     },
     en: {
         "CANCEL": "Cancel",
@@ -127,7 +129,9 @@ const strings = {
         "DESCRIPTIONS": "Descriptions",
         "DELETE": "Delete",
         "CONFIRM_DELETE_PROJECT_DESCRIPTION": "Are you sure you want to permanently remove this project?",
-        "DELETE_PROJECT": "Delete project"
+        "DELETE_PROJECT": "Delete project",
+        "PROJECT_URL": "Project url",
+        "ABOUT": "About"
     }
 };
 
