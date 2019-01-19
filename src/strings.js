@@ -36,6 +36,7 @@ const strings = {
         "DRAWER_CONTACT": "Contact",
         "DRAWER_ABOUT": "À propos",
         "DRAWER_SETTINGS": "Paramètres",
+        "DRAWER_GALLERIES": "Galeries",
 
         "PROJECTS_NEW_PROJECT": "Nouveau projet",
 
@@ -65,7 +66,15 @@ const strings = {
         "CONFIRM_DELETE_PROJECT_DESCRIPTION": "Êtes-vous certain(e) de vouloir supprimer de projet ?",
         "DELETE_PROJECT": "Supprimer le projet",
         "PROJECT_URL": "Lien du projet",
-        "ABOUT": "À propos"
+        "ABOUT": "À propos",
+        "NEW_GALLERY": "Nouvelle galerie",
+        "EDIT_GALLERY": "Modifier la galerie",
+        "PHOTOS": "Photos",
+        "IMPORT_PHOTOS": "Importer des photographies",
+        "IMPORT_PHOTOS_DESCRIPTION": "Merci d'importer une ou plusieurs photographies.",
+        "FILES": "fichiers",
+        "ADD": "Ajouter",
+        "TOO_MANY_PICTURES": "Trop d'images."
     },
     en: {
         "CANCEL": "Cancel",
@@ -101,6 +110,7 @@ const strings = {
         "DRAWER_CONTACT": "Contact",
         "DRAWER_ABOUT": "About",
         "DRAWER_SETTINGS": "Settings",
+        "DRAWER_GALLERIES": "Galleries",
 
         "PROJECTS_NEW_PROJECT": "New project",
 
@@ -131,7 +141,15 @@ const strings = {
         "CONFIRM_DELETE_PROJECT_DESCRIPTION": "Are you sure you want to permanently remove this project?",
         "DELETE_PROJECT": "Delete project",
         "PROJECT_URL": "Project url",
-        "ABOUT": "About"
+        "ABOUT": "About",
+        "NEW_GALLERY": "New gallery",
+        "EDIT_GALLERY": "Edit gallery",
+        "PHOTOS": "Photos",
+        "IMPORT_PHOTOS": "Import photos",
+        "IMPORT_PHOTOS_DESCRIPTION": "Please import one or multiple photos.",
+        "FILES": "files",
+        "ADD": "Add",
+        "TOO_MANY_PICTURES": "Too many pictures."
     }
 };
 

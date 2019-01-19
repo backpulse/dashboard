@@ -5,6 +5,7 @@ import MySites from './MySites';
 import SiteEditor from './SiteEditor';
 import Settings from './Settings';
 import Overview from './Overview';
+import Galleries from './Galleries';
 
 export {
     MySites,
@@ -13,5 +14,6 @@ export {
     Projects,
     SiteEditor,
     Settings,
-    Overview
+    Overview,
+    Galleries
 }

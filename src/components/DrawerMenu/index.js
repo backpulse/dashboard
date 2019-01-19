@@ -14,9 +14,9 @@ import ContactIcon from '@material-ui/icons/ContactMail';
 import AboutIcon from '@material-ui/icons/PermIdentity';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import OverviewIcon from '@material-ui/icons/RemoveRedEye';
+import PhotoLibrary from '@material-ui/icons/PhotoLibrary';
 
 import Hidden from '@material-ui/core/Hidden';
-
 
 import {Link, withRouter} from 'react-router-dom';
 
@@ -61,6 +61,13 @@ class DrawerMenu extends React.Component {
                 icon: <LibraryBooks/>,
                 text: strings.DRAWER_PROJECTS,
                 type: "portfolio"
+
+            },
+            {
+                path: "/site/" + this.props.match.params.name + "/galleries",
+                icon: <PhotoLibrary/>,
+                text: strings.DRAWER_GALLERIES,
+                type: "photography"
 
             },
             {

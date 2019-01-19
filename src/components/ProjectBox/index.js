@@ -7,8 +7,6 @@ import UpdateIcon from '@material-ui/icons/Update';
 
 import Button from '@material-ui/core/Button';
 
-import {Link} from 'react-router-dom';
-
 import dayjs from 'dayjs';
 
 import strings from 'strings';

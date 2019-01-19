@@ -18,48 +18,42 @@ import DialogContent from '@material-ui/core/DialogContent';
 import FormControl from '@material-ui/core/FormControl';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import RemoveCircle from '@material-ui/icons/RemoveCircle';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-
-import ProjectBox from 'components/ProjectBox';
-
 import strings from 'strings';
+import Selector from 'components/Selector';
+
+import FileUploader from 'components/FileUploader';
 
 import client from 'services/client';
 
 import './styles.scss';
-import Selector from 'components/Selector';
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
 }
+class Galleries extends React.Component {
 
-class Projects extends React.Component {
-    
     constructor(props) {
         super(props);
         this.state = {
-            projects: [],
-            languages: [],
-            dialogOpen: false,
-            confirmDelete: false,
+            galleries : [],
+
             titles: [],
             descriptions: [],
-            url: "",
-            id: "",
-            short_id: ""
+            languages: [],
+            newGalleryDialog: false,
+
+            importDialog: false
         }
     }
 
     componentDidMount() {
-        this.fetchProjects();
+        this.fetchGalleries();
     }
 
-    fetchProjects = () => {
-        client.get('/projects/'+ this.props.match.params.name).then(response => {
-            const projects = response.data.payload || [];
-            this.setState({projects});
+    fetchGalleries = () => {
+        client.get('/galleries/' + this.props.match.params.name).then(response => {
+            const galleries = response.data.payload;
+            this.setState({galleries});
         }).catch(err => {
             if(err) throw err;
         });
@@ -79,11 +73,10 @@ class Projects extends React.Component {
         });
     }
 
-    handleNewProject = () => {
+    handleNewGallery = () => {
         this.fetchLanguages();
         this.setState({
-            dialogOpen: true,
-            url: "",
+            newGalleryDialog: true,
             id: "",
             short_id: "",
             titles: [{
@@ -100,25 +93,8 @@ class Projects extends React.Component {
     };
 
     handleClose = () => this.setState({
-        dialogOpen: false
-    })
-
-    fetchProject = id => {
-        client.get('/project/'+ id).then(response => {
-            const project = response.data.payload;
-            this.setState({...project});
-        }).catch(err => {
-            if(err) throw err;
-        });
-    }
-
-    editProject = project => {
-        this.fetchLanguages();
-        this.fetchProject(project.short_id);
-        this.setState({
-            dialogOpen: true
-        });
-    }
+        newGalleryDialog: false
+    });
 
     handleChangeTitle = (event, i) => {
         const value = event.target.value;
@@ -173,40 +149,6 @@ class Projects extends React.Component {
         this.setState({descriptions});
     }
 
-    handleSave = () => {
-        client.put('/projects/' + this.props.match.params.name, {
-            titles: this.state.titles,
-            descriptions: this.state.descriptions,
-            id: this.state.id,
-            short_id: this.state.short_id,
-            url: this.state.url
-        }).then(response => {
-            this.handleClose();
-            this.fetchProjects();
-        }).catch(err => {
-            if(err) throw err;
-        });
-    }
-    
-
-    openConfirmDelete = () => this.setState({
-        confirmDelete: true
-    });
-
-    handleConfirmClose = () => this.setState({
-        confirmDelete: false
-    });
-
-    deleteProject = () => {
-        client.delete('/project/' + this.state.short_id).then(response => {
-            this.fetchProjects();
-            this.handleConfirmClose();
-            this.handleClose();
-        }).catch(err => {
-            if(err) throw err;
-        });
-    }
-
     getAvailableTitleLanguages = () => {
         const languages = this.state.languages;
         const available = [];
@@ -251,23 +193,23 @@ class Projects extends React.Component {
         return available;
     }
 
+    toggleImport = () => this.setState({
+        importDialog: !this.state.importDialog
+    })
+    
+
     render() {
         return (
-            <div className="page dashboard-projects">
-                <Fab onClick={this.handleNewProject} className="fab" variant="extended" color="primary" aria-label="Add">
+            <div className="page dashboard-galleries">
+                <Fab onClick={this.handleNewGallery} className="fab" variant="extended" color="primary" aria-label="Add">
                     <AddIcon />
-                    {strings.PROJECTS_NEW_PROJECT}
+                    {strings.NEW_GALLERY}
                 </Fab>
-                <h1>{strings.DRAWER_PROJECTS}</h1>
-                <div className="projects-container">
-                    {this.state.projects.map((project, i) => {
-                        return <ProjectBox key={i} onOpen={() => this.editProject(project)} project={project}/>;
-                    })}
-                </div>
+                <h1>{strings.DRAWER_GALLERIES}</h1>
 
                 <Dialog
                     fullScreen
-                    open={this.state.dialogOpen}
+                    open={this.state.newGalleryDialog}
                     onClose={this.handleClose}
                     TransitionComponent={Transition}
                     >
@@ -277,7 +219,7 @@ class Projects extends React.Component {
                             <CloseIcon />
                         </IconButton>
                         <Typography variant="h6" color="inherit" style={{flex: 1}}>
-                            {this.state.id ? strings.PROJECT_EDIT : strings.PROJECTS_NEW_PROJECT}
+                            {this.state.id ? strings.PROJECT_EDIT : strings.NEW_GALLERY}
                         </Typography>
                         {this.state.id && <Button style={{marginRight: 15}} className="button-danger-outlined" variant="outlined" onClick={this.openConfirmDelete}>
                             {strings.DELETE}
@@ -289,9 +231,9 @@ class Projects extends React.Component {
                     </AppBar>
                     <DialogContent className="dialog-content">
                         <Grid container spacing={16}>
-                            <Grid item xs={6}>
+                            <Grid item md={5} xs={12}>
                                 <Grid container direction="column">
-                                    <Grid item xs={12} md={8}>
+                                    <Grid item xs={12} md={10}>
                                         <div className="title-div">
                                             <h1>{strings.TITLES}</h1>
                                             <FormControl fullWidth>
@@ -305,15 +247,15 @@ class Projects extends React.Component {
                                         </div>
                                     </Grid>
                                     {this.state.titles.map((title, i) => (
-                                        <Grid key={i} item xs={12} md={8}>
+                                        <Grid key={i} item md={10}>
                                             <TextField
                                                 label={title.language_name}
                                                 variant="outlined"
                                                 value={title.content}
                                                 onChange={e => this.handleChangeTitle(e, i)}
                                                 margin="dense"
-                                                fullWidth
                                                 multiline
+                                                fullWidth
                                                 InputProps={{
                                                     endAdornment: (
                                                     <InputAdornment className="remove-button" position="end">
@@ -331,10 +273,8 @@ class Projects extends React.Component {
                                         {this.state.errorMsg}
                                     </FormHelperText>}
                                 </Grid>
-                            </Grid>
-                            <Grid item xs={6}>
                                 <Grid container direction="column">
-                                    <Grid item xs={12} md={8}>
+                                    <Grid style={{marginTop: 15}} item xs={12} md={10}>
                                         <div className="title-div">
                                             <h1>{strings.DESCRIPTIONS}</h1>
                                             <FormControl fullWidth>
@@ -348,7 +288,7 @@ class Projects extends React.Component {
                                         </div>
                                     </Grid>
                                     {this.state.descriptions.map((desc, i) => (
-                                        <Grid key={i} item xs={12} md={8}>
+                                        <Grid key={i} item xs={12} md={10}>
                                             <TextField
                                                 label={desc.language_name}
                                                 variant="outlined"
@@ -375,45 +315,23 @@ class Projects extends React.Component {
                                     </FormHelperText>}
                                 </Grid>
                             </Grid>
-                        </Grid>
-                        <Grid item xs={12} md={4}>
-                            <h1>{strings.PROJECT_URL}</h1>
-                            <TextField
-                                label={"URL"}
-                                variant="outlined"
-                                value={this.state.url}
-                                onChange={e => this.setState({
-                                    url: e.target.value
-                                })}
-                                fullWidth
-                                margin="dense"
-                            />
+                            <Grid item md={7} xs={12}>
+                                <Grid container direction="column">
+                                    <Grid item xs={12} md={8}>
+                                    <div className="title-div">
+                                        <h1>{strings.PHOTOS}</h1>
+                                        <Button onClick={this.toggleImport} size="large" variant="contained" color="primary">Importer</Button>
+                                        <FileUploader open={this.state.importDialog} close={this.toggleImport}/>
+                                    </div>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </DialogContent>
-                </Dialog>
-
-                <Dialog
-                    open={this.state.confirmDelete}
-                    onClose={this.handleConfirmClose}
-                    >
-                    <DialogTitle>{strings.DELETE_PROJECT}</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            {strings.CONFIRM_DELETE_PROJECT_DESCRIPTION}             
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.handleClose} color="primary" autoFocus>
-                            {strings.CANCEL}
-                        </Button>
-                        <Button size="large" onClick={this.deleteProject} className="button-danger">
-                            {strings.DELETE}
-                        </Button>
-                    </DialogActions>
                 </Dialog>
             </div>
-        );
+        )
     }
 }
 
-export default withRouter(Projects);
+export default withRouter(Galleries);
