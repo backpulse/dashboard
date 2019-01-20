@@ -8,21 +8,14 @@
 }
 
 .dialog-content {
-    margin-top: 15px;
-    margin-left: 15px;
+    padding-top: 15px!important;
+    @media screen and(max-width: 960px) {
+        margin-left: 0px;
+    }
+    margin-left: 50px;
 
     .url-input {
         width: calc(100% + 8px);
-    }
-
-    .title-div {
-        display: flex;
-        margin-bottom: 15px;
-        align-items: center;
-        h1 {
-            display: inline-block!important;
-            margin-right: 15px;
-        }
     }
 }
 .topbar {
@@ -31,4 +24,7 @@
 
 .remove-button {
     cursor: pointer;
+}
+.no-padding {
+    padding-right: 0px!important
 }

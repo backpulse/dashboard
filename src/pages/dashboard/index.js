@@ -6,6 +6,7 @@ import SiteEditor from './SiteEditor';
 import Settings from './Settings';
 import Overview from './Overview';
 import Galleries from './Galleries';
+import EditProject from './EditProject';
 
 export {
     MySites,
@@ -15,5 +16,6 @@ export {
     SiteEditor,
     Settings,
     Overview,
-    Galleries
+    Galleries,
+    EditProject
 }

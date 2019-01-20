@@ -14,7 +14,7 @@ import {
 import { getJWT, getUser, removeJWT } from 'utils/token';
 
 import {
-    MySites, SiteEditor, Projects, Contact, About, Settings, Overview, Galleries
+    MySites, SiteEditor, Projects, Contact, About, Settings, Overview, Galleries, EditProject
 } from 'pages/dashboard';
 
 import {
@@ -85,8 +85,14 @@ class App extends React.Component {
 								<React.Fragment>
 									<Route exact path="/site/:name" render={() => this.requireAuth(<Overview/>)}/>
 									<Route path="/site/:name" render={() => this.requireAuth(<SiteEditor/>)}/>
+									
 									<Route path="/site/:name/projects" render={() => this.requireAuth(<Projects/>)}/>
-									<Route path="/site/:name/galleries" render={() => this.requireAuth(<Galleries/>)}/>
+									<Route path="/site/:name/projects/new" render={() => this.requireAuth(<EditProject new/>)}/>
+									<Route path="/site/:name/projects/edit/:id" render={() => this.requireAuth(<EditProject/>)}/>
+
+									<Route exact path="/site/:name/galleries" render={() => this.requireAuth(<Galleries/>)}/>
+									<Route path="/site/:name/galleries/:id" render={() => this.requireAuth(<Galleries edit/>)}/>
+
 									<Route path="/site/:name/about" render={() => this.requireAuth(<About/>)}/>
 									<Route path="/site/:name/contact" render={() => this.requireAuth(<Contact/>)}/>
 									<Route path="/site/:name/settings" render={() => this.requireAuth(<Settings/>)}/>

@@ -101,3 +101,17 @@ a {
     flex: 1!important;
     padding: 0!important;
 }
+
+.title-div {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+    h1 {
+        display: inline-block!important;
+        margin-right: 15px;
+    }
+}
+
+.margin-10 {
+    margin: 10px;
+}

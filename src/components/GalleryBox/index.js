@@ -13,20 +13,20 @@ import strings from 'strings';
 
 import './styles.scss';
 
-class ProjectBox extends React.Component {
+class galleryBox extends React.Component {
     render() {
         return (
-            <Paper className="projectbox">
-                <div onClick={this.props.onOpen} className="projectbox-content">
+            <Paper className="gallerybox">
+                <div onClick={this.props.onOpen} className="gallerybox-content">
                     <div>
-                        <Typography variant="body1">{this.props.project.title}</Typography>
+                        <Typography variant="body1">{this.props.gallery.title}</Typography>
                     </div>
 
                     <div className="divider"/>
                 </div>
                 <div className="bottom">
                     <UpdateIcon fontSize="small"/>
-                    <Typography className="updated-at" variant="caption"> {dayjs(this.props.project.updated_at).format("DD/MM/YYYY HH:mm")}</Typography>
+                    <Typography className="updated-at" variant="caption"> {dayjs(this.props.gallery.updated_at).format("DD/MM/YYYY HH:mm")}</Typography>
                     <Button onClick={this.props.onOpen} className="open-button" color="primary" size="small" variant="contained">{strings.OPEN}</Button>
                 </div>
             
@@ -36,4 +36,4 @@ class ProjectBox extends React.Component {
     }
 }
 
-export default ProjectBox;
+export default galleryBox;

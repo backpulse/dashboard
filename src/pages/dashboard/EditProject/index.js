@@ -1,9 +1,7 @@
 import React from 'react';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import {withRouter}from 'react-router';
 
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
@@ -17,61 +15,73 @@ import DialogContent from '@material-ui/core/DialogContent';
 import FormControl from '@material-ui/core/FormControl';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import RemoveCircle from '@material-ui/icons/RemoveCircle';
-import strings from 'strings';
-import Selector from 'components/Selector';
-
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-import FileUploader from 'components/FileUploader';
+import {withRouter} from 'react-router';
+
+import Selector from 'components/Selector';
 
 import client from 'services/client';
 
-import GalleryBox from 'components/GalleryBox';
-
-import './styles.scss';
-
-import PhotoBox from 'components/PhotoBox';
-
+import strings from 'strings';
 function Transition(props) {
     return <Slide direction="up" {...props} />;
 }
-class Galleries extends React.Component {
+
+class EditProject extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            galleries : [],
             fetched: false,
+            languages: [],
+            open: true,
+            confirmDelete: false,
             titles: [],
             descriptions: [],
-            languages: [],
-            photos: [],
-            editGalleryDialog: false,
-            newGalleryDialog: false,
-            galleryName: "",
-            importDialog: false,
-            confirmDelete: false,
-            nameHasError: false,
-            error: false,
-            errorMsg: ""
+            url: "",
+            id: "",
+            short_id: ""
         }
     }
 
     componentDidMount() {
-        this.fetchGalleries();
+        if(!this.props.new) {
+            this.fetchProject(this.props.match.params.id);
+        } else {
+            this.setupNewProject();
+        }
+        this.fetchLanguages();
     }
 
-    fetchGalleries = () => {
-        this.setState({fetched: false});
-        client.get('/galleries/' + this.props.match.params.name).then(response => {
-            const galleries = response.data.payload || [];
-            this.setState({galleries, fetched: true});
-        }).catch(err => {
-            if(err) throw err;
+    setupNewProject = () => {
+        this.setState({
+            url: "",
+            id: "",
+            short_id: "",
+            titles: [{
+                "language_name": "English",
+                "language_code": "en",
+                "content": "New title"
+            }],
+            descriptions: [{
+                "language_name": "English",
+                "language_code": "en",
+                "content": "New description"
+            }]
+        })
+    };
+
+    handleClose = () => {
+        this.setState({
+            open: false,
+            confirmDelete: false
         });
+        setTimeout(() => {
+            this.props.history.replace('/site/' + this.props.match.params.name + '/projects');
+        }, 250);
     }
 
     fetchLanguages = () => {
@@ -88,69 +98,15 @@ class Galleries extends React.Component {
         });
     }
 
-    handleCreateGallery = () => {
-        this.setState({ galleryName: "",newGalleryDialog: true, error: false, errorMsg: "", nameHasError: false});
-    }
-    
-    checkError = err => {
-        const errType = err.data.message;
-        switch(errType) {
-            case "name_too_short": {
-                this.setState({
-                    nameHasError: true,
-                    errorMsg: strings.NAME_TOO_SHORT,
-                    error: true
-                });
-                break;
-            }
-            case "name_too_long": {
-                this.setState({
-                    nameHasError: true,
-                    errorMsg: strings.NAME_TOO_LONG,
-                    error: true
-                });
-                break;
-            }
-            default:
-                break
-        }
-    }
-
-    createGallery = e => {
-        e.preventDefault();
-        client.post('/galleries/'+this.props.match.params.name + '/' + this.state.galleryName).then(response => {
-            this.fetchGalleries();
-            this.handleCloseNewGalleryDialog();
+    fetchProject = id => {
+        client.get('/project/'+ id).then(response => {
+            const project = response.data.payload;
+            this.setState({...project});
         }).catch(err => {
-            this.checkError(err);
-            if(err) throw err;
-        })
-    }
-
-    fetchGallery = id => {
-        client.get('/gallerie/'+ id).then(response => {
-            const gallery =response.data.payload;
-            this.setState({...gallery});
-            console.log(gallery);
-        }).catch(err => {
+            this.handleClose();
             if(err) throw err;
         });
     }
-
-    editGallery = id => {
-        this.fetchLanguages();
-        this.fetchGallery(id);
-        this.setState({
-            editGalleryDialog: true
-        });
-    }
-
-    handleCloseNewGalleryDialog = () => this.setState({
-        newGalleryDialog: false
-    });
-    handleCloseEditGalleryDialog = () => this.setState({
-        editGalleryDialog: false
-    });
 
     handleChangeTitle = (event, i) => {
         const value = event.target.value;
@@ -205,6 +161,37 @@ class Galleries extends React.Component {
         this.setState({descriptions});
     }
 
+    handleSave = () => {
+        client.put('/projects/' + this.props.match.params.name, {
+            titles: this.state.titles,
+            descriptions: this.state.descriptions,
+            id: this.state.id,
+            short_id: this.state.short_id,
+            url: this.state.url
+        }).then(response => {
+            this.handleClose();
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
+    
+
+    openConfirmDelete = () => this.setState({
+        confirmDelete: true
+    });
+
+    handleConfirmClose = () => this.setState({
+        confirmDelete: false
+    });
+
+    deleteProject = () => {
+        client.delete('/project/' + this.state.short_id).then(response => {
+            this.handleClose();
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
+
     getAvailableTitleLanguages = () => {
         const languages = this.state.languages;
         const available = [];
@@ -249,120 +236,23 @@ class Galleries extends React.Component {
         return available;
     }
 
-    toggleImport = () => this.setState({
-        importDialog: !this.state.importDialog
-    })
-    
-    onUploadFinished = photos => {
-        console.log(photos);
-        this.toggleImport();
-    }
-
-    handleNameChange = e => this.setState({
-        galleryName: e.target.value
-    });
-
-    handleSave = () => {
-        client.put('/gallerie/' + this.state.short_id, {
-            titles: this.state.titles,
-            descriptions: this.state.descriptions
-        }).then(response => {
-            this.fetchGalleries();
-        }).catch(err => {
-            if(err) throw err;
-        });
-    }
-
-    openConfirmDelete = () => this.setState({
-        confirmDelete: true
-    });
-    handleConfirmClose = () => this.setState({
-        confirmDelete: false
-    });
-
-    deleteGallery = () => {
-        client.delete('/gallerie/' + this.state.short_id).then(response => {
-            console.log(response.data);
-            this.fetchGalleries();
-            this.handleConfirmClose();
-            this.handleCloseEditGalleryDialog();
-        }).catch(err => {
-            if(err) throw err;
-        });
-    }
-
     render() {
         return (
-            <div className="page dashboard-galleries">
-                <Fab onClick={this.handleCreateGallery} className="fab" variant="extended" color="primary" aria-label="Add">
-                    <AddIcon />
-                    {strings.NEW_GALLERY}
-                </Fab>
-                <div className="title-div">
-                    <h1>{strings.DRAWER_GALLERIES}</h1>
-                </div>
-                {this.state.galleries.length < 1 && this.state.fetched && <Button onClick={this.handleCreateGallery} variant="contained" color="primary" aria-label="Add">
-                    <AddIcon />
-                    {strings.NEW_GALLERY}
-                </Button>}
-                <div className="galleries-container">
-                    {this.state.galleries.map((gallery, i) => {
-                        return <GalleryBox key={i} onOpen={() => this.editGallery(gallery.short_id)} gallery={gallery}/>;
-                    })}
-                </div>
-
-                <Dialog
-                    open={this.state.newGalleryDialog}
-                    onClose={this.handleCloseNewGalleryDialog}
-                    fullWidth
-                    aria-labelledby="form-dialog-title">
-                    <form onSubmit={this.createGallery}>
-                        <DialogTitle id="form-dialog-title">{strings.NEW_GALLERY}</DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                                {strings.NEW_GALLERY_DESCRIPTION}
-                            </DialogContentText>
-                            <FormControl fullWidth>
-                                <TextField
-                                    error={this.state.nameHasError}
-                                    required
-                                    onChange={this.handleNameChange}
-                                    autoFocus
-                                    value={this.state.galleryName}
-                                    margin="dense"
-                                    label={strings.NEW_GALLERY_NAME}
-                                    fullWidth
-                                />
-                            </FormControl>
-                            {this.state.error && <FormHelperText error={true}>
-                                {this.state.errorMsg}
-                            </FormHelperText>}
-
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={this.handleCloseNewGalleryDialog} color="primary">
-                                {strings.CANCEL}
-                            </Button>
-                            <Button type="submit" variant="contained" color="primary">
-                                {strings.CREATE}
-                            </Button>
-                        </DialogActions>
-                    </form>
-                </Dialog>
-
-                <Dialog
+            <div>
+                 <Dialog
                     fullScreen
-                    open={this.state.editGalleryDialog}
-                    onClose={this.handleCloseEditGalleryDialog}
+                    className="no-padding"
+                    open={this.state.open}
+                    onClose={this.handleClose}
                     TransitionComponent={Transition}
                     >
                     <AppBar className="topbar">
                         <Toolbar>
-                        <IconButton color="inherit" onClick={this.handleCloseEditGalleryDialog} aria-label="Close">
+                        <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
                             <CloseIcon />
                         </IconButton>
                         <Typography variant="h6" color="inherit" style={{flex: 1}}>
-                            {this.state.id ? strings.PROJECT_EDIT : strings.NEW_GALLERY}
+                            {this.state.id ? strings.PROJECT_EDIT : strings.PROJECTS_NEW_PROJECT}
                         </Typography>
                         {this.state.id && <Button style={{marginRight: 15}} className="button-danger-outlined" variant="outlined" onClick={this.openConfirmDelete}>
                             {strings.DELETE}
@@ -372,30 +262,11 @@ class Galleries extends React.Component {
                         </Button>
                         </Toolbar>
                     </AppBar>
-                    <DialogContent className="dialog-content dialog-gallery-edit">
+                    <DialogContent className="dialog-content">
                         <Grid container spacing={16}>
-                            <Grid item md={5} xs={12}>
+                            <Grid item xs={6}>
                                 <Grid container direction="column">
                                     <Grid item xs={12} md={8}>
-                                        <div className="title-div">
-                                            <h1>{strings.PHOTOS}</h1>
-                                            
-                                            <Button onClick={this.toggleImport} size="medium" variant="contained" color="primary">Importer</Button>
-                                            <FileUploader isGallery galleryID={this.state.short_id} onDone={this.onUploadFinished} open={this.state.importDialog} close={this.toggleImport}/>
-                                        </div>
-                                    </Grid>
-                                    <div className="gallery-photos-container">
-                                        {this.state.photos.map((photo, i) => (
-                                            <Grid key={i} item xs={12} md={10}>
-                                                <PhotoBox previewButton className="padding-10" editing src={photo.url}/>
-                                            </Grid>
-                                        ))}
-                                    </div>
-                                </Grid>
-                            </Grid>
-                            <Grid item md={7} xs={12}>
-                                <Grid container direction="column">
-                                    <Grid item xs={12} md={10}>
                                         <div className="title-div">
                                             <h1>{strings.TITLES}</h1>
                                             <FormControl fullWidth>
@@ -409,15 +280,15 @@ class Galleries extends React.Component {
                                         </div>
                                     </Grid>
                                     {this.state.titles.map((title, i) => (
-                                        <Grid key={i} item md={10}>
+                                        <Grid key={i} item xs={12} md={8}>
                                             <TextField
                                                 label={title.language_name}
                                                 variant="outlined"
                                                 value={title.content}
                                                 onChange={e => this.handleChangeTitle(e, i)}
                                                 margin="dense"
-                                                multiline
                                                 fullWidth
+                                                multiline
                                                 InputProps={{
                                                     endAdornment: (
                                                     <InputAdornment className="remove-button" position="end">
@@ -435,8 +306,10 @@ class Galleries extends React.Component {
                                         {this.state.errorMsg}
                                     </FormHelperText>}
                                 </Grid>
+                            </Grid>
+                            <Grid item xs={6}>
                                 <Grid container direction="column">
-                                    <Grid style={{marginTop: 15}} item xs={12} md={10}>
+                                    <Grid item xs={12} md={8}>
                                         <div className="title-div">
                                             <h1>{strings.DESCRIPTIONS}</h1>
                                             <FormControl fullWidth>
@@ -450,7 +323,7 @@ class Galleries extends React.Component {
                                         </div>
                                     </Grid>
                                     {this.state.descriptions.map((desc, i) => (
-                                        <Grid key={i} item xs={12} md={10}>
+                                        <Grid key={i} item xs={12} md={8}>
                                             <TextField
                                                 label={desc.language_name}
                                                 variant="outlined"
@@ -478,23 +351,37 @@ class Galleries extends React.Component {
                                 </Grid>
                             </Grid>
                         </Grid>
+                        <Grid item xs={12} md={4}>
+                            <h1>{strings.PROJECT_URL}</h1>
+                            <TextField
+                                label={"URL"}
+                                variant="outlined"
+                                value={this.state.url}
+                                onChange={e => this.setState({
+                                    url: e.target.value
+                                })}
+                                fullWidth
+                                margin="dense"
+                            />
+                        </Grid>
                     </DialogContent>
                 </Dialog>
+
                 <Dialog
                     open={this.state.confirmDelete}
                     onClose={this.handleConfirmClose}
                     >
-                    <DialogTitle>{strings.DELETE_GALLERY}</DialogTitle>
+                    <DialogTitle>{strings.DELETE_PROJECT}</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            {strings.CONFIRM_DELETE_GALLERY_DESCRIPTION}             
+                            {strings.CONFIRM_DELETE_PROJECT_DESCRIPTION}             
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleConfirmClose} color="primary" autoFocus>
                             {strings.CANCEL}
                         </Button>
-                        <Button size="large" onClick={this.deleteGallery} className="button-danger">
+                        <Button size="large" onClick={this.deleteProject} className="button-danger">
                             {strings.DELETE}
                         </Button>
                     </DialogActions>
@@ -504,4 +391,4 @@ class Galleries extends React.Component {
     }
 }
 
-export default withRouter(Galleries);
+export default withRouter(EditProject);

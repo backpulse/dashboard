@@ -30,6 +30,49 @@ class FileUploader extends React.Component {
             completed: 0
         });
     }
+    
+    upload = (file, cb) => {
+        const formData = new FormData();
+        formData.append("image", file, file.name);
+        formData.append("is_gallery", this.props.isGallery);
+        formData.append("is_project", this.props.isProject);
+        formData.append("gallery_id", this.props.galleryID);
+        formData.append("project_id", this.props.projectID);
+
+        client.post("/photos", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(response => {
+            cb(response.data);
+        }).catch(err => {
+            if(err) {
+                this.setState({publishing: false, error: err.message});
+            }
+        });
+    }
+
+    handleSubmit = () => {
+        const files = document.getElementById("fileInput").files;
+        this.setState({publishing: true});
+
+        let completed = 0;
+        const uploadedPictures = [];
+        async.eachSeries(files, (file, next) => {
+            this.upload(file, data => {
+                uploadedPictures.push(data);
+                console.log(uploadedPictures);
+                completed++;
+                this.setState({completed});
+                next();
+            });
+        }, () => {
+            this.setState({publishing: false}, () => {
+                console.log(uploadedPictures);
+                this.props.onDone(uploadedPictures);
+            });
+        });
+    }
 
     handleImageSelect = () => {
         const fileInput = document.getElementById("fileInput");

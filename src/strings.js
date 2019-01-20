@@ -63,7 +63,7 @@ const strings = {
         "PROJECT_EDIT": "Modifier le projet",
         "DESCRIPTIONS": "Descriptions",
         "DELETE": "Supprimer",
-        "CONFIRM_DELETE_PROJECT_DESCRIPTION": "Êtes-vous certain(e) de vouloir supprimer de projet ?",
+        "CONFIRM_DELETE_PROJECT_DESCRIPTION": "Êtes-vous certain(e) de vouloir supprimer ce projet ?",
         "DELETE_PROJECT": "Supprimer le projet",
         "PROJECT_URL": "Lien du projet",
         "ABOUT": "À propos",
@@ -74,7 +74,12 @@ const strings = {
         "IMPORT_PHOTOS_DESCRIPTION": "Merci d'importer une ou plusieurs photographies.",
         "FILES": "fichiers",
         "ADD": "Ajouter",
-        "TOO_MANY_PICTURES": "Trop d'images."
+        "TOO_MANY_PICTURES": "Trop d'images.",
+        "NEW_GALLERY_NAME": "Nom de la galerie",
+        "NEW_GALLERY_DESCRIPTION": "Merci d'indiquer le nom de votre nouvelle galerie.",
+        "CONFIRM_DELETE_GALLERY_DESCRIPTION": "Êtes-vous certain(e) de vouloir supprimer cette galerie ?",
+        "DELETE_GALLERY": "Supprimer la galerie",
+        "GALLERY_PREVIEW_IMAGE": "Illustration de la galerie"
     },
     en: {
         "CANCEL": "Cancel",
@@ -149,7 +154,12 @@ const strings = {
         "IMPORT_PHOTOS_DESCRIPTION": "Please import one or multiple photos.",
         "FILES": "files",
         "ADD": "Add",
-        "TOO_MANY_PICTURES": "Too many pictures."
+        "TOO_MANY_PICTURES": "Too many pictures.",
+        "NEW_GALLERY_NAME": "Gallery name",
+        "NEW_GALLERY_DESCRIPTION": "Please enter the name of the new gallery.",
+        "CONFIRM_DELETE_GALLERY_DESCRIPTION": "Are you sure you want to permanently remove this gallery?",
+        "DELETE_GALLERY": "Delete gallery",
+        "GALLERY_PREVIEW_IMAGE": "Gallery preview image"
     }
 };
 
