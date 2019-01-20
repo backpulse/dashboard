@@ -79,7 +79,7 @@ const strings = {
         "NEW_GALLERY_DESCRIPTION": "Merci d'indiquer le nom de votre nouvelle galerie.",
         "CONFIRM_DELETE_GALLERY_DESCRIPTION": "Êtes-vous certain(e) de vouloir supprimer cette galerie ?",
         "DELETE_GALLERY": "Supprimer la galerie",
-        "GALLERY_PREVIEW_IMAGE": "Illustration de la galerie"
+        "GALLERY_PREVIEW_IMAGE": "Illustration"
     },
     en: {
         "CANCEL": "Cancel",
@@ -159,7 +159,7 @@ const strings = {
         "NEW_GALLERY_DESCRIPTION": "Please enter the name of the new gallery.",
         "CONFIRM_DELETE_GALLERY_DESCRIPTION": "Are you sure you want to permanently remove this gallery?",
         "DELETE_GALLERY": "Delete gallery",
-        "GALLERY_PREVIEW_IMAGE": "Gallery preview image"
+        "GALLERY_PREVIEW_IMAGE": "Preview"
     }
 };
 
