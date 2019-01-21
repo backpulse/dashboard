@@ -115,3 +115,13 @@ a {
 .margin-10 {
     margin: 10px;
 }
+
+.progress {
+    margin-top: 6px;
+    position: absolute;
+
+    .circular {
+        margin-top: 24px!important;
+        position: absolute;
+    }
+}
