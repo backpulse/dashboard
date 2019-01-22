@@ -79,7 +79,13 @@ const strings = {
         "NEW_GALLERY_DESCRIPTION": "Merci d'indiquer le nom de votre nouvelle galerie.",
         "CONFIRM_DELETE_GALLERY_DESCRIPTION": "Êtes-vous certain(e) de vouloir supprimer cette galerie ?",
         "DELETE_GALLERY": "Supprimer la galerie",
-        "GALLERY_PREVIEW_IMAGE": "Illustration"
+        "GALLERY_PREVIEW_IMAGE": "Illustration",
+        "SETTINGS": "Paramètres",
+        "SITE": "Site",
+        "OWNERSHIP": "Propriété",
+        "OWNER": "Propriétaire",
+        "DISPLAY_NAME": "Nom d'affichage",
+        "NAME": "Nom"
     },
     en: {
         "CANCEL": "Cancel",
@@ -159,7 +165,13 @@ const strings = {
         "NEW_GALLERY_DESCRIPTION": "Please enter the name of the new gallery.",
         "CONFIRM_DELETE_GALLERY_DESCRIPTION": "Are you sure you want to permanently remove this gallery?",
         "DELETE_GALLERY": "Delete gallery",
-        "GALLERY_PREVIEW_IMAGE": "Preview"
+        "GALLERY_PREVIEW_IMAGE": "Preview",
+        "SETTINGS": "Settings",
+        "SITE": "Site",
+        "OWNERSHIP": "Ownership",
+        "OWNER": "Owner",
+        "DISPLAY_NAME": "Display name",
+        "NAME": "Name"
     }
 };
 

@@ -45,6 +45,7 @@ class Authentication extends React.Component {
     }
 
     checkError = err => {
+        console.log(err);
         const errType = err.data.message;
         switch (errType) {
             case "password_too_short":

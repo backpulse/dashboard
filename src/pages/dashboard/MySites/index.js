@@ -48,7 +48,7 @@ class MySites extends React.Component {
 
     fetchSites = () => {
         client.get('/sites').then(response => {
-            const sites = response.data.payload;
+            const sites = response.data.payload || [];
             this.setState({sites});
         }).catch(err => {
             if(err) throw err;
