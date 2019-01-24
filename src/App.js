@@ -41,6 +41,21 @@ const theme = createMuiTheme({
 	}
 });
 
+const themeLight = createMuiTheme({
+	typography: {
+	  useNextVariants: true,
+	},
+	palette: {
+		primary: {
+			main: "#00ad9f",
+			contrastText: "white"
+		},
+		secondary: {
+			main: "#0e1e25"
+		}
+	}
+});
+
 
 class App extends React.Component {
 
@@ -78,14 +93,17 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<MuiThemeProvider theme={theme}>
-				<Router>
-					<div className="app-container">
-						<div className="app">
-							<Route exact path="/" render={() => getJWT() ? <MySites/> : <HomepageHome/>}/>
+			<Router>
+				<div className="app-container">
+					<div className="app">
+						{!getJWT() && <MuiThemeProvider theme={themeLight}>
 							<Route path="/signup" render={() => this.noAuth(<Authentication type="signup" />)} />
 							<Route path="/login" render={() => this.noAuth(<Authentication type="login" />)} />
-							
+							<Route exact path="/" render={() => <Redirect to="/login"/>}/>
+						</MuiThemeProvider>}
+
+						{getJWT() && <MuiThemeProvider theme={theme}>
+							<Route exact path="/" render={() => <MySites/>}/>
 							<Route path="/site/:name" render={({ match: { url } }) => (
 								<React.Fragment>
 									<Route exact path="/site/:name" render={() => this.requireAuth(<Overview/>)}/>
@@ -103,12 +121,10 @@ class App extends React.Component {
 									<Route path="/site/:name/settings" render={() => this.requireAuth(<Settings/>)}/>
 								</React.Fragment>
 							)}/>
-
-							{/* <Route render={() => window.location = "/"}/> */}
-						</div>
+						</MuiThemeProvider>}
 					</div>
-				</Router>
-			</MuiThemeProvider>
+				</div>
+			</Router>
 		)
 	}
 }

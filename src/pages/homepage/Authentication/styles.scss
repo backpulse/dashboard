@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
 
+    
     h1 {
         font-size: 36px;
         font-weight: 300;
@@ -20,6 +21,10 @@
         padding: 32px 40px 40px;
         width: 70%;
         margin: 0 auto;
+
+        input {
+            color: #0e1e25!important;
+        }
 
         p {
             position: absolute;

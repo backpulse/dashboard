@@ -28,7 +28,7 @@ class PhotoBox extends React.Component {
                     <Checkbox
                         checked={this.props.checked}
                         onChange={this.props.toggleCheck}
-                        color="secondary"
+                        color="primary"
                     />
                     <Tooltip title={strings.DELETE}>
                         <IconButton onClick={this.props.onDelete} aria-label="Delete">
