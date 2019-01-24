@@ -31,6 +31,9 @@ const strings = {
         "SITE_EXISTS": "Nom indisponible.",
         "SITE_NAME_INCORRECT": "Le nom ne doit contenir que des lettres minuscules, des chiffres et des tirets.",
         "OPEN": "Ouvrir",
+        "EDIT": "Modifier",
+        "FAVORITE": "Favoris",
+        
         "DRAWER_OVERVIEW": "Vue d'ensemble",
         "DRAWER_PROJECTS": "Projets",
         "DRAWER_CONTACT": "Contact",
@@ -115,6 +118,8 @@ const strings = {
         "SITE_EXISTS": "Unavailable name.",
         "SITE_NAME_INCORRECT": "The name should only contain lowercase letters, numbers, and dashes.",
         "OPEN": "Open",
+        "EDIT": "Edit",
+        "FAVORITE": "Favorite",
 
         "DRAWER_OVERVIEW": "Overview",
         "DRAWER_PROJECTS": "My projects",

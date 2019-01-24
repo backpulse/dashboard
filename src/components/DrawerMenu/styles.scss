@@ -6,13 +6,30 @@
     position: relative;
     display: flex;
 }
-
 .drawer-paper {
     position: relative;
     width: 240px;
 
     div+div {
         width: 240px !important;
+    }
+
+    .route-text {
+        span {
+            color: #e3e3e3;
+        }
+    }
+
+    > div {
+        background-color: #0e1e25!important;
+    }
+
+    .list-item {
+        background-color: #0e1e25;
+        color: #e3e3e3;
+        svg {
+            fill: #e3e3e3;
+        }
     }
 
 }
@@ -37,5 +54,8 @@
 
     &.active {
         background-color: rgba(0, 0, 0, 0.09);
+        div {
+            background-color: rgba(0, 0, 0, 0);
+        }
     }
 }

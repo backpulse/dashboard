@@ -155,6 +155,7 @@ class About extends React.Component {
                             <TextField
                                 label={desc.language_name}
                                 variant="outlined"
+                                className="description-input"
                                 multiline
                                 value={desc.content}
                                 onChange={e => this.handleChangeDescription(e, i)}

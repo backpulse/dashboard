@@ -146,6 +146,15 @@ class MySites extends React.Component {
         }
     }
 
+    favoriteSite = site => {
+        client.put('/sites/favorite/' + site.name).then(response => {
+            console.log(response.data);
+            this.fetchSites();
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
+
     render() {
         return (
             <div className="page dashboard-my-sites">
@@ -158,7 +167,11 @@ class MySites extends React.Component {
                 <Typography variant="h1">{strings.MENU_MY_SITES}</Typography>
                 <div className="sites-container">
                     {this.state.sites.map((site, i) => (
-                        <SiteBox key={i} site={site}/>
+                        <SiteBox 
+                            open={() => this.openSite(site)} 
+                            favorite={() => this.favoriteSite(site)}
+                            key={i} 
+                            site={site}/>
                     ))}
                 </div>
 

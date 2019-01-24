@@ -111,7 +111,7 @@ class DrawerMenu extends React.Component {
                                     <ListItemIcon>
                                         {route.icon}
                                     </ListItemIcon>
-                                    <ListItemText inset primary={route.text} />
+                                    <ListItemText className="route-text" inset primary={route.text} />
                                 </ListItem>
                             </Link> 
                         } else {
