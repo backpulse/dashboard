@@ -3,13 +3,10 @@ import Typography from '@material-ui/core/Typography';
 
 import './styles.scss';
 
-import {Link} from 'react-router-dom';
-
 import dayjs from 'dayjs';
 
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';

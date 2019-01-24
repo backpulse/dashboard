@@ -18,7 +18,7 @@ import {
 } from 'pages/dashboard';
 
 import {
-    Home as HomepageHome, Authentication
+    Authentication
 } from 'pages/homepage';
 
 import {getTheme} from 'utils';

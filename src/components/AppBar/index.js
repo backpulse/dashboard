@@ -10,7 +10,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
 import './styles.scss';
-import {withRouter} from 'react-router';
 
 import strings from 'strings';
 import {Link} from 'react-router-dom';
