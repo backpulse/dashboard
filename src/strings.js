@@ -88,7 +88,10 @@ const strings = {
         "OWNERSHIP": "Propriété",
         "OWNER": "Propriétaire",
         "DISPLAY_NAME": "Nom d'affichage",
-        "NAME": "Nom"
+        "NAME": "Nom",
+
+        "DARK_THEME": "Mode sombre",
+        "LIGHT_THEME": "Mode normal"
     },
     en: {
         "CANCEL": "Cancel",
@@ -176,7 +179,9 @@ const strings = {
         "OWNERSHIP": "Ownership",
         "OWNER": "Owner",
         "DISPLAY_NAME": "Display name",
-        "NAME": "Name"
+        "NAME": "Name",
+        "DARK_THEME": "Dark mode",
+        "LIGHT_THEME": "Light mode"
     }
 };
 

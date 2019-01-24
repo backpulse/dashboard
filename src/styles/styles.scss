@@ -6,32 +6,41 @@ body, html, #root,.app,.app-container {
 }
 
 .app {
-    // background-color: #0e1e25fa;
     div.page {
         padding-top: 85px;
         padding-left: 275px;
         padding-right: 25px;
         min-height: calc(100% - 85px);
 
-        background-color: #0e1e25fa;
-
         h1 {
-            color: #e3e3e3;
             font-size: 36px;
             font-weight: 300;
             line-height: 48px;
         }
     }
 }
+.dark {
+    input,textarea {
+        color: white!important;
+    }
+    div.page {
+        background-color: #0e1e25fa;
+    }
+    h1,h2,h3,h4,h5 {
+        color: #e3e3e3!important;
+    }
+}
+.light {
+    div.page {
+    }
+    h1 {
+        color: #0e1e25;
+    }
+}
 
 h1,h2,h3,h4,h5 {
     font-weight: 300;
     line-height: 48px;
-    color: #e3e3e3;
-}
-
-input,textarea {
-    color: white!important;
 }
 
 h1 {

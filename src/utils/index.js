@@ -10,11 +10,8 @@ export const copy = text => {
 
 export const getTheme = () => {
     const theme = localStorage.getItem("theme");
-    if (theme === "dark") {
-        return "dark";
-    } else {
-        return "light";
-    }
+    if (theme === "light") return "light";
+    return "dark";
 }
 
 export const toggleTheme = () => {

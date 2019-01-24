@@ -17,6 +17,8 @@ import {Link} from 'react-router-dom';
 
 import {signOut} from 'utils/token';
 
+import {getTheme, toggleTheme} from 'utils';
+
 class AppBar extends React.Component {
 
     constructor(props) {
@@ -25,6 +27,7 @@ class AppBar extends React.Component {
             anchorEl: null,
             open: false
         }
+        console.log(props); 
     }
     
     handleMenu = event => {
@@ -78,6 +81,11 @@ class AppBar extends React.Component {
                                 <Link to="/account">
                                     <MenuItem onClick={this.handleClose}>{strings.MENU_MY_ACCOUNT}</MenuItem>
                                 </Link>
+                                <MenuItem onClick={e => {
+                                    toggleTheme();
+                                    this.props.updateTheme()
+                                    this.handleClose();
+                                }}>{getTheme() === "light" ? strings.DARK_THEME : strings.LIGHT_THEME}</MenuItem>
                                 <MenuItem onClick={signOut}>{strings.MENU_LOGOUT}</MenuItem>
                             </Menu>
                         </div>
@@ -88,4 +96,4 @@ class AppBar extends React.Component {
     }
 }
 
-export default withRouter(AppBar);
+export default AppBar;

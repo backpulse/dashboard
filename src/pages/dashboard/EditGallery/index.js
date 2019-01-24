@@ -32,6 +32,8 @@ import client from 'services/client';
 
 import {withRouter} from 'react-router';
 
+import {getTheme} from 'utils';
+
 import './styles.scss';
 
 function Transition(props) {
@@ -238,6 +240,7 @@ class EditGallery extends React.Component {
         return (
             <div>
                 <Dialog
+                 className={getTheme()}
                     fullScreen
                     open={this.state.open}
                     onClose={this.handleClose}

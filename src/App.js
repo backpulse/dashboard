@@ -21,6 +21,8 @@ import {
     Home as HomepageHome, Authentication
 } from 'pages/homepage';
 
+import {getTheme} from 'utils';
+
 const theme = createMuiTheme({
 	typography: {
 	  useNextVariants: true,
@@ -33,6 +35,10 @@ const theme = createMuiTheme({
 		secondary: {
 			main: "#0e1e25",
 			contrastText: "#e3e3e3"
+		},
+		text: {
+			primary: "#e3e3e3",
+			secondary: "#e3e3e3"
 		},
 		background: {
 			paper: "#0e1e25"
@@ -47,13 +53,14 @@ const themeLight = createMuiTheme({
 	},
 	palette: {
 		primary: {
-			main: "#00ad9f",
-			contrastText: "white"
+			main: "#0e1e25",
+
 		},
 		secondary: {
-			main: "#0e1e25"
-		}
-	}
+			main: "#00ad9f",
+		},
+		type: "light"
+	},
 });
 
 
@@ -90,24 +97,27 @@ class App extends React.Component {
 		}
 	}
 
+	updateTheme = () => {
+		this.forceUpdate();
+	}
 
 	render() {
 		return (
 			<Router>
 				<div className="app-container">
-					<div className="app">
+					<div className={["app", getTheme()].join(" ")}>
 						<MuiThemeProvider theme={themeLight}>
 							<Route path="/signup" render={() => this.noAuth(<Authentication type="signup" />)} />
 							<Route path="/login" render={() => this.noAuth(<Authentication type="login" />)} />
 							{!getJWT() && <Route exact path="/" render={() => <Redirect to="/login"/>}/>}
 						</MuiThemeProvider>
 
-						{getJWT() && <MuiThemeProvider theme={theme}>
-							<Route exact path="/" render={() => <MySites/>}/>
+						{getJWT() && <MuiThemeProvider theme={getTheme() === "dark" ? theme : themeLight}>
+							<Route exact path="/" render={() => <MySites updateTheme={this.updateTheme}/>}/>
 							<Route path="/site/:name" render={({ match: { url } }) => (
 								<React.Fragment>
+									<Route path="/site/:name" render={() => this.requireAuth(<SiteEditor updateTheme={this.updateTheme}/>)}/>
 									<Route exact path="/site/:name" render={() => this.requireAuth(<Overview/>)}/>
-									<Route path="/site/:name" render={() => this.requireAuth(<SiteEditor/>)}/>
 									
 									<Route path="/site/:name/projects" render={() => this.requireAuth(<Projects/>)}/>
 									<Route path="/site/:name/projects/new" render={() => this.requireAuth(<EditProject new/>)}/>

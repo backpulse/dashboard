@@ -8,7 +8,6 @@ import client from 'services/client';
 import DrawerMenu from 'components/DrawerMenu';
 import AppBar from 'components/AppBar';
 
-
 class SiteEditor extends React.Component {
 
     constructor(props) {
@@ -34,7 +33,7 @@ class SiteEditor extends React.Component {
     render() {
         return (
             <div className="site-editor">
-                <AppBar title={this.props.match.params.name}/>
+                <AppBar updateTheme={this.props.updateTheme} title={this.props.match.params.name}/>
                 <DrawerMenu site={this.state.site}/>
             </div>
         );

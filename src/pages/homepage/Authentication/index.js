@@ -125,7 +125,7 @@ class Authentication extends React.Component {
                                 {this.state.errorMsg}
                             </FormHelperText>}
                             <FormControl fullWidth>
-                                <Button type="submit" variant="contained" color="primary">
+                                <Button type="submit" variant="contained" color="secondary">
                                     {this.props.type === "login" ? strings.AUTHENTICATION_LOGIN : strings.AUTHENTICATION_SIGN_UP}
                                 </Button>
                             </FormControl>

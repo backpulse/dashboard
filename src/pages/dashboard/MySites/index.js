@@ -158,7 +158,7 @@ class MySites extends React.Component {
     render() {
         return (
             <div className="page dashboard-my-sites">
-                <AppBar/>
+                <AppBar updateTheme={this.props.updateTheme}/>
                 <Fab onClick={this.handleNewSite} className="fab" variant="extended" color="primary" aria-label="Add">
                     <AddIcon />
                     {strings.MY_SITES_ADD_SITE}
