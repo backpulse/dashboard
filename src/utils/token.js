@@ -12,7 +12,7 @@ export function removeJWT() {
 
 export function signOut() {
     removeJWT();
-    window.location = "/";
+    window.location = "https://backpulse.io";
 }
 
 export function getUser() {

@@ -96,11 +96,11 @@ class App extends React.Component {
 			<Router>
 				<div className="app-container">
 					<div className="app">
-						{!getJWT() && <MuiThemeProvider theme={themeLight}>
+						<MuiThemeProvider theme={themeLight}>
 							<Route path="/signup" render={() => this.noAuth(<Authentication type="signup" />)} />
 							<Route path="/login" render={() => this.noAuth(<Authentication type="login" />)} />
-							<Route exact path="/" render={() => <Redirect to="/login"/>}/>
-						</MuiThemeProvider>}
+							{!getJWT() && <Route exact path="/" render={() => <Redirect to="/login"/>}/>}
+						</MuiThemeProvider>
 
 						{getJWT() && <MuiThemeProvider theme={theme}>
 							<Route exact path="/" render={() => <MySites/>}/>
