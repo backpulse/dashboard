@@ -102,7 +102,12 @@ const strings = {
         "PASSWORD_RULES": "Le mot de passe doit contenir plus de 8 caractères.",
         "DANGER_ZONE": "Zone de danger",
         "CLOSE_ACCOUNT": "Clôturer mon compte",
-        "DELETE_ALL_APPS_FIRST": "Avant de clôturer votre compte, merci de supprimer tous vos sites."
+        "DELETE_ALL_APPS_FIRST": "Avant de clôturer votre compte, merci de supprimer tous vos sites.",
+        "VERIFY_EMAIL": "Merci de vérifier votre adresse email.",
+
+        "WRONG_PASSWORD": "Le mot de passe est éronné",
+        "PASSWORD_CHANGED": "Le mot de passe a été correctement changé.",
+        "CLOSE_ACCOUNT_DESCRIPTION": "Vous êtes sur le point de supprimer votre compte Backpulse. Merci de confirmer en écrivant votre adresse email."
     },
     en: {
         "CANCEL": "Cancel",
@@ -203,7 +208,11 @@ const strings = {
         "PASSWORD_RULES": "Password must be 8 or more characters.",
         "DANGER_ZONE": "Danger zone",
         "CLOSE_ACCOUNT": "Close my account",
-        "DELETE_ALL_APPS_FIRST": "You must delete all your sites before closing your account."
+        "DELETE_ALL_APPS_FIRST": "You must delete all your sites before closing your account.",
+        "VERIFY_EMAIL": "Please verify your email address.",
+        "WRONG_PASSWORD": "Password is incorrect",
+        "PASSWORD_CHANGED": "Password was successfuly changed.",
+        "CLOSE_ACCOUNT_DESCRIPTION": "You are about to close your Backpulse account. Please confirm by typing your email address."
     }
 };
 
