@@ -19,7 +19,7 @@ import Selector from 'components/Selector';
 import strings from 'strings';
 
 import client from 'services/client';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
 class Settings extends React.Component {
     

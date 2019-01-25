@@ -6,6 +6,7 @@ const strings = {
     fr: {
         "CANCEL": "Annuler",
         "CREATE": "Créer",
+        "EMAIL": "Adresse email",
         "AUTHENICATION_CREATE_BACKPULSE_ACCOUNT": "Créer un compte Backpulse",
         "AUTHENTICATION_LOGIN_TO_BACKPULSE": "Se connecter à Backpulse",
         "AUTHENTICATION_EMAIL_ADDRESS": "Adresse email",
@@ -91,11 +92,22 @@ const strings = {
         "NAME": "Nom",
 
         "DARK_THEME": "Mode sombre",
-        "LIGHT_THEME": "Mode normal"
+        "LIGHT_THEME": "Mode normal",
+
+        "PROFILE": "Profil",
+        "CHANGE_PASSWORD": "Changer le mot passe",
+        "CURRENT_PASSWORD": "Mot de passe actuel",
+        "NEW_PASSWORD": "Nouveau mot de passe",
+        "CONFIRM": "Confirmer",
+        "PASSWORD_RULES": "Le mot de passe doit contenir plus de 8 caractères.",
+        "DANGER_ZONE": "Zone de danger",
+        "CLOSE_ACCOUNT": "Clôturer mon compte",
+        "DELETE_ALL_APPS_FIRST": "Avant de clôturer votre compte, merci de supprimer tous vos sites."
     },
     en: {
         "CANCEL": "Cancel",
         "CREATE": "Create",
+        "EMAIL": "Email address",
         "AUTHENICATION_CREATE_BACKPULSE_ACCOUNT": "Create a Backpulse account",
         "AUTHENTICATION_LOGIN_TO_BACKPULSE": "Log in to Backpulse",
         "AUTHENTICATION_EMAIL_ADDRESS": "Email address",
@@ -181,7 +193,17 @@ const strings = {
         "DISPLAY_NAME": "Display name",
         "NAME": "Name",
         "DARK_THEME": "Dark mode",
-        "LIGHT_THEME": "Light mode"
+        "LIGHT_THEME": "Light mode",
+
+        "PROFILE": "Profile",
+        "CHANGE_PASSWORD": "Change password",
+        "CURRENT_PASSWORD": "Current password",
+        "NEW_PASSWORD": "New password",
+        "CONFIRM": "Confirm",
+        "PASSWORD_RULES": "Password must be 8 or more characters.",
+        "DANGER_ZONE": "Danger zone",
+        "CLOSE_ACCOUNT": "Close my account",
+        "DELETE_ALL_APPS_FIRST": "You must delete all your sites before closing your account."
     }
 };
 

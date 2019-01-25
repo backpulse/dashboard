@@ -1,0 +1,37 @@
+.page.my-account {
+    padding-left: 20%!important;
+    padding-right: 20%!important;
+    
+    h1 {
+        margin-bottom: 25px;
+    }
+    h2 {
+        margin-bottom: -15px;
+
+    }
+
+    .group {
+        margin-bottom: 25px;
+        .divider {
+            margin-top: 25px;
+        }
+        .red-text {
+            color: #e74c3c!important;
+        }
+        button {
+            margin-top: 15px;
+        }
+        .warning-text {
+            margin-top: 15px;
+        }
+    }
+
+}
+
+.dark {
+    .page.my-account {
+        h2 {
+            color: #00ad9f!important;
+        }
+    }
+}

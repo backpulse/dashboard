@@ -14,7 +14,7 @@ import {
 import { getJWT, getUser, removeJWT } from 'utils/token';
 
 import {
-    MySites, SiteEditor, Projects, Contact, About, Settings, Overview, Galleries, EditProject, EditGallery
+    MySites, SiteEditor, Projects, Contact, About, Settings, Overview, Galleries, EditProject, EditGallery, MyAccount
 } from 'pages/dashboard';
 
 import {
@@ -114,6 +114,7 @@ class App extends React.Component {
 
 						{getJWT() && <MuiThemeProvider theme={getTheme() === "dark" ? theme : themeLight}>
 							<Route exact path="/" render={() => <MySites updateTheme={this.updateTheme}/>}/>
+							<Route exact path="/account" render={() => this.requireAuth(<MyAccount updateTheme={this.updateTheme}/>)}/>
 							<Route path="/site/:name" render={({ match: { url } }) => (
 								<React.Fragment>
 									<Route path="/site/:name" render={() => this.requireAuth(<SiteEditor updateTheme={this.updateTheme}/>)}/>
