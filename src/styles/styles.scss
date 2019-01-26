@@ -12,6 +12,10 @@ body, html, #root,.app,.app-container {
         padding-right: 25px;
         min-height: calc(100% - 85px);
 
+        @media screen and(max-width: 960px) {
+            padding-left: 25px;
+        }
+
         h1 {
             font-size: 36px;
             font-weight: 300;
@@ -148,4 +152,9 @@ a {
         margin-top: 24px!important;
         position: absolute;
     }
+}
+
+
+.red-text {
+    color: #e74c3c!important;
 }

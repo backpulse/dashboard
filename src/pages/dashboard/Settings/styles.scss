@@ -5,4 +5,20 @@
     hr {
         margin-top: 15px;
     }
+    
+    .red-text {
+        color: #e74c3c!important;
+    }
+
+    .margin {
+        margin-top: 15px;
+    }
+}
+
+.dark {
+    .page.dashboard-settings {
+        h2.primary {
+            color: #00ad9f!important;
+        }
+    }
 }

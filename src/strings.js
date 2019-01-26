@@ -107,7 +107,10 @@ const strings = {
 
         "WRONG_PASSWORD": "Le mot de passe est éronné",
         "PASSWORD_CHANGED": "Le mot de passe a été correctement changé.",
-        "CLOSE_ACCOUNT_DESCRIPTION": "Vous êtes sur le point de supprimer votre compte Backpulse. Merci de confirmer en écrivant votre adresse email."
+        "CLOSE_ACCOUNT_DESCRIPTION": "Vous êtes sur le point de supprimer votre compte Backpulse. Merci de confirmer en écrivant votre adresse email.",
+        "TRANSFER" : "Transférer le site",
+        "DELETE_SITE": "Supprimer le site",
+        "CONFIRM_DELETE_SITE": "Vous êtes sur le point de supprimer ce site. Merci de confirmer en écrivant le nom du site."
     },
     en: {
         "CANCEL": "Cancel",
@@ -212,7 +215,10 @@ const strings = {
         "VERIFY_EMAIL": "Please verify your email address.",
         "WRONG_PASSWORD": "Password is incorrect",
         "PASSWORD_CHANGED": "Password was successfuly changed.",
-        "CLOSE_ACCOUNT_DESCRIPTION": "You are about to close your Backpulse account. Please confirm by typing your email address."
+        "CLOSE_ACCOUNT_DESCRIPTION": "You are about to close your Backpulse account. Please confirm by typing your email address.",
+        "TRANSFER": "Transfer site",
+        "DELETE_SITE": "Delete site",
+        "CONFIRM_DELETE_SITE": "You are about to delete this site. Please confirm by typing the site's name."
     }
 };
 

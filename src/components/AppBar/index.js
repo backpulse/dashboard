@@ -6,6 +6,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
 import Typography from '@material-ui/core/Typography';
 
@@ -37,18 +38,22 @@ class AppBar extends React.Component {
         this.setState({ anchorEl: null, open: false });
     };
 
+    handleDrawerToggle = () => {
+        window.dispatchEvent(new Event("menu-toggle"));
+    }
+
     render() {
         return (
             <React.Fragment>
                 <Bar position="fixed" className="app-bar">
                     <Toolbar>
-                        {/* <IconButton
+                        <IconButton
                             className="hide-desktop"
                             color="inherit"
                             aria-label="Open drawer"
                             onClick={this.handleDrawerToggle}>
                             <MenuIcon />
-                        </IconButton> */}
+                        </IconButton>
                         <Typography style={{marginLeft: 15}} variant="h6" color="inherit" noWrap>
                             {this.props.title || "Backpulse"}
                         </Typography>

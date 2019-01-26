@@ -33,7 +33,7 @@ class DrawerMenu extends React.Component {
         this.state = {
             drawerOpened: false,
             confirmSignoutAlert: false,
-            mobileOpen: false
+            mobileOpen: true
         }
     }
 
@@ -165,6 +165,10 @@ class DrawerMenu extends React.Component {
         this.props.history.listen(route => {
             getRouteName(route);
         });
+
+        window.addEventListener("menu-toggle", () => {
+            this.handleDrawerToggle();
+        });
     }
 
     render() {
@@ -182,7 +186,9 @@ class DrawerMenu extends React.Component {
                             keepMounted: true, // Better open performance on mobile.
                           }}
                         >
-                        <div className="toolbar"/>
+                        <div className="toolbar">
+                          <h1>Backpulse</h1>
+                        </div>
                         {this.getDrawer()}
                     </Drawer>
                 </Hidden>

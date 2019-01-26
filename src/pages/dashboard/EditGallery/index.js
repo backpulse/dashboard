@@ -360,7 +360,7 @@ class EditGallery extends React.Component {
                                             <h1>{strings.PHOTOS}</h1>
                                         </div>
                                     </Grid>
-                                    <FileUploader isGallery galleryID={this.state.short_id} onDone={this.onUploadFinished} open={this.state.importDialog} close={this.toggleImport}/>
+                                    <FileUploader siteName={this.props.match.params.name} isGallery galleryID={this.state.short_id} onDone={this.onUploadFinished} open={this.state.importDialog} close={this.toggleImport}/>
                                     <div className="gallery-photos-container">
                                         {this.state.photos.map((photo, i) => (
                                             <Grid key={i} item xs={12} md={10}>

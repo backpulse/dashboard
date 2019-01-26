@@ -39,7 +39,7 @@ class FileUploader extends React.Component {
         formData.append("gallery_id", this.props.galleryID);
         formData.append("project_id", this.props.projectID);
 
-        client.post("/photos", formData, {
+        client.post("/photos/" + this.props.siteName, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

@@ -2,6 +2,18 @@
     padding-left: 10%!important;
     padding-right: 10%!important;
 
+    @media screen and (max-width: 750px) {
+        padding-left: 5%!important;
+        padding-right: 5%!important;
+        .sites-container {
+            justify-content: center;
+            .sitebox {
+                width: 100%;
+            }
+        }
+        
+    }
+
     .sites-container {
         display: flex;
         flex-direction: row;
