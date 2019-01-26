@@ -158,13 +158,13 @@ class MySites extends React.Component {
     render() {
         return (
             <div className="page dashboard-my-sites">
-                <AppBar updateTheme={this.props.updateTheme}/>
+                <AppBar noMenu updateTheme={this.props.updateTheme}/>
                 <Fab onClick={this.handleNewSite} className="fab" variant="extended" color="primary" aria-label="Add">
                     <AddIcon />
                     {strings.MY_SITES_ADD_SITE}
                 </Fab>
 
-                <Typography variant="h1">{strings.MENU_MY_SITES}</Typography>
+                <h1>{strings.MENU_MY_SITES}</h1>
                 <div className="sites-container">
                     {this.state.sites.map((site, i) => (
                         <SiteBox 

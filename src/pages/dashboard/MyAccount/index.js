@@ -166,7 +166,7 @@ class MyAccount extends React.Component {
     render() {
         return (
             <div className="page my-account">
-                <AppBar updateTheme={this.props.updateTheme}/>
+                <AppBar noMenu updateTheme={this.props.updateTheme}/>
                 <h1>{strings.MENU_MY_ACCOUNT}</h1>
                 
                 <Snackbar

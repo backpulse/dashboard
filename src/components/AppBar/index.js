@@ -47,13 +47,13 @@ class AppBar extends React.Component {
             <React.Fragment>
                 <Bar position="fixed" className="app-bar">
                     <Toolbar>
-                        <IconButton
+                        {!this.props.noMenu && <IconButton
                             className="hide-desktop"
                             color="inherit"
                             aria-label="Open drawer"
                             onClick={this.handleDrawerToggle}>
                             <MenuIcon />
-                        </IconButton>
+                        </IconButton>}
                         <Typography style={{marginLeft: 15}} variant="h6" color="inherit" noWrap>
                             {this.props.title || "Backpulse"}
                         </Typography>

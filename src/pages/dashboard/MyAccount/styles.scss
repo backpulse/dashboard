@@ -2,6 +2,11 @@
     padding-left: 20%!important;
     padding-right: 20%!important;
     
+    @media screen and (max-width: 700px) {
+        padding-left: 5% !important;
+        padding-right: 5% !important;
+    }
+
     h1 {
         margin-bottom: 25px;
     }

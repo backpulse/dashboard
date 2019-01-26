@@ -33,7 +33,7 @@ class DrawerMenu extends React.Component {
         this.state = {
             drawerOpened: false,
             confirmSignoutAlert: false,
-            mobileOpen: true
+            mobileOpen: false
         }
     }
 
