@@ -39,7 +39,8 @@ class Settings extends React.Component {
             display_name: "",
             editingName: false,
             collaborators: [],
-            confirmDelete: false
+            confirmDelete: false,
+            confirmName: ""
         }
     }
 

@@ -165,6 +165,10 @@ class MySites extends React.Component {
                 </Fab>
 
                 <h1>{strings.MENU_MY_SITES}</h1>
+                {this.state.sites.length < 1 && <Button className="new-site-button" onClick={this.handleNewSite} variant="contained" color="primary" aria-label="Add">
+                    <AddIcon />
+                    {strings.MY_SITES_ADD_SITE}
+                </Button>}
                 <div className="sites-container">
                     {this.state.sites.map((site, i) => (
                         <SiteBox 

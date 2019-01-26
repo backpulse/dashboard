@@ -166,9 +166,11 @@ class DrawerMenu extends React.Component {
             getRouteName(route);
         });
 
-        window.addEventListener("menu-toggle", () => {
-            this.handleDrawerToggle();
-        });
+        window.addEventListener("menu-toggle", this.handleDrawerToggle);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("menu-toggle", this.handleDrawerToggle);
     }
 
     render() {
