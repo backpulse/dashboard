@@ -9,6 +9,7 @@ import Galleries from './Galleries';
 import EditProject from './EditProject';
 import EditGallery from './EditGallery';
 import MyAccount from './MyAccount';
+import Access from './Access';
 
 export {
     MySites,
@@ -21,5 +22,6 @@ export {
     Galleries,
     EditProject,
     EditGallery,
-    MyAccount
+    MyAccount,
+    Access
 }

@@ -15,6 +15,7 @@ import AboutIcon from '@material-ui/icons/PermIdentity';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import OverviewIcon from '@material-ui/icons/RemoveRedEye';
 import PhotoLibrary from '@material-ui/icons/PhotoLibrary';
+import LockIcon from '@material-ui/icons/Lock';
 
 import Hidden from '@material-ui/core/Hidden';
 
@@ -80,6 +81,15 @@ class DrawerMenu extends React.Component {
                 path: "/site/" + this.props.match.params.name + "/contact",
                 icon: <ContactIcon/>,
                 text: strings.DRAWER_CONTACT,
+                type: "all"
+            },
+            {
+                divider: true
+            },
+            {
+                path: "/site/" + this.props.match.params.name + "/access",
+                icon: <LockIcon/>,
+                text: strings.DRAWER_ACCESS,
                 type: "all"
             },
             {

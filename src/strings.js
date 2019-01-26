@@ -41,6 +41,7 @@ const strings = {
         "DRAWER_ABOUT": "À propos",
         "DRAWER_SETTINGS": "Paramètres",
         "DRAWER_GALLERIES": "Galeries",
+        "DRAWER_ACCESS": "Accès",
 
         "PROJECTS_NEW_PROJECT": "Nouveau projet",
 
@@ -150,6 +151,7 @@ const strings = {
         "DRAWER_ABOUT": "About",
         "DRAWER_SETTINGS": "Settings",
         "DRAWER_GALLERIES": "Galleries",
+        "DRAWER_ACCESS": "Access",
 
         "PROJECTS_NEW_PROJECT": "New project",
 
