@@ -8,7 +8,6 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import IconButton from '@material-ui/core/IconButton';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import Divider from '@material-ui/core/Divider';
@@ -122,7 +121,7 @@ class MyAccount extends React.Component {
                 });
                 break;
             }
-            case "password_too_short": {
+            case "password_too_long": {
                 this.setState({
                     errorMsg: strings.PASSWORD_TOO_LONG,
                     error: true,
@@ -136,6 +135,7 @@ class MyAccount extends React.Component {
                     error: true,
                     errorField: "confirm"
                 });
+                break;
             }
             default:
                 break

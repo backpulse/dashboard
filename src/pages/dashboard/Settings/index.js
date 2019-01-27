@@ -24,7 +24,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import strings from 'strings';
 
 import client from 'services/client';
-import Typography from '@material-ui/core/Typography';
 
 class Settings extends React.Component {
     
@@ -129,6 +128,7 @@ class Settings extends React.Component {
                     error: true,
                     errorField: "name"
                 });
+                break;
             }
             default:
                 break

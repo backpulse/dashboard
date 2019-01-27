@@ -111,7 +111,15 @@ const strings = {
         "CLOSE_ACCOUNT_DESCRIPTION": "Vous êtes sur le point de supprimer votre compte Backpulse. Merci de confirmer en écrivant votre adresse email.",
         "TRANSFER" : "Transférer le site",
         "DELETE_SITE": "Supprimer le site",
-        "CONFIRM_DELETE_SITE": "Vous êtes sur le point de supprimer ce site. Merci de confirmer en écrivant le nom du site."
+        "CONFIRM_DELETE_SITE": "Vous êtes sur le point de supprimer ce site. Merci de confirmer en écrivant le nom du site.",
+        "ADD_COLLABORATOR": "Ajouter un collaborateur",
+        "ADD_COLLABORATOR_DESCRIPTION": "Merci d'entrer l'adresse email du collaborateur.",
+        "INVITE": "Inviter",
+        "COLLABORATOR_EXISTS": "Ce collaborateur est déjà invité.",
+        "EMAIL_INCORRECT": "Cette adresse email est incorrecte.",
+        "COLLABORATOR": "Collaborateur",
+        "REMOVE_COLLABORATOR": "Exclure ce collaborateur ?",
+        "REMOVE_COLLABORATOR_DESCRIPTION": "Êtes-vous certain(e) de vouloir exclure ce collaborateur ?"
     },
     en: {
         "CANCEL": "Cancel",
@@ -220,7 +228,15 @@ const strings = {
         "CLOSE_ACCOUNT_DESCRIPTION": "You are about to close your Backpulse account. Please confirm by typing your email address.",
         "TRANSFER": "Transfer site",
         "DELETE_SITE": "Delete site",
-        "CONFIRM_DELETE_SITE": "You are about to delete this site. Please confirm by typing the site's name."
+        "CONFIRM_DELETE_SITE": "You are about to delete this site. Please confirm by typing the site's name.",
+        "ADD_COLLABORATOR": "Add a collaborator",
+        "ADD_COLLABORATOR_DESCRIPTION": "Please enter the collaborator's email address.",
+        "INVITE": "Invite",
+        "COLLABORATOR_EXISTS": "This collaborator is already invited.",
+        "EMAIL_INCORRECT": "Email address is incorrect.",
+        "COLLABORATOR": "Collaborator",
+        "REMOVE_COLLABORATOR": "Kick this collaborator?",
+        "REMOVE_COLLABORATOR_DESCRIPTION": "Are you sure you want to kick this collaborator?"
     }
 };
 

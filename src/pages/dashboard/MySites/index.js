@@ -24,7 +24,6 @@ import {toTitleCase} from 'utils';
 
 import strings from 'strings';
 import SiteBox from 'components/SiteBox';
-import Typography from '@material-ui/core/Typography';
 
 import AppBar from 'components/AppBar';
 
@@ -147,8 +146,14 @@ class MySites extends React.Component {
     }
 
     favoriteSite = site => {
+        const sites = this.state.sites;
+        sites.forEach((s, i) => {
+            if(s.name === site.name) {
+                sites[i].favorite = !sites[i].favorite;
+            }
+        });
+        this.setState({sites});
         client.put('/sites/favorite/' + site.name).then(response => {
-            console.log(response.data);
             this.fetchSites();
         }).catch(err => {
             if(err) throw err;
