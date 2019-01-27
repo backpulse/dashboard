@@ -14,7 +14,19 @@ import {
 import { getJWT, getUser, removeJWT } from 'utils/token';
 
 import {
-    MySites, SiteEditor, Projects, Contact, About, Settings, Overview, Galleries, EditProject, EditGallery, MyAccount, Access
+	MySites, 
+	SiteEditor, 
+	Projects, 
+	Contact, 
+	About, 
+	Settings, 
+	Overview, 
+	Galleries,
+	EditProject, 
+	EditGallery, 
+	MyAccount, 
+	Access,
+	Modules
 } from 'pages/dashboard';
 
 import {
@@ -122,6 +134,7 @@ class App extends React.Component {
 									
 									<Route path="/site/:name/projects" render={() => this.requireAuth(<Projects/>)}/>
 									<Route path="/site/:name/access" render={() => this.requireAuth(<Access/>)}/>
+									<Route path="/site/:name/modules" render={() => this.requireAuth(<Modules forceRender={() => this.forceUpdate}/>)}/>
 									<Route path="/site/:name/projects/new" render={() => this.requireAuth(<EditProject new/>)}/>
 									<Route path="/site/:name/projects/edit/:id" render={() => this.requireAuth(<EditProject/>)}/>
 

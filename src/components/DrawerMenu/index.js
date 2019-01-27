@@ -16,6 +16,7 @@ import ArrowBack from '@material-ui/icons/ArrowBack';
 import OverviewIcon from '@material-ui/icons/RemoveRedEye';
 import PhotoLibrary from '@material-ui/icons/PhotoLibrary';
 import LockIcon from '@material-ui/icons/Lock';
+import ExtensionIcon from '@material-ui/icons/Extension';
 
 import Hidden from '@material-ui/core/Hidden';
 
@@ -37,6 +38,10 @@ class DrawerMenu extends React.Component {
             confirmSignoutAlert: false,
             mobileOpen: false
         }
+
+        setTimeout(() => {
+            this.forceUpdate();
+        }, 1500);
     }
 
     handleClose = () => this.setState({confirmSignoutAlert: false});
@@ -50,55 +55,71 @@ class DrawerMenu extends React.Component {
     handleDrawerToggle = () => this.setState({mobileOpen: true});
     handleMobileClose = () => this.setState({mobileOpen: false});
 
+    hasModule = moduleName => {
+        const modules = this.props.site.modules;
+        for(let i = 0; i < modules.length; i++) {
+            if(modules[i] === moduleName) {
+                return true;
+            }
+        }
+        return false
+    }
+
     getDrawer = () => {
         const routes = [
             {
                 path: "/site/" + this.props.match.params.name,
                 icon: <OverviewIcon/>,
                 text: strings.DRAWER_OVERVIEW,
-                type: "all"
+                show: true
             },
             {
                 path: "/site/" + this.props.match.params.name + "/projects",
                 icon: <LibraryBooks/>,
                 text: strings.DRAWER_PROJECTS,
-                type: "portfolio"
+                show: this.hasModule("projects")
 
             },
             {
                 path: "/site/" + this.props.match.params.name + "/galleries",
                 icon: <PhotoLibrary/>,
                 text: strings.DRAWER_GALLERIES,
-                type: "photography"
+                show: this.hasModule("galleries")
 
             },
             {
                 path: "/site/" + this.props.match.params.name + "/about",
                 icon: <AboutIcon/>,
                 text: strings.DRAWER_ABOUT,
-                type: "all"
+                show: true
             },
             {
                 path: "/site/" + this.props.match.params.name + "/contact",
                 icon: <ContactIcon/>,
                 text: strings.DRAWER_CONTACT,
-                type: "all"
+                show: true
             },
             {
                 divider: true
             },
             {
+                path: "/site/" + this.props.match.params.name + "/modules",
+                icon: <ExtensionIcon/>,
+                text: strings.DRAWER_MODULES,
+                show: true
+            },
+            {
                 path: "/site/" + this.props.match.params.name + "/access",
                 icon: <LockIcon/>,
                 text: strings.DRAWER_ACCESS,
-                type: "all"
+                show: true
             },
             {
                 path: "/site/" + this.props.match.params.name + "/settings",
                 icon: <SettingsIcon/>,
                 text: strings.DRAWER_SETTINGS,
                 type: "all",
-                hide: this.props.site.role !== "owner"
+                show: this.props.site.role == "owner"
             },
             {
                 divider: true
@@ -107,7 +128,7 @@ class DrawerMenu extends React.Component {
                 path: "/",
                 icon: <ArrowBack/>,
                 text: strings.MENU_MY_SITES,
-                type: "all"
+                show: true
             }
         ];
         return (
@@ -117,7 +138,7 @@ class DrawerMenu extends React.Component {
                     {routes.map((route, i) => {
                         if(route.divider) {
                             return <Divider style={{marginBottom: 10, marginTop: 10}} key={i}/>
-                        } else if((this.props.site.type === route.type || route.type === "all") && !route.hide) {
+                        } else if(route.show) {
                             return <Link key={i} to={route.path}>
                                 <ListItem className={["list-item", this.isActive(route) ? "active": ""].join(" ")} button>
                                     <ListItemIcon>

@@ -169,7 +169,7 @@ class Access extends React.Component {
 
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={this.handleNewSiteDialogClose} color="primary">
+                            <Button onClick={this.handleClose} color="primary">
                                 {strings.CANCEL}
                             </Button>
                             <Button type="submit" variant="contained" color="primary">

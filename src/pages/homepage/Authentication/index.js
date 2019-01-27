@@ -38,7 +38,6 @@ class Authentication extends React.Component {
             saveJWT(response.data.payload);
             window.location = "/";
         }).catch(err => {
-            //TODO: display error
             this.checkError(err);
             if(err) throw err;
         });

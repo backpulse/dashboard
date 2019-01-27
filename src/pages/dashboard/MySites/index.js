@@ -39,8 +39,6 @@ class MySites extends React.Component {
             siteType: "",
             sites: [],
 
-            types: [],
-
             nameHasError: false,
             error: false,
             errorMsg: "",
@@ -57,22 +55,12 @@ class MySites extends React.Component {
         });
     }
 
-    fetchTypes = () => {
-        client.get('/constants/site-types').then(response => {
-            const types = response.data.payload || [];
-            this.setState({types});
-        }).catch(err => {
-            if(err) throw err;
-        });
-    }
-
     componentDidMount() {
         this.fetchSites();
     }
 
 
     handleNewSite = () => {
-        this.fetchTypes();
         this.setState({newSiteDialog: true, errorMsg: "", error: false, nameHasError: false, siteName: "", siteType: ""})
     };
     handleNewSiteDialogClose = () => this.setState({newSiteDialog: false});
@@ -211,17 +199,6 @@ class MySites extends React.Component {
                                     label={strings.NEW_SITE_NAME}
                                     fullWidth
                                 />
-                            </FormControl>
-                            <FormControl required fullWidth>
-                                <InputLabel htmlFor="age-simple">{strings.NEW_SITE_TYPE}</InputLabel>
-                                <Select
-                                    required
-                                    value={this.state.siteType}
-                                    onChange={this.handleTypeChange}>
-                                    {this.state.types.map((type, i) => (
-                                        <MenuItem key={i} value={type}>{toTitleCase(type)}</MenuItem>
-                                    ))}
-                                </Select>
                             </FormControl>
                             {this.state.error && <FormHelperText error={true}>
                                 {this.state.errorMsg}

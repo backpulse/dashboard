@@ -23,7 +23,7 @@ const strings = {
 
         "MY_SITES_ADD_SITE": "Nouveau site",
         "NEW_SITE_TITLE": "Créer un nouveau site",
-        "NEW_SITE_DESCRIPTION": "Merci d'indiquer le nom et le type de votre site.",
+        "NEW_SITE_DESCRIPTION": "Merci d'indiquer le nom de votre site.",
         "NEW_SITE_NAME": "Nom",
         "NEW_SITE_TYPE": "Type",
 
@@ -40,6 +40,7 @@ const strings = {
         "DRAWER_CONTACT": "Contact",
         "DRAWER_ABOUT": "À propos",
         "DRAWER_SETTINGS": "Paramètres",
+        "DRAWER_MODULES": "Modules",
         "DRAWER_GALLERIES": "Galeries",
         "DRAWER_ACCESS": "Accès",
 
@@ -119,7 +120,16 @@ const strings = {
         "EMAIL_INCORRECT": "Cette adresse email est incorrecte.",
         "COLLABORATOR": "Collaborateur",
         "REMOVE_COLLABORATOR": "Exclure ce collaborateur ?",
-        "REMOVE_COLLABORATOR_DESCRIPTION": "Êtes-vous certain(e) de vouloir exclure ce collaborateur ?"
+        "REMOVE_COLLABORATOR_DESCRIPTION": "Êtes-vous certain(e) de vouloir exclure ce collaborateur ?",
+
+        "MODULE_GALLERIES": "Galeries",
+        "MODULE_PROJECTS": "Projets",
+        "MODULE_ARTICLES": "Articles",
+
+        "ADD_MODULE": "Ajouter un module",
+        "ADD_MODULE_DESCRIPTION": "Merci de sélectionner le module que vous souhaitez ajouter.",
+        "REMOVE_MODULE": "Supprimer le module",
+        "REMOVE_MODULE_DESCRIPTION": "Vous êtes sur le point de supprimer un module. Tout le contenu associé à celui-ci sera également supprimé."
     },
     en: {
         "CANCEL": "Cancel",
@@ -141,7 +151,7 @@ const strings = {
 
         "MY_SITES_ADD_SITE": "New site",
         "NEW_SITE_TITLE": "Create a new site",
-        "NEW_SITE_DESCRIPTION": "Please enter your new site's name and type.",
+        "NEW_SITE_DESCRIPTION": "Please enter your new site's name.",
         "NEW_SITE_NAME": "Name",
         "NEW_SITE_TYPE": "Type",
 
@@ -158,6 +168,7 @@ const strings = {
         "DRAWER_CONTACT": "Contact",
         "DRAWER_ABOUT": "About",
         "DRAWER_SETTINGS": "Settings",
+        "DRAWER_MODULES": "Modules",
         "DRAWER_GALLERIES": "Galleries",
         "DRAWER_ACCESS": "Access",
 
@@ -236,7 +247,15 @@ const strings = {
         "EMAIL_INCORRECT": "Email address is incorrect.",
         "COLLABORATOR": "Collaborator",
         "REMOVE_COLLABORATOR": "Kick this collaborator?",
-        "REMOVE_COLLABORATOR_DESCRIPTION": "Are you sure you want to kick this collaborator?"
+        "REMOVE_COLLABORATOR_DESCRIPTION": "Are you sure you want to kick this collaborator?",
+        "MODULE_GALLERIES": "Galleries",
+        "MODULE_PROJECTS": "Projects",
+        "MODULE_ARTICLES": "Articles",
+        "ADD_MODULE": "Add a module",
+        "ADD_MODULE_DESCRIPTION": "Please select the module you would like to add to your site.",
+
+        "REMOVE_MODULE": "Remove module",
+        "REMOVE_MODULE_DESCRIPTION": "You are about to remove a module. All the content associated with this module will be removed as well. Please make sure you know what you are doing."
     }
 };
 
