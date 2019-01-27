@@ -20,6 +20,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import {toTitleCase} from 'utils';
 
 import strings from 'strings';
@@ -41,14 +43,15 @@ class MySites extends React.Component {
 
             nameHasError: false,
             error: false,
-            errorMsg: ""
+            errorMsg: "",
+            fetched: false
         }
     }
 
     fetchSites = () => {
         client.get('/sites').then(response => {
             const sites = response.data.payload || [];
-            this.setState({sites});
+            this.setState({sites, fetched: true});
         }).catch(err => {
             if(err) throw err;
         });
@@ -170,7 +173,9 @@ class MySites extends React.Component {
                 </Fab>
 
                 <h1>{strings.MENU_MY_SITES}</h1>
-                {this.state.sites.length < 1 && <Button className="new-site-button" onClick={this.handleNewSite} variant="contained" color="primary" aria-label="Add">
+                {!this.state.fetched && <CircularProgress/>}
+
+                {this.state.sites.length < 1 && this.state.fetched && <Button className="new-site-button" onClick={this.handleNewSite} variant="contained" color="primary" aria-label="Add">
                     <AddIcon />
                     {strings.MY_SITES_ADD_SITE}
                 </Button>}

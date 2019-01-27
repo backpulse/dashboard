@@ -10,6 +10,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import strings from 'strings';
 
 import client from 'services/client';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class Contact extends React.Component {
 
@@ -26,15 +27,17 @@ class Contact extends React.Component {
 
             error: false,
             errorField: "",
-            errorMsg: ""
+            errorMsg: "",
+            fetched: false
         }
     }
 
     fetchContact = () => {
         client.get('/contact/' + this.props.match.params.name).then(response => {
             const contact = response.data.payload;
-            this.setState({...contact});
+            this.setState({...contact, fetched: true});
         }).catch(err => {
+            this.setState({fetched: true});
             if(err) throw err;
         });
     }
@@ -122,7 +125,8 @@ class Contact extends React.Component {
         return (
             <div className="page dashboard-contact">
                 <h1>{strings.CONTACT}</h1>
-                <Grid container direction="column">
+                {!this.state.fetched && <CircularProgress className="progress"/>}
+                {this.state.fetched && <Grid container direction="column">
                     <Grid item xs={12} md={4}>
                         <TextField
                             error={this.state.errorField === "name"}
@@ -209,7 +213,7 @@ class Contact extends React.Component {
                     <Grid item xs={12} md={4}>
                         <Button onClick={this.saveContact} style={{marginTop: 15}} variant="contained" color="primary" fullWidth>{strings.SAVE}</Button>
                     </Grid>
-                </Grid>
+                </Grid>}
             </div>
         );
     }

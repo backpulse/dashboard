@@ -22,6 +22,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import client from 'services/client';
 
@@ -42,14 +43,15 @@ class Access extends React.Component {
             error: false,
             errorMsg: "",
 
-            removeDialog: false
+            removeDialog: false,
+            fetched: false
         }
     }
 
     fetchCollaborators = () => {
         client.get('/sites/' + this.props.match.params.name + '/collaborators').then(response => {
             const collaborators = response.data.payload || [];
-            this.setState({collaborators});
+            this.setState({collaborators, fetched: true});
         }).catch(err => {
             if(err) throw err;
         });
@@ -115,14 +117,28 @@ class Access extends React.Component {
         removeDialog: false
     });
 
+    isOwner = () => {
+        const collabs = this.state.collaborators;
+        for(let i = 0; i < collabs.length; i++) {
+            if(collabs[i].email === getUser().email) {
+                if(collabs[i].role === "owner") {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     render() {
         return (
             <div className="page dashboard-access">
                 <h1>{strings.DRAWER_ACCESS}</h1>
-                <Button onClick={this.handleNewCollaborator} className="new-collab-button" variant="contained" color="primary" aria-label="Add">
+
+                <Button disabled={!this.isOwner()} onClick={this.handleNewCollaborator} className="new-collab-button" variant="contained" color="primary" aria-label="Add">
                     <AddIcon />
                     {strings.ADD_COLLABORATOR}
                 </Button>
+                {!this.state.fetched && <CircularProgress style={{display: "block"}}/>}
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -181,23 +197,25 @@ class Access extends React.Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
-                <List className="collab-list">
-                    {this.state.collaborators.map((c, i) => (
-                        <ListItem style={{paddingLeft: 5}} key={i} dense>
-                            <AccountCircle fontSize="large" color="primary"/>
-                            <ListItemText primary={c.email} secondary={c.role === "collaborator" ? strings.COLLABORATOR.toLowerCase() : strings.OWNER.toLowerCase()} />
-                            
-                            <ListItemSecondaryAction>
-                                <IconButton disabled={c.email === getUser().email} onClick={() => this.setState({
-                                    removeDialog: true,
-                                    collabToDelete: c
-                                })}>
-                                    <DeleteIcon />
-                                </IconButton>
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                    ))}
-                </List>
+                {this.state.fetched && 
+                    <List className="collab-list">
+                        {this.state.collaborators.map((c, i) => (
+                            <ListItem style={{paddingLeft: 5}} key={i} dense>
+                                <AccountCircle fontSize="large" color="primary"/>
+                                <ListItemText primary={c.email} secondary={c.role === "collaborator" ? strings.COLLABORATOR.toLowerCase() : strings.OWNER.toLowerCase()} />
+                                
+                                <ListItemSecondaryAction>
+                                    <IconButton disabled={c.email === getUser().email || !this.isOwner()} onClick={() => this.setState({
+                                        removeDialog: true,
+                                        collabToDelete: c
+                                    })}>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        ))}
+                    </List>
+                }
  
             </div>
         )

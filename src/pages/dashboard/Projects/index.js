@@ -4,6 +4,7 @@ import AddIcon from '@material-ui/icons/Add';
 import {withRouter}from 'react-router';
 
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import ProjectBox from 'components/ProjectBox';
 
@@ -59,6 +60,7 @@ class Projects extends React.Component {
                 <div className="title-div">
                     <h1>{strings.DRAWER_PROJECTS}</h1>
                 </div>
+                {!this.state.fetched && <CircularProgress className="progress"/>}
                 {this.state.projects.length < 1 && this.state.fetched && <Button onClick={this.handleNewProject} variant="contained" color="primary" aria-label="Add">
                     <AddIcon />
                     {strings.PROJECTS_NEW_PROJECT}

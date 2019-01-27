@@ -16,6 +16,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import client from 'services/client';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import GalleryBox from 'components/GalleryBox';
 
 import './styles.scss';
@@ -53,7 +55,6 @@ class Galleries extends React.Component {
 
 
     fetchGalleries = () => {
-        this.setState({fetched: false});
         client.get('/galleries/' + this.props.match.params.name).then(response => {
             const galleries = response.data.payload || [];
             this.setState({galleries, fetched: true});
@@ -125,6 +126,7 @@ class Galleries extends React.Component {
                 <div className="title-div">
                     <h1>{strings.DRAWER_GALLERIES}</h1>
                 </div>
+                {!this.state.fetched && <CircularProgress/>}
                 {this.state.galleries.length < 1 && this.state.fetched && <Button onClick={this.handleCreateGallery} variant="contained" color="primary" aria-label="Add">
                     <AddIcon />
                     {strings.NEW_GALLERY}

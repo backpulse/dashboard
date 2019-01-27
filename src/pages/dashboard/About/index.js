@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import RemoveCircle from '@material-ui/icons/RemoveCircle';
 import strings from 'strings';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import './styles.scss';
 
@@ -28,7 +29,8 @@ class About extends React.Component {
                     content: ""
                 }
             ],
-            languages: []
+            languages: [],
+            fetched: false
         }
     }
 
@@ -66,8 +68,9 @@ class About extends React.Component {
     fetchAbout = () => {
         client.get('/about/' + this.props.match.params.name).then(response => {
             const about = response.data.payload;
-            this.setState({...about});
+            this.setState({...about, fetched: true});
         }).catch(err => {
+            this.setState({fetched: true});
             if(err) throw err;
         });
     }
@@ -124,7 +127,8 @@ class About extends React.Component {
         return (
             <div className="page dashboard-about">
                 <h1>{strings.ABOUT}</h1>
-                <Grid container direction="column">
+                {!this.state.fetched && <CircularProgress className="progress"/>}
+                {this.state.fetched && <Grid container direction="column">
                     <Grid item xs={12} md={12}>
                         <TextField
                             error={this.state.errorField === "name"}
@@ -180,7 +184,7 @@ class About extends React.Component {
                     <Grid item xs={12} md={12}>
                         <Button onClick={this.saveAbout} className="save-button" variant="contained" color="primary" fullWidth>{strings.SAVE}</Button>
                     </Grid>
-                </Grid>
+                </Grid>}
             </div>
         );
     }

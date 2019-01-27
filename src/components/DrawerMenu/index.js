@@ -26,6 +26,7 @@ import { removeJWT } from 'utils/token';
 import './styles.scss';
 
 import strings from 'strings';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class DrawerMenu extends React.Component {
 
@@ -96,7 +97,8 @@ class DrawerMenu extends React.Component {
                 path: "/site/" + this.props.match.params.name + "/settings",
                 icon: <SettingsIcon/>,
                 text: strings.DRAWER_SETTINGS,
-                type: "all"
+                type: "all",
+                hide: this.props.site.role !== "owner"
             },
             {
                 divider: true
@@ -115,7 +117,7 @@ class DrawerMenu extends React.Component {
                     {routes.map((route, i) => {
                         if(route.divider) {
                             return <Divider style={{marginBottom: 10, marginTop: 10}} key={i}/>
-                        } else if(this.props.site.type === route.type || route.type === "all") {
+                        } else if((this.props.site.type === route.type || route.type === "all") && !route.hide) {
                             return <Link key={i} to={route.path}>
                                 <ListItem className={["list-item", this.isActive(route) ? "active": ""].join(" ")} button>
                                     <ListItemIcon>
@@ -196,12 +198,15 @@ class DrawerMenu extends React.Component {
                         onClose={this.handleMobileClose}
                         ModalProps={{
                             keepMounted: true, // Better open performance on mobile.
-                          }}
+                        }}
                         >
                         <div className="toolbar">
-                          <h1>Backpulse</h1>
+                        <h1>Backpulse</h1>
                         </div>
-                        {this.getDrawer()}
+                        {!this.props.site.name && <div className="progress-container">
+                            <CircularProgress/>
+                        </div>}
+                        {this.props.site.name && this.getDrawer()}
                     </Drawer>
                 </Hidden>
                 <Hidden smDown implementation="css">
@@ -209,7 +214,10 @@ class DrawerMenu extends React.Component {
                         variant="permanent"
                         className="drawer-paper">
                         <div className="toolbar"/>
-                        {this.getDrawer()}
+                        {!this.props.site.name && <div className="progress-container">
+                            <CircularProgress/>
+                        </div>}
+                        {this.props.site.name && this.getDrawer()}
                     </Drawer>
                 </Hidden>
             </div>

@@ -23,6 +23,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import strings from 'strings';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import client from 'services/client';
 
 class Settings extends React.Component {
@@ -39,7 +41,8 @@ class Settings extends React.Component {
             editingName: false,
             collaborators: [],
             confirmDelete: false,
-            confirmName: ""
+            confirmName: "",
+            fetched: false
         }
     }
 
@@ -47,7 +50,7 @@ class Settings extends React.Component {
         client.get('/sites/' + this.props.match.params.name).then(response => {
             const site = response.data.payload;
             site.collaborators = site.collaborators || []
-            this.setState({...site, originalName: site.name});
+            this.setState({...site, originalName: site.name, fetched: true});
         }).catch(err => {
             if(err) throw err;
         });
@@ -156,7 +159,8 @@ class Settings extends React.Component {
         return (
             <div className="page dashboard-settings">
             <h1>{strings.SETTINGS}</h1>
-            <Grid container direction="column">
+            {!this.state.fetched && <CircularProgress/>}
+            {this.state.fetched && <Grid container direction="column">
                 <h2 className="primary">{strings.SITE}</h2>
                 <Grid item md={12} lg={4}>
                     <TextField
@@ -205,7 +209,7 @@ class Settings extends React.Component {
                     <h2 className="red-text">{strings.DANGER_ZONE}</h2>
                     <Button onClick={this.confirmDelete} fullWidth className="button-danger margin">{strings.DELETE}</Button>
                 </Grid>
-            </Grid>
+            </Grid>}
             <Dialog
                     open={this.state.confirmDelete}
                     onClose={this.handleConfirmClose}

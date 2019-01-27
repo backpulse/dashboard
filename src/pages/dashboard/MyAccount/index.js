@@ -19,6 +19,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import {getUser, signOut} from 'utils/token';
 
 import './styles.scss';
@@ -42,7 +44,8 @@ class MyAccount extends React.Component {
             errorField: "",
 
             confirmDelete: false,
-            confirmEmail: ""
+            confirmEmail: "",
+            fetched: false
         }
     }
 
@@ -52,7 +55,8 @@ class MyAccount extends React.Component {
             const user = response.data.payload;
             this.setState({
                 ...user,
-                lastEmail: user.email
+                lastEmail: user.email,
+                fetched: true
             });
         }).catch(err => {
             if(err) throw err;
@@ -168,7 +172,8 @@ class MyAccount extends React.Component {
             <div className="page my-account">
                 <AppBar noMenu updateTheme={this.props.updateTheme}/>
                 <h1>{strings.MENU_MY_ACCOUNT}</h1>
-                
+                {!this.state.fetched && <CircularProgress/>}
+
                 <Snackbar
                     anchorOrigin={{vertical: "top", horizontal: "right"}}
                     open={this.state.snack}
@@ -211,7 +216,7 @@ class MyAccount extends React.Component {
                     </DialogActions>
                 </Dialog>
 
-                <Grid container direction="column">
+                {this.state.fetched && <Grid container direction="column">
                     <Grid className="group" item xs={12} md={12}>
                         <h2>{strings.PROFILE}</h2>
                         <TextField
@@ -272,7 +277,7 @@ class MyAccount extends React.Component {
                         <Typography className="warning-text">{strings.DELETE_ALL_APPS_FIRST}</Typography>
                         <Button onClick={this.openConfirm} variant="contained" className="button-danger">{strings.CLOSE_ACCOUNT}</Button>
                     </Grid>
-                </Grid>
+                </Grid>}
             </div>
         )
     }
