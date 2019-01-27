@@ -131,7 +131,9 @@ const strings = {
         "REMOVE_MODULE": "Supprimer le module",
         "REMOVE_MODULE_DESCRIPTION": "Vous êtes sur le point de supprimer un module. Tout le contenu associé à celui-ci sera également supprimé.",
         "YOUR_API_ENDPOINT": "Voici l'adresse de votre API.",
-        "CHECKOUT_DOCS": "Documentation"
+        "CHECKOUT_DOCS": "Documentation",
+        "TOTAL_SIZE": "Taille totale",
+        "IMPORT": "Importer"
     },
     en: {
         "CANCEL": "Cancel",
@@ -259,7 +261,9 @@ const strings = {
         "REMOVE_MODULE": "Remove module",
         "REMOVE_MODULE_DESCRIPTION": "You are about to remove a module. All the content associated with this module will be removed as well. Please make sure you know what you are doing.",
         "YOUR_API_ENDPOINT": "This is your API endpoint.",
-        "CHECKOUT_DOCS": "Documentation"
+        "CHECKOUT_DOCS": "Documentation",
+        "TOTAL_SIZE": "Total size",
+        "IMPORT": "Import"
     }
 };
 

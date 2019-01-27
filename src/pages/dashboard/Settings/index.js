@@ -24,8 +24,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import strings from 'strings';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import client from 'services/client';
+import Typography from '@material-ui/core/Typography';
 
 class Settings extends React.Component {
     
@@ -155,6 +157,8 @@ class Settings extends React.Component {
         });
     }
 
+    convertSize = size => size / (1024 * 1000);
+
     render() {
         return (
             <div className="page dashboard-settings">
@@ -203,6 +207,14 @@ class Settings extends React.Component {
                     />
                     <Button className="margin" fullWidth variant="outlined" color="primary">{strings.TRANSFER}</Button>
 
+                </Grid>
+                <Divider variant="fullWidth"/>
+                <Grid item md={12} lg={4}>
+                    <h2 className="primary" style={{marginBottom: 10}}>{strings.TOTAL_SIZE}</h2>
+                    <Typography variant="caption">{this.convertSize(this.state.total_size)} / 500 Mo</Typography>
+                    <LinearProgress variant="determinate" value={
+                        (this.convertSize(this.state.total_size) * 100) / 500
+                    }/>
                 </Grid>
                 <Divider variant="fullWidth"/>
                 <Grid item md={12} lg={4}>

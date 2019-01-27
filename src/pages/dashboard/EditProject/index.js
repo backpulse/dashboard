@@ -22,6 +22,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import {withRouter} from 'react-router';
 
 import Selector from 'components/Selector';
+import {getTheme} from 'utils';
 
 import client from 'services/client';
 
@@ -241,7 +242,7 @@ class EditProject extends React.Component {
             <div>
                  <Dialog
                     fullScreen
-                    className="no-padding"
+                    className={getTheme()}
                     open={this.state.open}
                     onClose={this.handleClose}
                     TransitionComponent={Transition}

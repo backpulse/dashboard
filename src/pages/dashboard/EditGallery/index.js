@@ -240,7 +240,7 @@ class EditGallery extends React.Component {
         return (
             <div>
                 <Dialog
-                 className={getTheme()}
+                    className={getTheme()}
                     fullScreen
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -264,10 +264,9 @@ class EditGallery extends React.Component {
                     </AppBar>
                         <Fab className="fab" onClick={this.toggleImport} variant="extended" color="primary">
                             <AddIcon/>
-                            Importer
+                            {strings.IMPORT}
                         </Fab>
                     <DialogContent className="dialog-content dialog-gallery-edit">
-                    
                         <Grid container spacing={16}>
                             <Grid item md={7} xs={12}>
                                 <Grid container direction="column">
