@@ -24,12 +24,15 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import Divider from '@material-ui/core/Divider';
+
 import client from 'services/client';
 
 import {withRouter} from 'react-router';
 
 import './styles.scss';
 import { getUser } from 'utils/token';
+import { Typography } from '@material-ui/core';
 
 class Access extends React.Component {
 
@@ -216,6 +219,17 @@ class Access extends React.Component {
                         ))}
                     </List>
                 }
+                <Divider/>
+                <h2>API</h2>
+                <Typography variant="body1">
+                    {strings.YOUR_API_ENDPOINT}
+                </Typography>
+                <Typography variant="body1">
+                    <code>
+                        https://api.backpulse.io/{this.props.match.params.name}
+                    </code>
+                </Typography>
+                <Button href="https://docs.backpulse.io" target="_blank" className="docs-btn" variant="contained" color="primary">{strings.CHECKOUT_DOCS}</Button>
  
             </div>
         )

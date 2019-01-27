@@ -129,7 +129,9 @@ const strings = {
         "ADD_MODULE": "Ajouter un module",
         "ADD_MODULE_DESCRIPTION": "Merci de sélectionner le module que vous souhaitez ajouter.",
         "REMOVE_MODULE": "Supprimer le module",
-        "REMOVE_MODULE_DESCRIPTION": "Vous êtes sur le point de supprimer un module. Tout le contenu associé à celui-ci sera également supprimé."
+        "REMOVE_MODULE_DESCRIPTION": "Vous êtes sur le point de supprimer un module. Tout le contenu associé à celui-ci sera également supprimé.",
+        "YOUR_API_ENDPOINT": "Voici l'adresse de votre API.",
+        "CHECKOUT_DOCS": "Documentation"
     },
     en: {
         "CANCEL": "Cancel",
@@ -255,7 +257,9 @@ const strings = {
         "ADD_MODULE_DESCRIPTION": "Please select the module you would like to add to your site.",
 
         "REMOVE_MODULE": "Remove module",
-        "REMOVE_MODULE_DESCRIPTION": "You are about to remove a module. All the content associated with this module will be removed as well. Please make sure you know what you are doing."
+        "REMOVE_MODULE_DESCRIPTION": "You are about to remove a module. All the content associated with this module will be removed as well. Please make sure you know what you are doing.",
+        "YOUR_API_ENDPOINT": "This is your API endpoint.",
+        "CHECKOUT_DOCS": "Documentation"
     }
 };
 
