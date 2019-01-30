@@ -73,7 +73,7 @@ a {
 }
 
 .fab {
-    position: absolute!important;
+    position: fixed!important;
     bottom: 15px;
     right: 15px;
 }
@@ -159,4 +159,12 @@ a {
 
 .red-text {
     color: #e74c3c!important;
+}
+
+.draggable {
+    margin: 15px;
+}
+
+.fit-content {
+    width: fit-content;
 }

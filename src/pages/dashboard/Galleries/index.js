@@ -16,11 +16,15 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import client from 'services/client';
 
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import GalleryBox from 'components/GalleryBox';
 
 import './styles.scss';
+
+import {reorder, sortByIndex} from 'utils';
 
 
 class Galleries extends React.Component {
@@ -57,6 +61,7 @@ class Galleries extends React.Component {
     fetchGalleries = () => {
         client.get('/galleries/' + this.props.match.params.name).then(response => {
             const galleries = response.data.payload || [];
+            sortByIndex(galleries);
             this.setState({galleries, fetched: true});
         }).catch(err => {
             if(err) throw err;
@@ -100,8 +105,6 @@ class Galleries extends React.Component {
         client.post('/galleries/'+this.props.match.params.name + '/' + this.state.galleryName).then(response => {
             this.fetchGalleries();
             this.handleCloseNewGalleryDialog();
-            const gallery = response.data.payload;
-            this.editGallery(gallery.short_id);
         }).catch(err => {
             this.checkError(err);
             if(err) throw err;
@@ -116,6 +119,39 @@ class Galleries extends React.Component {
         galleryName: e.target.value
     });
 
+    onDragEnd = result => {
+        // dropped outside the list
+        if (!result.destination) {
+            return;
+        }
+    
+        const items = reorder(
+            this.state.galleries,
+            result.source.index,
+            result.destination.index
+        );
+    
+        this.setState({
+            galleries: items,
+        });
+
+        this.updateIndexes(items);
+    }
+
+    updateIndexes = galleries => {
+        const items = galleries.map((g, i) => ({
+            id: g.id,
+            index: i
+        }));
+
+        console.log(items);
+        client.put('/galleries/' + this.props.match.params.name + '/indexes', items).then(response => {
+            console.log(response.data);
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
+
     render() {
         return (
             <div className="page dashboard-galleries">
@@ -123,20 +159,42 @@ class Galleries extends React.Component {
                     <AddIcon />
                     {strings.NEW_GALLERY}
                 </Fab>
-                <div className="title-div">
-                    <h1>{strings.DRAWER_GALLERIES}</h1>
-                </div>
-                {!this.state.fetched && <CircularProgress/>}
-                {this.state.galleries.length < 1 && this.state.fetched && <Button onClick={this.handleCreateGallery} variant="contained" color="primary" aria-label="Add">
-                    <AddIcon />
-                    {strings.NEW_GALLERY}
-                </Button>}
-                <div className="galleries-container">
-                    {this.state.galleries.map((gallery, i) => {
-                        return <GalleryBox key={i} onOpen={() => this.editGallery(gallery.short_id)} gallery={gallery}/>;
-                    })}
-                </div>
+                <div className="fit-content">
+                    <div className="title-div">
+                        <h1>{strings.DRAWER_GALLERIES}</h1>
+                    </div>
+                    {!this.state.fetched && <CircularProgress/>}
+                    {this.state.galleries.length < 1 && this.state.fetched && <Button onClick={this.handleCreateGallery} variant="contained" color="primary" aria-label="Add">
+                        <AddIcon />
+                        {strings.NEW_GALLERY}
+                    </Button>}
+                    <DragDropContext onDragEnd={this.onDragEnd}>
+                        <Droppable droppableId="droppable">
+                            {provided => (
+                                <div ref={provided.innerRef} className="galleries-container">
+                                    {this.state.galleries.map((gallery, i) => (
+                                        <Draggable key={i} draggableId={gallery.id} index={i}>
+                                            {provided => (
+                                            <div
+                                                className="draggable"
+                                                ref={provided.innerRef} 
+                                                {...provided.draggableProps} 
+                                                {...provided.dragHandleProps}>
+                                                <GalleryBox 
+                                                    onOpen={() => this.editGallery(gallery.short_id)} 
+                                                    gallery={gallery}
+                                                />
+                                            </div>
+                                            )}
+                                        </Draggable>
+                                    )
+                                    )}
+                                </div>
+                            )}
+                        </Droppable>
+                    </DragDropContext>
 
+                </div>
                 <Dialog
                     open={this.state.newGalleryDialog}
                     onClose={this.handleCloseNewGalleryDialog}

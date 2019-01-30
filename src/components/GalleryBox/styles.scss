@@ -1,12 +1,11 @@
 .gallerybox {
     width: 350px;
     min-height: 150px;
-
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    margin: 15px;
     position: relative;
+
+    @media screen and (max-width: 600px) {
+        width: 100%;
+    }
     
 
     .gallerybox-content {

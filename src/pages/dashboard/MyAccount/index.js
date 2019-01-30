@@ -24,9 +24,24 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import {getUser, signOut} from 'utils/token';
 
 import './styles.scss';
-
+import {Elements, StripeProvider} from 'react-stripe-elements';
 import client from 'services/client';
+import Checkout from 'components/Checkout/index.js';
+import MaskedInput from 'react-text-mask';
 
+function ZIP(props) {
+    const { inputRef, ...other } = props;
+    return (
+        <MaskedInput
+            ref={ref => {
+                inputRef(ref ? ref.inputElement : null);
+            }}
+            {...other}
+            mask={[/\d/, /\d/, /\d/,/\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
+        />
+    )
+}
+  
 class MyAccount extends React.Component {
     
     constructor(props) {
@@ -34,6 +49,11 @@ class MyAccount extends React.Component {
         this.state = {
             fullname: "",
             email: "",
+            country: "",
+            city: "",
+            state: "",
+            zip: "",
+            address: "",
 
             currentPassword: "",
             newPassword: "",
@@ -45,28 +65,42 @@ class MyAccount extends React.Component {
 
             confirmDelete: false,
             confirmEmail: "",
-            fetched: false
+            fetched: false,
+            professional: false,
+            payDialog: false,
+            confirmCancelSub: false
         }
     }
 
-    componentWillMount() {
+    fetchAccount = () => {
         client.get('/user').then(response => {
             console.log(response.data);
             const user = response.data.payload;
             this.setState({
                 ...user,
                 lastEmail: user.email,
+                lastName: user.fullname,
                 fetched: true
             });
+            this.lastUser = user;
         }).catch(err => {
             if(err) throw err;
         });
     }
 
+    componentWillMount() {
+        this.fetchAccount();
+    }
+
     updateProfile = () => {
         client.put('/profile', {
             fullname: this.state.fullname,
-            email: this.state.email
+            email: this.state.email,
+            country: this.state.country,
+            address: this.state.address,
+            city: this.state.city,
+            state: this.state.state,
+            zip: this.state.zip
         }).then(response => {
             if(this.state.lastEmail !== this.state.email) {
                 this.openSnack(strings.VERIFY_EMAIL)
@@ -167,6 +201,41 @@ class MyAccount extends React.Component {
         });
     }
 
+    openPay = () => this.setState({
+        payDialog: true
+    });
+    
+    closePayDialog = () => this.setState({
+        payDialog: false
+    });
+    
+    onPaySuccess = () => {
+        this.fetchAccount();
+        this.closePayDialog();
+    }
+
+    handleChange = (type, e) => this.setState({
+        [type]: e.target.value
+    });
+    
+    confirmCancelSub = () => this.setState({
+        confirmCancelSub: true
+    });
+
+    closeConfirmCancelSub = () => this.setState({
+        confirmCancelSub: false
+    });
+
+    cancelSubscription = () => {
+        client.delete('/account/subscription').then(response => {
+            console.log(response.data);
+            this.closeConfirmCancelSub();
+            this.fetchAccount();
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
+
     render() {
         return (
             <div className="page my-account">
@@ -230,11 +299,70 @@ class MyAccount extends React.Component {
                         <TextField
                             label={strings.NAME}
                             value={this.state.fullname}
-                            onChange={e=>this.setState({fullname: e.target.value})}
+                            onChange={e => this.handleChange('fullname', e)}
                             margin="normal"
                             fullWidth
                         />
+                        <TextField
+                            label={strings.COUNTRY}
+                            value={this.state.country}
+                            onChange={e => this.handleChange('country', e)}
+                            margin="normal"
+                            fullWidth
+                        />
+                         <TextField
+                            label={strings.ADDRESS}
+                            value={this.state.address}
+                            onChange={e => this.handleChange('address', e)}
+                            margin="normal"
+                            fullWidth
+                        />
+                        <div className="inline-grid">
+                        <Grid item md={5}>
+                            <TextField
+                                margin="dense"
+                                label={strings.CITY}
+                                onChange={e => this.handleChange('city', e)}
+                                value={this.state.city}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item md={3}>
+                            <TextField
+                                margin="dense"
+                                onChange={e => this.handleChange('state', e)}
+                                label={strings.STATE}
+                                value={this.state.state}
+                                fullWidth
+                            />
+                        </Grid>
+                            <Grid item md={3}>
+                                <TextField
+                                    margin="dense"
+                                    onChange={e => this.handleChange('zip', e)}
+                                    label={strings.POSTAL_CODE}
+                                    value={this.state.zip}
+                                    fullWidth
+                                    InputProps={{
+                                        inputComponent: ZIP
+                                    }}
+                                />
+                            </Grid>
+                        </div>
                         <Button onClick={this.updateProfile} variant="contained" color="primary">{strings.SAVE}</Button>
+                    </Grid>
+                    <Grid className="group" item xs={12} md={12}>
+                        <h2>{strings.BILLING}</h2>
+                        <div style={{marginTop: 15, display: "block"}}>
+                            <Typography>{strings.PLAN_TYPE} : {this.state.professional ? strings.BACKPULSE_PRO : strings.BACKPULSE_FREE}</Typography>
+                            <Button disabled={this.state.professional} onClick={this.openPay} variant="contained" color="primary">{this.state.professional ? strings.THANKYOU : strings.GO_PROFESIONNAL}</Button>
+                            <br/>
+                            {this.state.professional && 
+                                <Button onClick={this.confirmCancelSub} className="button-danger">
+                                    {strings.CANCEL_SUBSCRIPTION}
+                                </Button>
+                            }
+                        </div>
                     </Grid>
                     <Grid className="group" item xs={12} md={12}>
                         <h2>{strings.AUTHENTICATION_PASSWORD}</h2>
@@ -278,6 +406,45 @@ class MyAccount extends React.Component {
                         <Button onClick={this.openConfirm} variant="contained" className="button-danger">{strings.CLOSE_ACCOUNT}</Button>
                     </Grid>
                 </Grid>}
+
+                <Dialog
+                    open={this.state.confirmCancelSub}
+                    onClose={this.closeConfirmCancelSub}
+                    fullWidth
+                    >
+                    <DialogTitle>{strings.CANCEL_SUBSCRIPTION}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {strings.CANCEL_SUBSCRIPTION_DESCRIPTION}
+                        </DialogContentText>
+                        <DialogActions>
+                            <Button onClick={this.cancelSubscription} className="button-danger">
+                                {strings.CANCEL_SUBSCRIPTION}
+                            </Button>
+                            <Button onClick={this.closeConfirmCancelSub} variant="contained" color="primary">
+                                {strings.CANCEL}
+                            </Button>
+                        </DialogActions>
+                    </DialogContent>
+                </Dialog>
+
+                <Dialog
+                    open={this.state.payDialog}
+                    onClose={this.closePayDialog}
+                    fullWidth
+                    >
+                    <DialogTitle>{strings.GO_PROFESIONNAL}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText variant="h3" color="primary" style={{marginBottom: 15}} className="primary-text">
+                            {strings.PRO_PRICE}
+                        </DialogContentText>
+                        <StripeProvider apiKey="pk_test_BFTN9aWHTKMGTvYPSShPqHna">
+                            <Elements>
+                                <Checkout onSuccess={this.onPaySuccess} close={this.closePayDialog} lastUser={this.lastUser} />
+                            </Elements>
+                        </StripeProvider>
+                    </DialogContent>
+                </Dialog>
             </div>
         )
     }

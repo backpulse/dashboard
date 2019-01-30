@@ -18,7 +18,7 @@ import strings from 'strings';
 class GalleryBox extends React.Component {
     render() {
         return (
-            <Card className="projectbox">
+            <Card className="gallerybox">
                 <CardHeader
                     title={<Typography variant="body1">{this.props.gallery.title}</Typography>}
                     subheader={<Typography className="updated-at" variant="caption"> {dayjs(this.props.gallery.updated_at).format("DD/MM/YYYY HH:mm")}</Typography>}

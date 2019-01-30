@@ -28,6 +28,7 @@ import './styles.scss';
 
 import strings from 'strings';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { Typography } from '@material-ui/core';
 
 class DrawerMenu extends React.Component {
 
@@ -119,7 +120,7 @@ class DrawerMenu extends React.Component {
                 icon: <SettingsIcon/>,
                 text: strings.DRAWER_SETTINGS,
                 type: "all",
-                show: this.props.site.role == "owner"
+                show: this.props.site.role === "owner"
             },
             {
                 divider: true

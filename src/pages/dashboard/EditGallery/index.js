@@ -240,7 +240,7 @@ class EditGallery extends React.Component {
         return (
             <div>
                 <Dialog
-                    className={getTheme()}
+                    className={getTheme() + " edit-gallery-dialog"}
                     fullScreen
                     open={this.state.open}
                     onClose={this.handleClose}

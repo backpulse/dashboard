@@ -15,14 +15,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import {toTitleCase} from 'utils';
 
 import strings from 'strings';
 import SiteBox from 'components/SiteBox';
