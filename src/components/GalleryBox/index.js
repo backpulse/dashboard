@@ -35,7 +35,7 @@ class GalleryBox extends React.Component {
                         </IconButton>
                     </Tooltip>
                     <Tooltip title={strings.DELETE}>
-                        <IconButton style={{marginLeft: "auto"}}>
+                        <IconButton onClick={this.props.onDelete} style={{marginLeft: "auto"}}>
                             <DeleteIcon />
                         </IconButton>
                     </Tooltip> 

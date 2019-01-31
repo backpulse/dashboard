@@ -153,7 +153,10 @@ const strings = {
         "CANCEL_SUBSCRIPTION": "Résilier mon abonnement",
         "CANCEL_SUBSCRIPTION_DESCRIPTION": "Vous êtes sur le point de résilier votre abonnement Backpulse Pro. Cela implique que vous allez perdre vos avantages pro sur votre compte.",
         "THANKYOU": "Merci !",
-        "PLAN_TYPE": "Type d'abonnement"
+        "PLAN_TYPE": "Type d'abonnement",
+        "DELETE_PHOTOS": "Supprimer les photos ?",
+        "DELETE_PHOTOS_DESCRIPTION": "Vous êtes sur le point de supprimer une ou plusieurs photos. Êtes-vous certain(e) ?"
+
     },
     en: {
         "CANCEL": "Cancel",
@@ -302,8 +305,10 @@ const strings = {
         "BILLING": "Billing",
         "CANCEL_SUBSCRIPTION": "Cancel subscription",
         "CANCEL_SUBSCRIPTION_DESCRIPTION": "You are about to cancel your subscription. This implies you will loose all premium features on your account.",
-        "THANKYOU": "Thank you for trusting Backpulse!",
         "PLAN_TYPE": "Plan",
+        "THANKYOU": "Thank you for trusting Backpulse!",
+        "DELETE_PHOTOS": "Delete photos?",
+        "DELETE_PHOTOS_DESCRIPTION": "You are about to delete one or multiple photos. Are you sure?"
     }
 };
 

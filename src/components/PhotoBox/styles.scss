@@ -1,5 +1,9 @@
 .photobox{
     width: 400px;
+
+    @media screen and(max-width: 600px) {
+        width: 100%;
+    }
 }
 .photobox-preview-media {
     padding-top: 56.25%;

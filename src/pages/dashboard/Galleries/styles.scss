@@ -9,7 +9,13 @@
             position: relative;
         }
     }
-
+    .c-div {
+        @media screen and (max-width: 600px) {
+            width: 100%;
+        }
+        
+        width: fit-content;
+    }
 }
 
 

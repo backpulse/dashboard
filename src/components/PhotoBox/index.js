@@ -15,7 +15,7 @@ import './styles.scss';
 class PhotoBox extends React.Component {
     render() {
         return (
-            <Card className="photobox margin-10">
+            <Card className="photobox">
                 <CardMedia
                     className="photobox-preview-media"
                     image={this.props.src}

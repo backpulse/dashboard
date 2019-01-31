@@ -45,7 +45,8 @@ class Galleries extends React.Component {
             confirmDelete: false,
             nameHasError: false,
             error: false,
-            errorMsg: ""
+            errorMsg: "",
+            galleryToDelete: {}
         }
     }
 
@@ -152,6 +153,24 @@ class Galleries extends React.Component {
         });
     }
 
+    closeConfirmDelete = () => this.setState({
+        confirmDelete: false
+    });
+
+    confirmDelete = gallery => this.setState({
+        confirmDelete: true,
+        galleryToDelete: gallery
+    });
+
+    deleteGallery = () => {
+        client.delete('/gallery/' + this.state.galleryToDelete.short_id).then(response => {
+            this.closeConfirmDelete();
+            this.fetchGalleries();
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
+
     render() {
         return (
             <div className="page dashboard-galleries">
@@ -159,7 +178,7 @@ class Galleries extends React.Component {
                     <AddIcon />
                     {strings.NEW_GALLERY}
                 </Fab>
-                <div className="fit-content">
+                <div className="c-div">
                     <div className="title-div">
                         <h1>{strings.DRAWER_GALLERIES}</h1>
                     </div>
@@ -180,7 +199,8 @@ class Galleries extends React.Component {
                                                 ref={provided.innerRef} 
                                                 {...provided.draggableProps} 
                                                 {...provided.dragHandleProps}>
-                                                <GalleryBox 
+                                                <GalleryBox
+                                                    onDelete={() => this.confirmDelete(gallery)}
                                                     onOpen={() => this.editGallery(gallery.short_id)} 
                                                     gallery={gallery}
                                                 />
@@ -232,6 +252,26 @@ class Galleries extends React.Component {
                             </Button>
                         </DialogActions>
                     </form>
+                </Dialog>
+
+                <Dialog
+                    open={this.state.confirmDelete}
+                    onClose={this.closeConfirmDelete}
+                    >
+                    <DialogTitle>{strings.DELETE_GALLERY}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {strings.CONFIRM_DELETE_GALLERY_DESCRIPTION}             
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.closeConfirmDelete} color="primary" autoFocus>
+                            {strings.CANCEL}
+                        </Button>
+                        <Button size="large" onClick={this.deleteGallery} className="button-danger">
+                            {strings.DELETE}
+                        </Button>
+                    </DialogActions>
                 </Dialog>
             </div>
         )

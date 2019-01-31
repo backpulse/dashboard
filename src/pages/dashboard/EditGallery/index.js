@@ -20,6 +20,9 @@ import strings from 'strings';
 import Selector from 'components/Selector';
 import Fab from '@material-ui/core/Fab';
 
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
+
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -32,9 +35,10 @@ import client from 'services/client';
 
 import {withRouter} from 'react-router';
 
-import {getTheme} from 'utils';
+import {getTheme, reorder, sortByIndex} from 'utils';
 
 import './styles.scss';
+import { checkPropTypes } from 'prop-types';
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
@@ -52,7 +56,12 @@ class EditGallery extends React.Component {
             open: true,
 
             importDialog: false,
-            confirmDelete: false
+            confirmDelete: false,
+
+            editing: false,
+            deleteDialog: false,
+            checkedPhotos: [],
+            photoToDelete: null
         }
     }
 
@@ -65,6 +74,7 @@ class EditGallery extends React.Component {
         client.get('/gallery/'+ id).then(response => {
             const gallery =response.data.payload;
             gallery.photos = gallery.photos || [];
+            gallery.photos = sortByIndex(gallery.photos);
             this.setState({...gallery});
             console.log(gallery);
         }).catch(err => {
@@ -228,13 +238,97 @@ class EditGallery extends React.Component {
         confirmDelete: false
     });
 
-    deletePhoto = photo => {
-        client.delete('/photos/' + photo.id).then(response => {
+    handleDelete = () => {
+        this.setState({deleteDialog: true});
+    }
+
+    handleSingleDelete = photo => {
+        this.setState({photoToDelete: photo.id, deleteDialog: true});
+    }
+
+    closeDeleteDialog = () => {
+        this.setState({
+            deleteDialog: false,
+            checkedPhotos: []
+        })
+    }
+
+    deletePhotos = () => {
+        if(this.state.photoToDelete) {
+            this.setState({photoToDelete: null});
+            client.delete('/photos/' + this.state.photoToDelete).then(response => {
+                console.log(response.data);
+                this.fetchGallery(this.props.match.params.id);
+                this.closeDeleteDialog();
+            }).catch(err => {
+                if(err) throw err;
+            });
+            return;
+        }
+
+        client.delete('/photos/' + this.state.checkedPhotos.join(',')).then(response => {
+            this.fetchGallery(this.props.match.params.id);
+            this.closeDeleteDialog();
+            this.setState({checkedPhotos: []});
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
+
+    onDragEnd = result => {
+        // dropped outside the list
+        if (!result.destination) {
+            return;
+        }
+    
+        const items = reorder(
+            this.state.photos,
+            result.source.index,
+            result.destination.index
+        );
+    
+        this.setState({
+            photos: items,
+        });
+
+        this.updateIndexes(items);
+    }
+
+    updateIndexes = photos => {
+        const items = photos.map((photo, i) => ({
+            id: photo.id,
+            index: i
+        }));
+
+        console.log(items);
+        client.put('/photos/' + this.props.match.params.name + '/' + this.props.match.params.id + '/indexes', items).then(response => {
             console.log(response.data);
         }).catch(err => {
             if(err) throw err;
         });
     }
+
+    isChecked = photo => {
+        const checkedPhotos = this.state.checkedPhotos;
+        console.log(checkedPhotos);
+        return checkedPhotos.includes(photo.id)
+
+    }
+
+    toggleCheck = photo => {
+        const checkedPhotos = this.state.checkedPhotos;
+        if (!checkedPhotos.includes(photo.id)) {
+            checkedPhotos.push(photo.id);
+        } else {
+            const i = checkedPhotos.indexOf(photo.id);
+            checkedPhotos.splice(i, 1);
+        }
+        this.setState({checkedPhotos});
+    }
+
+    toggleEdit = () => this.setState({
+        editing: !this.state.editing
+    });
 
     render() {
         return (
@@ -252,7 +346,7 @@ class EditGallery extends React.Component {
                             <CloseIcon />
                         </IconButton>
                         <Typography variant="h6" color="inherit" style={{flex: 1}}>
-                            {this.state.id ? strings.PROJECT_EDIT : strings.NEW_GALLERY}
+                            {this.state.id ? strings.EDIT_GALLERY : strings.NEW_GALLERY}
                         </Typography>
                         {this.state.id && <Button style={{marginRight: 15}} className="button-danger-outlined" variant="outlined" onClick={this.openConfirmDelete}>
                             {strings.DELETE}
@@ -268,7 +362,7 @@ class EditGallery extends React.Component {
                         </Fab>
                     <DialogContent className="dialog-content dialog-gallery-edit">
                         <Grid container spacing={16}>
-                            <Grid item md={7} xs={12}>
+                            <Grid item lg={7} md={12} xs={12}>
                                 <Grid container direction="column">
                                     <Grid item xs={12} md={10}>
                                         <div className="title-div">
@@ -352,21 +446,57 @@ class EditGallery extends React.Component {
                                     </FormHelperText>}
                                 </Grid>
                             </Grid>
-                            <Grid item md={5} xs={12}>
+                            <Grid item lg={5} xs={12}>
                                 <Grid container direction="column">
-                                    <Grid item xs={12} md={8}>
+                                    <Grid item xs={12} lg={8} md={6}>
                                         <div className="title-div">
                                             <h1>{strings.PHOTOS}</h1>
+                                            <Button onClick={this.toggleEdit} variant="outlined" color="primary">Options</Button>
                                         </div>
+                                        {this.state.checkedPhotos.length > 0 && <Button onClick={this.handleDelete} variant="contained" className="button-danger">{strings.DELETE} ({this.state.checkedPhotos.length})</Button>}
                                     </Grid>
-                                    <FileUploader siteName={this.props.match.params.name} isGallery galleryID={this.state.short_id} onDone={this.onUploadFinished} open={this.state.importDialog} close={this.toggleImport}/>
-                                    <div className="gallery-photos-container">
-                                        {this.state.photos.map((photo, i) => (
-                                            <Grid key={i} item xs={12} md={10}>
-                                                <PhotoBox onDelete={() => this.deletePhoto(photo)} previewButton className="padding-10" editing src={photo.url}/>
-                                            </Grid>
-                                        ))}
-                                    </div>
+                                    <FileUploader 
+                                        siteName={this.props.match.params.name} 
+                                        isGallery
+                                        galleryID={this.state.short_id} 
+                                        onDone={this.onUploadFinished} 
+                                        open={this.state.importDialog} 
+                                        close={this.toggleImport}
+                                    />
+                                    {/* <div className="gallery-photos-container"> */}
+                                        <DragDropContext onDragEnd={this.onDragEnd}>
+                                            <Droppable droppableId="droppable">
+                                                {provided => (
+                                                    <div ref={provided.innerRef} className="galleries-container">
+                                                        {this.state.photos.map((photo, i) => (
+                                                            <Draggable key={i} draggableId={photo.id} index={i}>
+                                                                {provided => (
+                                                                    <div
+                                                                    className="margintop"
+                                                                    ref={provided.innerRef} 
+                                                                    {...provided.draggableProps} 
+                                                                    {...provided.dragHandleProps}>
+                                                                    <Grid item xs={12} md={10}>
+                                                                        <PhotoBox 
+                                                                            onDelete={() => this.handleSingleDelete(photo)} 
+                                                                            previewButton 
+                                                                            checked={this.isChecked(photo)}
+                                                                            toggleCheck={() => this.toggleCheck(photo)}
+                                                                            className="padding-10" 
+                                                                            editing={this.state.editing} 
+                                                                            src={photo.url}
+                                                                        />
+                                                                    </Grid>
+                                                                </div>
+                                                                )}
+                                                            </Draggable>
+                                                        )
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </Droppable>
+                                        </DragDropContext>
+                                    {/* </div> */}
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -390,6 +520,27 @@ class EditGallery extends React.Component {
                             {strings.DELETE}
                         </Button>
                     </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    open={this.state.deleteDialog}
+                    onClose={this.closeDeleteDialog}
+                    fullWidth
+                    >
+                    <DialogTitle>{strings.DELETE_PHOTOS}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {strings.DELETE_PHOTOS_DESCRIPTION}
+                        </DialogContentText>
+                        <DialogActions>
+                            <Button onClick={this.closeDeleteDialog}>
+                                {strings.CANCEL}
+                            </Button>
+                            <Button onClick={this.deletePhotos} variant="contained" className="button-danger">
+                                {strings.DELETE}
+                            </Button>
+                        </DialogActions>
+                    </DialogContent>
                 </Dialog>
             </div>
         )
