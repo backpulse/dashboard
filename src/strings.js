@@ -155,7 +155,8 @@ const strings = {
         "THANKYOU": "Merci !",
         "PLAN_TYPE": "Type d'abonnement",
         "DELETE_PHOTOS": "Supprimer les photos ?",
-        "DELETE_PHOTOS_DESCRIPTION": "Vous êtes sur le point de supprimer une ou plusieurs photos. Êtes-vous certain(e) ?"
+        "DELETE_PHOTOS_DESCRIPTION": "Vous êtes sur le point de supprimer une ou plusieurs photos. Êtes-vous certain(e) ?",
+        "DEFAULT_GALLERY": "Galerie d'accueil"
 
     },
     en: {
@@ -308,7 +309,8 @@ const strings = {
         "PLAN_TYPE": "Plan",
         "THANKYOU": "Thank you for trusting Backpulse!",
         "DELETE_PHOTOS": "Delete photos?",
-        "DELETE_PHOTOS_DESCRIPTION": "You are about to delete one or multiple photos. Are you sure?"
+        "DELETE_PHOTOS_DESCRIPTION": "You are about to delete one or multiple photos. Are you sure?",
+        "DEFAULT_GALLERY": "Default gallery"
     }
 };
 

@@ -46,7 +46,9 @@ class Galleries extends React.Component {
             nameHasError: false,
             error: false,
             errorMsg: "",
-            galleryToDelete: {}
+            galleryToDelete: {},
+
+            loading: false
         }
     }
 
@@ -171,6 +173,15 @@ class Galleries extends React.Component {
         });
     }
 
+    onDefaultSet = gallery => {
+        client.put('/galleries/' + this.props.match.params.name + '/default/' + gallery.short_id).then(response => {
+            console.log(response.data);
+            this.fetchGalleries();
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
+
     render() {
         return (
             <div className="page dashboard-galleries">
@@ -200,6 +211,8 @@ class Galleries extends React.Component {
                                                 {...provided.draggableProps} 
                                                 {...provided.dragHandleProps}>
                                                 <GalleryBox
+                                                    loading={this.state.loading}
+                                                    onDefaultSet={() => this.onDefaultSet(gallery)}
                                                     onDelete={() => this.confirmDelete(gallery)}
                                                     onOpen={() => this.editGallery(gallery.short_id)} 
                                                     gallery={gallery}

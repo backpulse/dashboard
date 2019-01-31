@@ -12,8 +12,9 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import strings from 'strings';
+import HomeIcon from '@material-ui/icons/Home';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class GalleryBox extends React.Component {
     render() {
@@ -24,14 +25,14 @@ class GalleryBox extends React.Component {
                     subheader={<Typography className="updated-at" variant="caption"> {dayjs(this.props.gallery.updated_at).format("DD/MM/YYYY HH:mm")}</Typography>}
                 />
                 <CardActions disableActionSpacing>
-                    <Tooltip title={strings.OPEN}>
-                        <IconButton onClick={this.props.open}>
-                            <OpenInNewIcon />
-                        </IconButton>
-                    </Tooltip>
                     <Tooltip title={strings.EDIT}>
                         <IconButton onClick={this.props.onOpen}>
                             <EditIcon />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title={strings.DEFAULT_GALLERY}>
+                        <IconButton onClick={this.props.onDefaultSet}>
+                            <HomeIcon color={this.props.gallery.default_gallery ? "primary": "inherit"} />
                         </IconButton>
                     </Tooltip>
                     <Tooltip title={strings.DELETE}>

@@ -76,7 +76,6 @@ class EditGallery extends React.Component {
             gallery.photos = gallery.photos || [];
             gallery.photos = sortByIndex(gallery.photos);
             this.setState({...gallery});
-            console.log(gallery);
         }).catch(err => {
             if(err) throw err;
         });
@@ -84,7 +83,6 @@ class EditGallery extends React.Component {
     
     deleteGallery = () => {
         client.delete('/gallery/' + this.state.short_id).then(response => {
-            console.log(response.data);
             this.handleClose();
         }).catch(err => {
             if(err) throw err;
@@ -103,9 +101,7 @@ class EditGallery extends React.Component {
         }).catch(err => {
             if(err) throw err;
         });
-    }
-
-    
+    }    
 
     handleClose = () => {
         this.setState({open: false});
@@ -257,7 +253,6 @@ class EditGallery extends React.Component {
         if(this.state.photoToDelete) {
             this.setState({photoToDelete: null});
             client.delete('/photos/' + this.state.photoToDelete).then(response => {
-                console.log(response.data);
                 this.fetchGallery(this.props.match.params.id);
                 this.closeDeleteDialog();
             }).catch(err => {
@@ -300,9 +295,7 @@ class EditGallery extends React.Component {
             index: i
         }));
 
-        console.log(items);
         client.put('/photos/' + this.props.match.params.name + '/' + this.props.match.params.id + '/indexes', items).then(response => {
-            console.log(response.data);
         }).catch(err => {
             if(err) throw err;
         });
@@ -310,9 +303,7 @@ class EditGallery extends React.Component {
 
     isChecked = photo => {
         const checkedPhotos = this.state.checkedPhotos;
-        console.log(checkedPhotos);
         return checkedPhotos.includes(photo.id)
-
     }
 
     toggleCheck = photo => {
@@ -329,6 +320,14 @@ class EditGallery extends React.Component {
     toggleEdit = () => this.setState({
         editing: !this.state.editing
     });
+
+    setPreviewPhoto = photo => {
+        client.put('/galleries/' + this.props.match.params.name + '/' + this.props.match.params.id + '/preview/'+photo.id).then(response => {
+            this.fetchGallery(this.props.match.params.id);
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
 
     render() {
         return (
@@ -479,7 +478,9 @@ class EditGallery extends React.Component {
                                                                     <Grid item xs={12} md={10}>
                                                                         <PhotoBox 
                                                                             onDelete={() => this.handleSingleDelete(photo)} 
-                                                                            previewButton 
+                                                                            previewButton
+                                                                            setPreview={() => this.setPreviewPhoto(photo)}
+                                                                            preview={photo.id === this.state.preview_photo_id} 
                                                                             checked={this.isChecked(photo)}
                                                                             toggleCheck={() => this.toggleCheck(photo)}
                                                                             className="padding-10" 

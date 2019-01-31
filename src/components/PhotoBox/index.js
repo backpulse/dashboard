@@ -19,7 +19,8 @@ class PhotoBox extends React.Component {
                 <CardMedia
                     className="photobox-preview-media"
                     image={this.props.src}
-                />
+                    />
+                {this.props.preview.toString()}
                 {this.props.editing && <CardActions disableActionSpacing>
                     <Checkbox
                         checked={this.props.checked}
@@ -31,7 +32,6 @@ class PhotoBox extends React.Component {
                             <DeleteIcon />
                         </IconButton>
                     </Tooltip>
-
                     {this.props.previewButton && <Button onClick={this.props.setPreview} color="primary" style={{marginLeft: "auto", cursor: this.props.preview ? "default": "pointer"}} size="small" variant={this.props.preview ? "contained" : "outlined"}>{strings.GALLERY_PREVIEW_IMAGE}</Button>}
 
                 </CardActions>}
