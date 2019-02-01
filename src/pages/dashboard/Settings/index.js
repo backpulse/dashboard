@@ -44,7 +44,9 @@ class Settings extends React.Component {
             collaborators: [],
             confirmDelete: false,
             confirmName: "",
-            fetched: false
+            fetched: false,
+            owner: "",
+            transferConfirm: false
         }
     }
 
@@ -67,10 +69,15 @@ class Settings extends React.Component {
     });
 
     getCollaborators = () => {
-        const collaborators = this.state.collaborators.map(c => ({
-            label: c.name,
-            value: c.id
-        }));
+        console.log(this.state.collaborators);
+        const collaborators = this.state.collaborators.map(c => {
+            // if(c.role !== "owner") {
+                return {
+                    label: c.email,
+                    value: c.email
+                }
+            // }
+        });
         return collaborators;
     }
 
@@ -157,7 +164,25 @@ class Settings extends React.Component {
         });
     }
 
-    convertSize = size => size / (1024 * 1000);
+    onOwnerChange = value => this.setState({
+        owner: value
+    });
+
+    transferConfirm = () => this.setState({
+        transferConfirm: true
+    });
+
+    closeTransferConfirm = () => this.setState({
+        transferConfirm: false
+    });
+
+    transferSite = () => {
+        client.post('/sites/' + this.props.match.params.name + '/transfer/' + this.state.owner.value).then(response => {
+            console.log(response.data);
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
 
     render() {
         return (
@@ -202,18 +227,19 @@ class Settings extends React.Component {
                     <Selector
                         options={this.getCollaborators()}
                         value={this.state.owner}
+                        backspaceRemovesValue={true}
                         placeholder={strings.OWNER}
-                        onChange={this.onTitleLanguageAdd}
+                        onChange={this.onOwnerChange}
                     />
-                    <Button className="margin" fullWidth variant="outlined" color="primary">{strings.TRANSFER}</Button>
+                    <Button onClick={this.transferConfirm} disabled={!this.state.owner} className="margin" fullWidth variant="outlined" color="primary">{strings.TRANSFER}</Button>
 
                 </Grid>
                 <Divider variant="fullWidth"/>
                 <Grid item md={12} lg={4}>
                     <h2 className="primary" style={{marginBottom: 10}}>{strings.TOTAL_SIZE}</h2>
-                    <Typography variant="caption">{this.convertSize(this.state.total_size)} / 500 Mo</Typography>
+                    <Typography variant="caption">{this.state.total_size} / 500 Mo</Typography>
                     <LinearProgress variant="determinate" value={
-                        (this.convertSize(this.state.total_size) * 100) / 500
+                        (this.state.total_size * 100) / 500
                     }/>
                 </Grid>
                 <Divider variant="fullWidth"/>
@@ -251,6 +277,25 @@ class Settings extends React.Component {
                         </Button>
                         <Button disabled={this.state.originalName !== this.state.confirmName} size="large" onClick={this.deleteSite} className="button-danger">
                             {strings.DELETE}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog
+                    open={this.state.transferConfirm}
+                    onClose={this.closeTransferConfirm}
+                    >
+                    <DialogTitle>{strings.TRANSFER}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {strings.TRANSFER_DESCRIPTION}             
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.closeTransferConfirm} color="primary">
+                            {strings.CANCEL}
+                        </Button>
+                        <Button onClick={this.transferSite} className="button-danger">
+                            {strings.TRANSFER}
                         </Button>
                     </DialogActions>
                 </Dialog>

@@ -156,7 +156,9 @@ const strings = {
         "PLAN_TYPE": "Type d'abonnement",
         "DELETE_PHOTOS": "Supprimer les photos ?",
         "DELETE_PHOTOS_DESCRIPTION": "Vous êtes sur le point de supprimer une ou plusieurs photos. Êtes-vous certain(e) ?",
-        "DEFAULT_GALLERY": "Galerie d'accueil"
+        "DEFAULT_GALLERY": "Galerie d'accueil",
+        "PLEASE_UPGRADE": "Le propriétaire de ce site doit passer à Backpulse Pro.",
+        "TRANSFER_DESCRIPTION": "Vous êtes sur le point de transférer votre site à un autre utilisateur. Merci de confirmer."
 
     },
     en: {
@@ -310,7 +312,9 @@ const strings = {
         "THANKYOU": "Thank you for trusting Backpulse!",
         "DELETE_PHOTOS": "Delete photos?",
         "DELETE_PHOTOS_DESCRIPTION": "You are about to delete one or multiple photos. Are you sure?",
-        "DEFAULT_GALLERY": "Default gallery"
+        "DEFAULT_GALLERY": "Default gallery",
+        "PLEASE_UPGRADE": "The owner of this site needs to upgrade his account.",
+        "TRANSFER_DESCRIPTION": "You are about to transfer this website to another use. Please make sure you know what you are doing."
     }
 };
 

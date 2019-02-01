@@ -77,6 +77,13 @@ class Access extends React.Component {
                 });
                 break;
             }
+            case "upgrade_account": {
+                this.setState({
+                    errorMsg: strings.PLEASE_UPGRADE,
+                    error: true
+                });
+                break;
+            }
             default:
                 break
         }
@@ -229,8 +236,11 @@ class Access extends React.Component {
                         https://api.backpulse.io/{this.props.match.params.name}
                     </code>
                 </Typography>
-                <Button href="https://docs.backpulse.io" target="_blank" className="docs-btn" variant="contained" color="primary">{strings.CHECKOUT_DOCS}</Button>
- 
+                <div className="docs-btn">
+                    <Button href="https://docs.backpulse.io" target="_blank"  variant="contained" color="primary">{strings.CHECKOUT_DOCS}</Button>
+                    <Button href="https://github.com/backpulse/wrapper" style={{marginLeft: 15}} target="_blank" variant="contained" color="primary">JS Wrapper</Button>
+                </div>
+
             </div>
         )
     }
