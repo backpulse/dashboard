@@ -92,6 +92,12 @@ a {
     line-height: 1.75!important;
 }
 
+.overflow-hidden {
+    textarea {
+        overflow: hidden!important;
+    }
+}
+
 .button-danger {
     color: white!important;
     background-color: #f44336!important;

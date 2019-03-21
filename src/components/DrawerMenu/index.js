@@ -17,6 +17,7 @@ import OverviewIcon from '@material-ui/icons/RemoveRedEye';
 import PhotoLibrary from '@material-ui/icons/PhotoLibrary';
 import LockIcon from '@material-ui/icons/Lock';
 import ExtensionIcon from '@material-ui/icons/Extension';
+import ArticleIcon from '@material-ui/icons/Folder';
 
 import Hidden from '@material-ui/core/Hidden';
 
@@ -72,6 +73,13 @@ class DrawerMenu extends React.Component {
                 icon: <OverviewIcon/>,
                 text: strings.DRAWER_OVERVIEW,
                 show: true
+            },
+            {
+                path: "/site/" + this.props.match.params.name + "/articles",
+                icon: <ArticleIcon/>,
+                text: strings.DRAWER_ARTICLES,
+                show: this.hasModule("articles")
+
             },
             {
                 path: "/site/" + this.props.match.params.name + "/projects",

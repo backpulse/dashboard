@@ -1,0 +1,16 @@
+.markdown-preview {
+    margin-top: 16px;
+    border: solid 2px #00ad9f;
+    border-radius: 4px;
+    padding: 18.5px 14px;
+    min-height: calc(100% - 65px);
+    color: white;
+    word-break: break-word;
+
+    h1,h2,h3,h4,h5,h6,a {
+        color: #00ad9f!important;
+    }
+    a {
+        font-weight: bold;
+    }
+}

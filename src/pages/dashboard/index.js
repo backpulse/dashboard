@@ -11,6 +11,8 @@ import EditGallery from './EditGallery';
 import MyAccount from './MyAccount';
 import Access from './Access';
 import Modules from './Modules';
+import Articles from './Articles';
+import EditArticle from './EditArticle';
 
 export {
     MySites,
@@ -25,5 +27,7 @@ export {
     EditGallery,
     MyAccount,
     Access,
-    Modules
+    Modules,
+    Articles,
+    EditArticle
 }

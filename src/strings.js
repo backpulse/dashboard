@@ -43,6 +43,7 @@ const strings = {
         "DRAWER_MODULES": "Modules",
         "DRAWER_GALLERIES": "Galeries",
         "DRAWER_ACCESS": "Accès",
+        "DRAWER_ARTICLES": "Articles",
 
         "PROJECTS_NEW_PROJECT": "Nouveau projet",
 
@@ -158,8 +159,13 @@ const strings = {
         "DELETE_PHOTOS_DESCRIPTION": "Vous êtes sur le point de supprimer une ou plusieurs photos. Êtes-vous certain(e) ?",
         "DEFAULT_GALLERY": "Galerie d'accueil",
         "PLEASE_UPGRADE": "Le propriétaire de ce site doit passer à Backpulse Pro.",
-        "TRANSFER_DESCRIPTION": "Vous êtes sur le point de transférer votre site à un autre utilisateur. Merci de confirmer."
-
+        "TRANSFER_DESCRIPTION": "Vous êtes sur le point de transférer votre site à un autre utilisateur. Merci de confirmer.",
+        "NEW_ARTICLE": "Nouvel article",
+        "EDIT_ARTICLE": "Modifier l'article",
+        "CONTENT": "Contenu",
+        "PREVIEW": "Prévisualisation",
+        "DELETE_ARTICLE": "Supprimer l'article ?",
+        "CONFIRM_DELETE_ARTICLE_DESCRIPTION": "Êtes-vous certain(e) de vouloir supprimer cet article ?",
     },
     en: {
         "CANCEL": "Cancel",
@@ -201,6 +207,7 @@ const strings = {
         "DRAWER_MODULES": "Modules",
         "DRAWER_GALLERIES": "Galleries",
         "DRAWER_ACCESS": "Access",
+        "DRAWER_ARTICLES": "Articles",
 
         "PROJECTS_NEW_PROJECT": "New project",
 
@@ -314,7 +321,13 @@ const strings = {
         "DELETE_PHOTOS_DESCRIPTION": "You are about to delete one or multiple photos. Are you sure?",
         "DEFAULT_GALLERY": "Default gallery",
         "PLEASE_UPGRADE": "The owner of this site needs to upgrade his account.",
-        "TRANSFER_DESCRIPTION": "You are about to transfer this website to another use. Please make sure you know what you are doing."
+        "TRANSFER_DESCRIPTION": "You are about to transfer this website to another use. Please make sure you know what you are doing.",
+        "NEW_ARTICLE": "New article",
+        "EDIT_ARTICLE": "Edit article",
+        "CONTENT": "Content",
+        "PREVIEW": "Preview",
+        "DELETE_ARTICLE": "Delete article?",
+        "CONFIRM_DELETE_PROJECT_DESCRIPTION": "Are you sure you want to permanently remove this article?",
     }
 };
 

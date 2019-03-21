@@ -26,7 +26,9 @@ import {
 	EditGallery, 
 	MyAccount, 
 	Access,
-	Modules
+	Modules,
+	Articles,
+	EditArticle
 } from 'pages/dashboard';
 
 import {
@@ -135,11 +137,16 @@ class App extends React.Component {
 									<Route path="/site/:name/projects" render={() => this.requireAuth(<Projects/>)}/>
 									<Route path="/site/:name/access" render={() => this.requireAuth(<Access/>)}/>
 									<Route path="/site/:name/modules" render={() => this.requireAuth(<Modules forceRender={() => this.forceUpdate}/>)}/>
+									
 									<Route path="/site/:name/projects/new" render={() => this.requireAuth(<EditProject new/>)}/>
 									<Route path="/site/:name/projects/edit/:id" render={() => this.requireAuth(<EditProject/>)}/>
 
 									<Route path="/site/:name/galleries" render={() => this.requireAuth(<Galleries/>)}/>
 									<Route path="/site/:name/galleries/:id" render={() => this.requireAuth(<EditGallery/>)}/>
+
+									<Route exact path="/site/:name/articles" render={() => this.requireAuth(<Articles/>)}/>
+									<Route path="/site/:name/articles/new" render={() => this.requireAuth(<EditArticle new/>)}/>
+									<Route path="/site/:name/articles/edit/:id" render={() => this.requireAuth(<EditArticle/>)}/>
 
 									<Route path="/site/:name/about" render={() => this.requireAuth(<About/>)}/>
 									<Route path="/site/:name/contact" render={() => this.requireAuth(<Contact/>)}/>
