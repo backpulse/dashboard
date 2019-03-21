@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import strings from 'strings';
 import Grid from '@material-ui/core/Grid';
 
-import Markdown from 'react-markdown/lib/react-markdown';
+import Markdown from 'react-markdown/src/react-markdown';
 
 import highlight from 'highlight.js';
 import DialogContent from '@material-ui/core/DialogContent';

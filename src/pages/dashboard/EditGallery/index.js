@@ -38,7 +38,6 @@ import {withRouter} from 'react-router';
 import {getTheme, reorder, sortByIndex} from 'utils';
 
 import './styles.scss';
-import { checkPropTypes } from 'prop-types';
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
