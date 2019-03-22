@@ -13,6 +13,7 @@ import Access from './Access';
 import Modules from './Modules';
 import Articles from './Articles';
 import EditArticle from './EditArticle';
+import Videos from './Videos';
 
 export {
     MySites,
@@ -29,5 +30,6 @@ export {
     Access,
     Modules,
     Articles,
-    EditArticle
+    EditArticle,
+    Videos
 }

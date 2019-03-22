@@ -41,6 +41,7 @@ const strings = {
         "DRAWER_ABOUT": "À propos",
         "DRAWER_SETTINGS": "Paramètres",
         "DRAWER_MODULES": "Modules",
+        "DRAWER_VIDEOS": "Vidéos",
         "DRAWER_GALLERIES": "Galeries",
         "DRAWER_ACCESS": "Accès",
         "DRAWER_ARTICLES": "Articles",
@@ -126,6 +127,7 @@ const strings = {
         "MODULE_GALLERIES": "Galeries",
         "MODULE_PROJECTS": "Projets",
         "MODULE_ARTICLES": "Articles",
+        "MODULE_VIDEOS": "Vidéos",
 
         "ADD_MODULE": "Ajouter un module",
         "ADD_MODULE_DESCRIPTION": "Merci de sélectionner le module que vous souhaitez ajouter.",
@@ -166,6 +168,7 @@ const strings = {
         "PREVIEW": "Prévisualisation",
         "DELETE_ARTICLE": "Supprimer l'article ?",
         "CONFIRM_DELETE_ARTICLE_DESCRIPTION": "Êtes-vous certain(e) de vouloir supprimer cet article ?",
+        "ADD_VIDEO": "Ajouter une vidéo"
     },
     en: {
         "CANCEL": "Cancel",
@@ -204,6 +207,7 @@ const strings = {
         "DRAWER_CONTACT": "Contact",
         "DRAWER_ABOUT": "About",
         "DRAWER_SETTINGS": "Settings",
+        "DRAWER_VIDEOS": "Videos",
         "DRAWER_MODULES": "Modules",
         "DRAWER_GALLERIES": "Galleries",
         "DRAWER_ACCESS": "Access",
@@ -288,6 +292,8 @@ const strings = {
         "MODULE_GALLERIES": "Galleries",
         "MODULE_PROJECTS": "Projects",
         "MODULE_ARTICLES": "Articles",
+        "MODULE_VIDEOS": "Videos",
+
         "ADD_MODULE": "Add a module",
         "ADD_MODULE_DESCRIPTION": "Please select the module you would like to add to your site.",
 
@@ -327,7 +333,9 @@ const strings = {
         "CONTENT": "Content",
         "PREVIEW": "Preview",
         "DELETE_ARTICLE": "Delete article?",
-        "CONFIRM_DELETE_PROJECT_DESCRIPTION": "Are you sure you want to permanently remove this article?",
+        
+        "CONFIRM_DELETE_ARTICLE_DESCRIPTION": "Are you sure you want to permanently remove this article?",
+        "ADD_VIDEO": "Add a video"
     }
 };
 

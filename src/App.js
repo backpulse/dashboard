@@ -28,7 +28,8 @@ import {
 	Access,
 	Modules,
 	Articles,
-	EditArticle
+	EditArticle,
+	Videos
 } from 'pages/dashboard';
 
 import {
@@ -140,6 +141,8 @@ class App extends React.Component {
 									
 									<Route path="/site/:name/projects/new" render={() => this.requireAuth(<EditProject new/>)}/>
 									<Route path="/site/:name/projects/edit/:id" render={() => this.requireAuth(<EditProject/>)}/>
+
+									<Route exact path="/site/:name/videos" render={() => this.requireAuth(<Videos/>)}/>
 
 									<Route path="/site/:name/galleries" render={() => this.requireAuth(<Galleries/>)}/>
 									<Route path="/site/:name/galleries/:id" render={() => this.requireAuth(<EditGallery/>)}/>
