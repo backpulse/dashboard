@@ -168,7 +168,19 @@ const strings = {
         "PREVIEW": "Prévisualisation",
         "DELETE_ARTICLE": "Supprimer l'article ?",
         "CONFIRM_DELETE_ARTICLE_DESCRIPTION": "Êtes-vous certain(e) de vouloir supprimer cet article ?",
-        "ADD_VIDEO": "Ajouter une vidéo"
+        "ADD_VIDEO": "Ajouter une vidéo",
+        "ADD_VIDEO_GROUP": "Ajouter un groupe",
+        "ADD_VIDEO_DESC": "Merci d'indiquer un titre.",
+        "VIDEO_GROUPS": "Groupes de vidéos",
+        "DELETE_VIDEO_GROUP": "Supprimer le groupe de vidéos",
+        "DELETE_VIDEO_GROUP_DESC": "Vous êtes sur le point de supprimer un groupe de vidéos. Êtes-vous certain(e) ?",
+        "YOUTUBE_URL": "URL YouTube",
+        "NO_NAME": "Sans titre",
+        "EDIT_VIDEO": "Modifier la vidéo",
+        "SAVE_VIDEO": "Sauvegarder la vidéo",
+        "INVALID_URL": "Url invalide",
+        "DELETE_VIDEO": "Supprimer la vidéo",
+        "CONFIRM_DELETE_VIDEO_DESC": "Vous êtes sur le point du supprimer une vidéo. Êtes-vous certain(e) ?"
     },
     en: {
         "CANCEL": "Cancel",
@@ -335,7 +347,20 @@ const strings = {
         "DELETE_ARTICLE": "Delete article?",
         
         "CONFIRM_DELETE_ARTICLE_DESCRIPTION": "Are you sure you want to permanently remove this article?",
-        "ADD_VIDEO": "Add a video"
+        "ADD_VIDEO": "Add a video",
+        "ADD_VIDEO_GROUP": "Add group",
+        "ADD_VIDEO_GROUP_DESC": "Please enter a title.",
+        "VIDEO_GROUPS": "Video groups",
+        "DELETE_VIDEO_GROUP": "Delete video group",
+        "DELETE_VIDEO_GROUP_DESC": "Are you sure you want to permanently remove this video group?",
+        "YOUTUBE_URL": "YouTube URL",
+        "NO_NAME": "No name",
+        "EDIT_VIDEO": "Edit video",
+        "SAVE_VIDEO": "Save video",
+        "INVALID_URL": "Invalid url",
+        "DELETE_VIDEO": "Delete video",
+        "CONFIRM_DELETE_VIDEO_DESC": "You are about to delete a video. Are you sure?"
+
     }
 };
 

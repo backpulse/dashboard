@@ -173,7 +173,7 @@ class EditArticle extends React.Component {
                         <Button onClick={this.closeConfirmDelete} color="primary" autoFocus>
                             {strings.CANCEL}
                         </Button>
-                        <Button size="large" onClick={this.deleteArticle} className="button-danger">
+                        <Button onClick={this.deleteArticle} className="button-danger">
                             {strings.DELETE}
                         </Button>
                     </DialogActions>

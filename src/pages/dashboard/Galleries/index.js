@@ -281,7 +281,7 @@ class Galleries extends React.Component {
                         <Button onClick={this.closeConfirmDelete} color="primary" autoFocus>
                             {strings.CANCEL}
                         </Button>
-                        <Button size="large" onClick={this.deleteGallery} className="button-danger">
+                        <Button onClick={this.deleteGallery} className="button-danger">
                             {strings.DELETE}
                         </Button>
                     </DialogActions>

@@ -65,3 +65,9 @@ export const reorder = (list, startIndex, endIndex) => {
 export const sortByIndex = array => {
     return array.sort(function(a, b){return a.index - b.index});
 }
+
+export const youtubeParser = url => {
+    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match&&match[7].length==11)? match[7] : false;
+}

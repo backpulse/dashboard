@@ -29,7 +29,9 @@ import {
 	Modules,
 	Articles,
 	EditArticle,
-	Videos
+	VideoGroups,
+	VideoGroup,
+	Video
 } from 'pages/dashboard';
 
 import {
@@ -142,7 +144,9 @@ class App extends React.Component {
 									<Route path="/site/:name/projects/new" render={() => this.requireAuth(<EditProject new/>)}/>
 									<Route path="/site/:name/projects/edit/:id" render={() => this.requireAuth(<EditProject/>)}/>
 
-									<Route exact path="/site/:name/videos" render={() => this.requireAuth(<Videos/>)}/>
+									<Route exact path="/site/:name/videogroups" render={() => this.requireAuth(<VideoGroups/>)}/>
+									<Route exact path="/site/:name/videogroups/:id" render={() => this.requireAuth(<VideoGroup/>)}/>
+									<Route exact path="/site/:name/videogroups/:id/:videoid" render={() => this.requireAuth(<Video/>)}/>
 
 									<Route path="/site/:name/galleries" render={() => this.requireAuth(<Galleries/>)}/>
 									<Route path="/site/:name/galleries/:id" render={() => this.requireAuth(<EditGallery/>)}/>

@@ -13,7 +13,9 @@ import Access from './Access';
 import Modules from './Modules';
 import Articles from './Articles';
 import EditArticle from './EditArticle';
-import Videos from './Videos';
+import VideoGroups from './VideoGroups';
+import VideoGroup from './VideoGroup';
+import Video from './Video';
 
 export {
     MySites,
@@ -31,5 +33,7 @@ export {
     Modules,
     Articles,
     EditArticle,
-    Videos
+    VideoGroups,
+    VideoGroup,
+    Video
 }

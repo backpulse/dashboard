@@ -107,7 +107,7 @@ class FileUploader extends React.Component {
                 </DialogContentText>
 
                 <div style={{display: "flex", alignItems:"center"}}>
-                    <Button  disabled={this.state.publishing} onClick={this.handleImageSelect} size="large" style={{marginTop: 15}} variant="contained" color="primary">{strings.IMPORT_PHOTOS}</Button>
+                    <Button  disabled={this.state.publishing} onClick={this.handleImageSelect} style={{marginTop: 15}} variant="contained" color="primary">{strings.IMPORT_PHOTOS}</Button>
                     
                     {this.props.max && this.state.files < 1 && <Typography style={{paddingTop: 15, paddingLeft: 10}}variant="body1">{this.props.max} max</Typography>}
                     {this.state.files.length > 0 && <Typography style={{paddingTop: 15, paddingLeft: 10}} variant="body1">{this.state.files.length} {strings.FILES}</Typography>}

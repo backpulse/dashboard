@@ -97,7 +97,7 @@ class DrawerMenu extends React.Component {
 
             },
             {
-                path: "/site/" + this.props.match.params.name + "/videos",
+                path: "/site/" + this.props.match.params.name + "/videogroups",
                 icon: <VideoLibraryIcon/>,
                 text: strings.DRAWER_VIDEOS,
                 show: this.hasModule("videos")

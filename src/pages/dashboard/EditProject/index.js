@@ -382,7 +382,7 @@ class EditProject extends React.Component {
                         <Button onClick={this.handleConfirmClose} color="primary" autoFocus>
                             {strings.CANCEL}
                         </Button>
-                        <Button size="large" onClick={this.deleteProject} className="button-danger">
+                        <Button onClick={this.deleteProject} className="button-danger">
                             {strings.DELETE}
                         </Button>
                     </DialogActions>

@@ -275,7 +275,7 @@ class Settings extends React.Component {
                         <Button onClick={this.handleConfirmClose} color="primary">
                             {strings.CANCEL}
                         </Button>
-                        <Button disabled={this.state.originalName !== this.state.confirmName} size="large" onClick={this.deleteSite} className="button-danger">
+                        <Button disabled={this.state.originalName !== this.state.confirmName} onClick={this.deleteSite} className="button-danger">
                             {strings.DELETE}
                         </Button>
                     </DialogActions>
