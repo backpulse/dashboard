@@ -22,6 +22,9 @@ import VideoGroup from '../../../components/VideoGroup';
 
 import './styles.scss';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {sortByIndex} from 'utils';
+
+import Sorter from 'components/Sorter';
 
 class Videos extends React.Component {
     
@@ -33,16 +36,15 @@ class Videos extends React.Component {
             groups: [],
             title: "",
             addVideoGroup: false,
-            confirmDelete: false,
-            addVideoGroup: false
+            confirmDelete: false
         }
     }
 
     fetchVideoGroups = () => {
         this.setState({fetched: false});
         client.get('/videogroups/' + this.props.match.params.name).then(response => {
-            console.log(response.data);
             const groups = response.data.payload || [];
+            sortByIndex(groups);
             this.setState({groups, fetched: true});
         }).catch(err => {
             if(err) throw err;
@@ -97,6 +99,15 @@ class Videos extends React.Component {
         });
     }
 
+    onDragEnd = groups => {
+        this.setState({groups});
+        client.put('/videogroups/' + this.props.match.params.name + '/indexes', groups).then(response => {
+            console.log(response.data);
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
+
     render() {
         return (
             <div className="page dashboard-videogroups">
@@ -107,19 +118,19 @@ class Videos extends React.Component {
                     {strings.ADD_VIDEO_GROUP}
                 </Fab>
 
-                <div className="groups-container">
-                    {this.state.groups.map((group, i) => (
-                        <VideoGroup 
-                            onDelete={() => this.setState({
-                                confirmDelete: true,
-                                groupToDelete: group
-                            })} 
-                            onEdit={() => this.editGroup(group)}
-                            group={group} 
-                            key={i}
-                        />
-                    ))}
-                </div>
+                <Sorter 
+                    className="groups-container" 
+                
+                    onDragEnd={this.onDragEnd} 
+                    component={VideoGroup} 
+                    items={this.state.groups}
+
+                    onEdit={g => this.editGroup(g)}
+                    onDelete={g => this.setState({
+                        confirmDelete: true,
+                        groupToDelete: g,
+                    })} 
+                />
 
                 <Dialog
                     fullWidth

@@ -90,7 +90,7 @@ class Video extends React.Component {
                             margin="normal"
                             fullWidth
                         />
-                        <img width={300} src={"https://img.youtube.com/vi/" + youtubeParser(this.state.youtube_url) + "/maxresdefault.jpg"}/>
+                        <img alt="thumbnail" width={300} src={"https://img.youtube.com/vi/" + youtubeParser(this.state.youtube_url) + "/maxresdefault.jpg"}/>
                     </Grid>
                     <Grid>
                         <Button

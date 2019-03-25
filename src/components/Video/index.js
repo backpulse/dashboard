@@ -21,12 +21,12 @@ class Video extends React.Component {
         return (
             <Card className="video">
                 <CardHeader
-                    title={<Typography variant="body1">{this.props.video.title || strings.NO_NAME}</Typography>}
-                    subheader={<Typography className="updated-at" variant="caption"> {dayjs(this.props.video.updated_at).format("DD/MM/YYYY HH:mm")}</Typography>}
+                    title={<Typography variant="body1">{this.props.data.title || strings.NO_NAME}</Typography>}
+                    subheader={<Typography className="updated-at" variant="caption"> {dayjs(this.props.data.updated_at).format("DD/MM/YYYY HH:mm")}</Typography>}
                 />
                 <CardMedia
                     className="media"
-                    image={"https://img.youtube.com/vi/" + youtubeParser(this.props.video.youtube_url) + "/maxresdefault.jpg"}
+                    image={"https://img.youtube.com/vi/" + youtubeParser(this.props.data.youtube_url) + "/maxresdefault.jpg"}
                 />
                 <CardActions disableActionSpacing>
                     <Tooltip title={strings.OPEN}>

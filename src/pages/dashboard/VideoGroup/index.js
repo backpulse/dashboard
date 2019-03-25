@@ -21,7 +21,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import './styles.scss';
 
 import Video from 'components/Video';
+import {sortByIndex} from 'utils';
 
+import Sorter from 'components/Sorter';
 class VideoGroup extends React.Component {
 
     constructor(props) {
@@ -47,6 +49,8 @@ class VideoGroup extends React.Component {
         client.get('/videogroups/'+this.props.match.params.name + '/' + id).then(response => {
             const group = response.data.payload;
             group.videos = group.videos || [];
+
+            sortByIndex(group.videos);
             this.setState({group, fetched: true});
         }).catch(err => {
             if(err) throw err;
@@ -102,6 +106,18 @@ class VideoGroup extends React.Component {
         });
     }
 
+    onDragEnd = videos => {
+        const group = this.state.group;
+        group.videos = videos;
+        this.setState({group});
+        client.put('/videos/' + this.props.match.params.name + '/indexes', videos).then(response => {
+            console.log(response.data);
+        }).catch(err => {
+            if(err) throw err;
+        });
+
+    }
+
     render() {
         return (
             <div className="page dashboard-videogroup">
@@ -112,14 +128,20 @@ class VideoGroup extends React.Component {
                 </Fab>
                 {!this.state.fetched && <CircularProgress className="progress"/>}
 
-                <div className="videos-container">
-                    {this.state.group.videos.map((video, i) => (
-                        <Video onDelete={() => this.setState({
-                            videoToDelete: video,
-                            confirmDelete: true
-                        })} onEdit={() => this.editVideo(video)} key={i} video={video}/>
-                    ))}
-                </div>
+
+                <Sorter 
+                    className="videos-container" 
+                
+                    onDragEnd={this.onDragEnd} 
+                    component={Video} 
+                    items={this.state.group.videos}
+
+                    onEdit={video => this.editVideo(video)}
+                    onDelete={video => this.setState({
+                        videoToDelete: video,
+                        confirmDelete: true
+                    })}
+                />
 
                 <Dialog
                     open={this.state.addVideo}

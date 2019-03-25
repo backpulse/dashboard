@@ -20,8 +20,8 @@ class VideoGroup extends React.Component {
         return (
             <Card className="videogroup">
                 <CardHeader
-                    title={<Typography variant="body1">{this.props.group.title}</Typography>}
-                    subheader={<Typography className="updated-at" variant="caption"> {dayjs(this.props.group.updated_at).format("DD/MM/YYYY HH:mm")}</Typography>}
+                    title={<Typography variant="body1">{this.props.data.title}</Typography>}
+                    subheader={<Typography className="updated-at" variant="caption"> {dayjs(this.props.data.updated_at).format("DD/MM/YYYY HH:mm")}</Typography>}
                 />
                 <CardActions disableActionSpacing>
                     <Tooltip title={strings.OPEN}>

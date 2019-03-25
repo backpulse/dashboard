@@ -16,16 +16,15 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import client from 'services/client';
 
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import GalleryBox from 'components/GalleryBox';
 
 import './styles.scss';
 
-import {reorder, sortByIndex} from 'utils';
+import Sorter from '../../../components/Sorter';
 
+import {sortByIndex} from 'utils';
 
 class Galleries extends React.Component {
 
@@ -122,33 +121,9 @@ class Galleries extends React.Component {
         galleryName: e.target.value
     });
 
-    onDragEnd = result => {
-        // dropped outside the list
-        if (!result.destination) {
-            return;
-        }
-    
-        const items = reorder(
-            this.state.galleries,
-            result.source.index,
-            result.destination.index
-        );
-    
-        this.setState({
-            galleries: items,
-        });
-
-        this.updateIndexes(items);
-    }
-
-    updateIndexes = galleries => {
-        const items = galleries.map((g, i) => ({
-            id: g.id,
-            index: i
-        }));
-
-        console.log(items);
-        client.put('/galleries/' + this.props.match.params.name + '/indexes', items).then(response => {
+    onDragEnd = galleries => {
+        this.setState({galleries});
+        client.put('/galleries/' + this.props.match.params.name + '/indexes', galleries).then(response => {
             console.log(response.data);
         }).catch(err => {
             if(err) throw err;
@@ -189,45 +164,30 @@ class Galleries extends React.Component {
                     <AddIcon />
                     {strings.NEW_GALLERY}
                 </Fab>
-                <div className="c-div">
-                    <div className="title-div">
-                        <h1>{strings.DRAWER_GALLERIES}</h1>
-                    </div>
-                    {!this.state.fetched && <CircularProgress/>}
-                    {this.state.galleries.length < 1 && this.state.fetched && <Button onClick={this.handleCreateGallery} variant="contained" color="primary" aria-label="Add">
-                        <AddIcon />
-                        {strings.NEW_GALLERY}
-                    </Button>}
-                    <DragDropContext onDragEnd={this.onDragEnd}>
-                        <Droppable droppableId="droppable">
-                            {provided => (
-                                <div ref={provided.innerRef} className="galleries-container">
-                                    {this.state.galleries.map((gallery, i) => (
-                                        <Draggable key={i} draggableId={gallery.id} index={i}>
-                                            {provided => (
-                                            <div
-                                                className="draggable"
-                                                ref={provided.innerRef} 
-                                                {...provided.draggableProps} 
-                                                {...provided.dragHandleProps}>
-                                                <GalleryBox
-                                                    loading={this.state.loading}
-                                                    onDefaultSet={() => this.onDefaultSet(gallery)}
-                                                    onDelete={() => this.confirmDelete(gallery)}
-                                                    onOpen={() => this.editGallery(gallery.short_id)} 
-                                                    gallery={gallery}
-                                                />
-                                            </div>
-                                            )}
-                                        </Draggable>
-                                    )
-                                    )}
-                                </div>
-                            )}
-                        </Droppable>
-                    </DragDropContext>
-
+                <div className="title-div">
+                    <h1>{strings.DRAWER_GALLERIES}</h1>
                 </div>
+                {!this.state.fetched && <CircularProgress/>}
+                {this.state.galleries.length < 1 && this.state.fetched && <Button onClick={this.handleCreateGallery} variant="contained" color="primary" aria-label="Add">
+                    <AddIcon />
+                    {strings.NEW_GALLERY}
+                </Button>}
+
+                {this.state.galleries.length > 0 && 
+                    <Sorter 
+                        className="galleries-container" 
+                    
+                        onDragEnd={this.onDragEnd} 
+                        component={GalleryBox} 
+                        items={this.state.galleries}
+
+                        loading={this.state.loading}
+                        onEdit={g => this.editGallery(g.id)}
+                        onDelete={g => this.confirmDelete(g)}
+                        onDefaultSet={g => this.onDefaultSet(g)}
+                    />
+                }
+
                 <Dialog
                     open={this.state.newGalleryDialog}
                     onClose={this.handleCloseNewGalleryDialog}
