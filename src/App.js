@@ -31,7 +31,10 @@ import {
 	EditArticle,
 	VideoGroups,
 	VideoGroup,
-	Video
+	Video,
+	Albums,
+	Album,
+	Music
 } from 'pages/dashboard';
 
 import {
@@ -147,6 +150,10 @@ class App extends React.Component {
 									<Route exact path="/site/:name/videogroups" render={() => this.requireAuth(<VideoGroups/>)}/>
 									<Route exact path="/site/:name/videogroups/:id" render={() => this.requireAuth(<VideoGroup/>)}/>
 									<Route exact path="/site/:name/videogroups/:id/:videoid" render={() => this.requireAuth(<Video/>)}/>
+
+									<Route exact path="/site/:name/albums" render={() => this.requireAuth(<Albums/>)}/>
+									{/* <Route exact path="/site/:name/albums/:id" render={() => this.requireAuth(<Album/>)}/>
+									<Route exact path="/site/:name/albums/:id/:musicid" render={() => this.requireAuth(<Music/>)}/> */}
 
 									<Route path="/site/:name/galleries" render={() => this.requireAuth(<Galleries/>)}/>
 									<Route path="/site/:name/galleries/:id" render={() => this.requireAuth(<EditGallery/>)}/>

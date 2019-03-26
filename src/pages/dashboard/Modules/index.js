@@ -45,7 +45,7 @@ class Modules extends React.Component {
             moduleToAdd: ""
         }
 
-        this.modules = ["projects", "galleries", "articles", "videos"];
+        this.modules = ["projects", "galleries", "articles", "videos", "music"];
     }
 
     fetchModules = () => {
@@ -67,6 +67,7 @@ class Modules extends React.Component {
         if(m === "projects") return strings.MODULE_PROJECTS;
         if(m === "articles") return strings.MODULE_ARTICLES;
         if(m === "videos") return strings.MODULE_VIDEOS;
+        if(m === "music") return strings.MODULE_MUSIC;
     }
 
     openModuleSelector = () => this.setState({

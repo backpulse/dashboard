@@ -45,6 +45,7 @@ const strings = {
         "DRAWER_GALLERIES": "Galeries",
         "DRAWER_ACCESS": "Accès",
         "DRAWER_ARTICLES": "Articles",
+        "DRAWER_MUSIC": "Musique",
 
         "PROJECTS_NEW_PROJECT": "Nouveau projet",
 
@@ -128,6 +129,7 @@ const strings = {
         "MODULE_PROJECTS": "Projets",
         "MODULE_ARTICLES": "Articles",
         "MODULE_VIDEOS": "Vidéos",
+        "MODULE_MUSIC": "Musique / Podcasts",
 
         "ADD_MODULE": "Ajouter un module",
         "ADD_MODULE_DESCRIPTION": "Merci de sélectionner le module que vous souhaitez ajouter.",
@@ -215,7 +217,7 @@ const strings = {
         "FAVORITE": "Favorite",
 
         "DRAWER_OVERVIEW": "Overview",
-        "DRAWER_PROJECTS": "My projects",
+        "DRAWER_PROJECTS": "Projects",
         "DRAWER_CONTACT": "Contact",
         "DRAWER_ABOUT": "About",
         "DRAWER_SETTINGS": "Settings",
@@ -224,6 +226,7 @@ const strings = {
         "DRAWER_GALLERIES": "Galleries",
         "DRAWER_ACCESS": "Access",
         "DRAWER_ARTICLES": "Articles",
+        "DRAWER_MUSIC": "Music",
 
         "PROJECTS_NEW_PROJECT": "New project",
 
@@ -305,6 +308,7 @@ const strings = {
         "MODULE_PROJECTS": "Projects",
         "MODULE_ARTICLES": "Articles",
         "MODULE_VIDEOS": "Videos",
+        "MODULE_MUSIC": "Music / Podcasts",
 
         "ADD_MODULE": "Add a module",
         "ADD_MODULE_DESCRIPTION": "Please select the module you would like to add to your site.",

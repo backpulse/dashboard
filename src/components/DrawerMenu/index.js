@@ -19,6 +19,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import ExtensionIcon from '@material-ui/icons/Extension';
 import ArticleIcon from '@material-ui/icons/Folder';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
+import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
 
 import Hidden from '@material-ui/core/Hidden';
 
@@ -76,6 +77,9 @@ class DrawerMenu extends React.Component {
                 show: true
             },
             {
+                divider: true
+            },
+            {
                 path: "/site/" + this.props.match.params.name + "/articles",
                 icon: <ArticleIcon/>,
                 text: strings.DRAWER_ARTICLES,
@@ -101,6 +105,15 @@ class DrawerMenu extends React.Component {
                 icon: <VideoLibraryIcon/>,
                 text: strings.DRAWER_VIDEOS,
                 show: this.hasModule("videos")
+            },
+            {
+                path: "/site/" + this.props.match.params.name + "/albums",
+                icon: <LibraryMusicIcon/>,
+                text: strings.DRAWER_MUSIC,
+                show: this.hasModule("music")
+            },
+            {  
+                divider: true
             },
             {
                 path: "/site/" + this.props.match.params.name + "/about",

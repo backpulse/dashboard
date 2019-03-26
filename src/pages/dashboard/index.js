@@ -16,6 +16,7 @@ import EditArticle from './EditArticle';
 import VideoGroups from './VideoGroups';
 import VideoGroup from './VideoGroup';
 import Video from './Video';
+import Albums from './Albums';
 
 export {
     MySites,
@@ -35,5 +36,6 @@ export {
     EditArticle,
     VideoGroups,
     VideoGroup,
-    Video
+    Video,
+    Albums
 }
