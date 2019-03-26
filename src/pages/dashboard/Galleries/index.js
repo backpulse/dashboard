@@ -113,8 +113,8 @@ class Galleries extends React.Component {
         })
     }
 
-    editGallery = id => {
-        this.props.history.push('/site/' + this.props.match.params.name + '/galleries/' + id);
+    editGallery = gallery => {
+        this.props.history.push('/site/' + this.props.match.params.name + '/galleries/' + gallery.short_id);
     }
 
     handleNameChange = e => this.setState({
@@ -182,7 +182,7 @@ class Galleries extends React.Component {
                         items={this.state.galleries}
 
                         loading={this.state.loading}
-                        onEdit={g => this.editGallery(g.id)}
+                        onEdit={g => this.editGallery(g)}
                         onDelete={g => this.confirmDelete(g)}
                         onDefaultSet={g => this.onDefaultSet(g)}
                     />

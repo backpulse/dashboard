@@ -123,7 +123,7 @@ class FileUploader extends React.Component {
                 <Button disabled={this.state.publishing} onClick={this.props.close} color="primary">
                     {strings.CANCEL}
                 </Button>
-                <Button disabled={this.state.publishing || this.state.files.length < 1} onClick={this.handleSubmit} variant="contained" color="secondary">
+                <Button disabled={this.state.publishing || this.state.files.length < 1} onClick={this.handleSubmit} variant="contained" color="primary">
                     {strings.ADD}
                 </Button>
             </DialogActions>
