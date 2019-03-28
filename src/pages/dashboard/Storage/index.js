@@ -6,8 +6,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import FileUploader from 'components/FileUploader';
+import File from 'components/File';
 
 import client from 'services/client';
+import './styles.scss';
+import Masonry from 'react-masonry-component';
 
 class Storage extends React.Component {
 
@@ -24,10 +27,11 @@ class Storage extends React.Component {
     }
     
     fetchFiles = () => {
-        this.setState({fetched: true});
+        this.setState({fetched: false});
         client.get('/files/' + this.props.match.params.name).then(response => {
             const files = response.data.payload || [];
-            this.setState({files});
+            files.reverse();
+            this.setState({files, fetched: true});
             console.log(files);
         }).catch(err => {
             if(err) throw err;
@@ -45,18 +49,29 @@ class Storage extends React.Component {
     onUploadDone = data => {
         console.log(data);
         this.fetchFiles();
+        this.closeImport();
     }
 
     render() {
         return (
             <div className="page dashboard-storage">
-                <h1>{strings.DRAWER_STORAGE}</h1>
+                <h1 className="title-div">{strings.DRAWER_STORAGE}</h1>
+                {!this.state.fetched && <CircularProgress style={{display: "block"}}/>}
                 <Fab onClick={this.importFiles} className="fab" variant="extended" color="primary" aria-label="Add">
                     <AddIcon />
                     {strings.IMPORT_FILE}
                 </Fab>
 
-                {!this.state.fetched && <CircularProgress style={{display: "block"}}/>}
+
+                {/* <div className="files-container"> */}
+                    <Masonry className="files-container">
+                        {this.state.files.map((file, i) => (
+                            // <div>
+                                <File data={file} key={i}/>
+                            // </div>
+                        ))}
+                    </Masonry>
+                {/* </div> */}
 
                 <FileUploader
                     siteName={this.props.match.params.name} 

@@ -184,7 +184,8 @@ const strings = {
         "INVALID_URL": "Url invalide",
         "DELETE_VIDEO": "Supprimer la vidéo",
         "CONFIRM_DELETE_VIDEO_DESC": "Vous êtes sur le point du supprimer une vidéo. Êtes-vous certain(e) ?",
-        "IMPORT_FILE": "Importer"
+        "IMPORT_FILE": "Importer",
+        "COPY_URL": "Copier le lien"
     },
     en: {
         "CANCEL": "Cancel",
@@ -367,7 +368,8 @@ const strings = {
         "INVALID_URL": "Invalid url",
         "DELETE_VIDEO": "Delete video",
         "CONFIRM_DELETE_VIDEO_DESC": "You are about to delete a video. Are you sure?",
-        "IMPORT_FILE": "Import file"
+        "IMPORT_FILE": "Import file",
+        "COPY_URL": "Copy url"
 
     }
 };
