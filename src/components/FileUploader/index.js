@@ -33,23 +33,35 @@ class FileUploader extends React.Component {
     
     upload = (file, cb) => {
         const formData = new FormData();
-        formData.append("image", file, file.name);
-        formData.append("is_gallery", this.props.isGallery);
-        formData.append("is_project", this.props.isProject);
-        formData.append("gallery_id", this.props.galleryID);
-        formData.append("project_id", this.props.projectID);
+        
 
-        client.post("/photos/" + this.props.siteName, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        }).then(response => {
-            cb(response.data);
-        }).catch(err => {
-            if(err) {
-                this.setState({publishing: false, error: err.message});
-            }
-        });
+        if(this.props.isStorage) {
+            formData.append("file", file, file.name);
+            client.post('/files/' + this.props.siteName, formData, {headers: {"Content-Type": "multipart/form-data"}}).then(response => cb(response.data)).catch(err => {
+                if(err) {
+                    this.setState({publishing: false, error: err.message});
+                }
+            })
+        } else {
+            formData.append("image", file, file.name);
+            formData.append("is_gallery", this.props.isGallery);
+            formData.append("is_project", this.props.isProject);
+            formData.append("gallery_id", this.props.galleryID);
+            formData.append("project_id", this.props.projectID);
+    
+            client.post("/photos/" + this.props.siteName, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(response => {
+                cb(response.data);
+            }).catch(err => {
+                if(err) {
+                    this.setState({publishing: false, error: err.message});
+                }
+            });
+        }
+
     }
 
     handleSubmit = () => {
@@ -99,15 +111,15 @@ class FileUploader extends React.Component {
                 onClose={this.state.publishing ? null : this.props.close}
                 fullWidth
             >
-            <DialogTitle>{strings.IMPORT_PHOTOS}</DialogTitle>
+            <DialogTitle>{strings.IMPORT_FILES}</DialogTitle>
             <DialogContent>
 
                 <DialogContentText variant="body1">
-                    {strings.IMPORT_PHOTOS_DESCRIPTION}
+                    {strings.IMPORT_FILES_DESCRIPTION}
                 </DialogContentText>
 
                 <div style={{display: "flex", alignItems:"center"}}>
-                    <Button  disabled={this.state.publishing} onClick={this.handleImageSelect} style={{marginTop: 15}} variant="contained" color="primary">{strings.IMPORT_PHOTOS}</Button>
+                    <Button  disabled={this.state.publishing} onClick={this.handleImageSelect} style={{marginTop: 15}} variant="contained" color="primary">{strings.IMPORT_FILES}</Button>
                     
                     {this.props.max && this.state.files < 1 && <Typography style={{paddingTop: 15, paddingLeft: 10}}variant="body1">{this.props.max} max</Typography>}
                     {this.state.files.length > 0 && <Typography style={{paddingTop: 15, paddingLeft: 10}} variant="body1">{this.state.files.length} {strings.FILES}</Typography>}
@@ -124,10 +136,10 @@ class FileUploader extends React.Component {
                     {strings.CANCEL}
                 </Button>
                 <Button disabled={this.state.publishing || this.state.files.length < 1} onClick={this.handleSubmit} variant="contained" color="primary">
-                    {strings.ADD}
+                    {strings.IMPORT}
                 </Button>
             </DialogActions>
-            <input multiple id="fileInput" type="file" accept="image/*"/>
+            <input multiple id="fileInput" type="file" accept={this.props.allTypes ? "*" : "image/*"}/>
             </Dialog>
         )
     }   

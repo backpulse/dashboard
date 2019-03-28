@@ -20,6 +20,7 @@ import ExtensionIcon from '@material-ui/icons/Extension';
 import ArticleIcon from '@material-ui/icons/Folder';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
+import StorageIcon from '@material-ui/icons/Storage';
 
 import Hidden from '@material-ui/core/Hidden';
 
@@ -125,6 +126,12 @@ class DrawerMenu extends React.Component {
                 path: "/site/" + this.props.match.params.name + "/contact",
                 icon: <ContactIcon/>,
                 text: strings.DRAWER_CONTACT,
+                show: true
+            },
+            {
+                path: "/site/" + this.props.match.params.name + "/storage",
+                icon: <StorageIcon/>,
+                text: strings.DRAWER_STORAGE,
                 show: true
             },
             {

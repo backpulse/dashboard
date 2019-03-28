@@ -46,6 +46,7 @@ const strings = {
         "DRAWER_ACCESS": "Accès",
         "DRAWER_ARTICLES": "Articles",
         "DRAWER_MUSIC": "Musique",
+        "DRAWER_STORAGE": "Stockage",
 
         "PROJECTS_NEW_PROJECT": "Nouveau projet",
 
@@ -182,7 +183,8 @@ const strings = {
         "SAVE_VIDEO": "Sauvegarder la vidéo",
         "INVALID_URL": "Url invalide",
         "DELETE_VIDEO": "Supprimer la vidéo",
-        "CONFIRM_DELETE_VIDEO_DESC": "Vous êtes sur le point du supprimer une vidéo. Êtes-vous certain(e) ?"
+        "CONFIRM_DELETE_VIDEO_DESC": "Vous êtes sur le point du supprimer une vidéo. Êtes-vous certain(e) ?",
+        "IMPORT_FILE": "Importer"
     },
     en: {
         "CANCEL": "Cancel",
@@ -227,6 +229,7 @@ const strings = {
         "DRAWER_ACCESS": "Access",
         "DRAWER_ARTICLES": "Articles",
         "DRAWER_MUSIC": "Music",
+        "DRAWER_STORAGE": "Storage",
 
         "PROJECTS_NEW_PROJECT": "New project",
 
@@ -261,8 +264,8 @@ const strings = {
         "NEW_GALLERY": "New gallery",
         "EDIT_GALLERY": "Edit gallery",
         "PHOTOS": "Photos",
-        "IMPORT_PHOTOS": "Import photos",
-        "IMPORT_PHOTOS_DESCRIPTION": "Please import one or multiple photos.",
+        "IMPORT_FILES": "Import files",
+        "IMPORT_FILES_DESCRIPTION": "Please import one or multiple files.",
         "FILES": "files",
         "ADD": "Add",
         "TOO_MANY_PICTURES": "Too many pictures.",
@@ -363,7 +366,8 @@ const strings = {
         "SAVE_VIDEO": "Save video",
         "INVALID_URL": "Invalid url",
         "DELETE_VIDEO": "Delete video",
-        "CONFIRM_DELETE_VIDEO_DESC": "You are about to delete a video. Are you sure?"
+        "CONFIRM_DELETE_VIDEO_DESC": "You are about to delete a video. Are you sure?",
+        "IMPORT_FILE": "Import file"
 
     }
 };
