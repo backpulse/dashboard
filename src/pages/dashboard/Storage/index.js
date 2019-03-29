@@ -12,13 +12,25 @@ import client from 'services/client';
 import './styles.scss';
 import Masonry from 'react-masonry-component';
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@material-ui/core/DialogActions';
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
+
 class Storage extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             files: [],
-            importFiles: false
+            importFiles: false,
+            confirmDelete: false,
+            editFile: false,
+            newFilename: ""
         }
     }
 
@@ -52,6 +64,34 @@ class Storage extends React.Component {
         this.closeImport();
     }
 
+    closeConfirm = () => this.setState({
+        confirmDelete: false
+    })
+
+    removeFile = () => {
+        client.delete('/files/' + this.props.match.params.name + '/' + [this.state.fileToDelete.id]).then(response => {
+            console.log(response.data);
+            this.closeConfirm();
+            this.fetchFiles();
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
+
+    closeEdit = () => this.setState({
+        editFile: false
+    });
+
+    editFile = e => {
+        e.preventDefault();
+        client.put('/files/' + this.props.match.params.name + '/' + this.state.fileToEdit.id + '/' + this.state.newFilename).then(response => {
+            this.fetchFiles();
+            this.closeEdit();
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
+
     render() {
         return (
             <div className="page dashboard-storage">
@@ -62,16 +102,23 @@ class Storage extends React.Component {
                     {strings.IMPORT_FILE}
                 </Fab>
 
-
-                {/* <div className="files-container"> */}
-                    <Masonry className="files-container">
-                        {this.state.files.map((file, i) => (
-                            // <div>
-                                <File data={file} key={i}/>
-                            // </div>
-                        ))}
-                    </Masonry>
-                {/* </div> */}
+                <Masonry className="files-container">
+                    {this.state.files.map((file, i) => (
+                        <File 
+                            onDelete={() => this.setState({
+                                fileToDelete: file,
+                                confirmDelete: true
+                            })}
+                            onEdit={() => this.setState({
+                                fileToEdit: file,
+                                editFile: true,
+                                newFilename: file.name
+                            })}
+                            data={file} 
+                            key={i}
+                        />
+                    ))}
+                </Masonry>
 
                 <FileUploader
                     siteName={this.props.match.params.name} 
@@ -81,6 +128,60 @@ class Storage extends React.Component {
                     open={this.state.importFiles} 
                     close={this.closeImport}
                 />
+
+                <Dialog
+                    open={this.state.editFile}
+                    onClose={this.closeEdit}
+                    fullWidth>
+                    <form onSubmit={this.editFile}>
+                        <DialogTitle>{strings.EDIT_FILENAME}</DialogTitle>
+                        <DialogContent>
+                            <FormControl fullWidth>
+                                <TextField
+                                    required
+                                    onChange={ e => this.setState({
+                                        newFilename: e.target.value
+                                    })}
+                                    autoFocus
+                                    value={this.state.newFilename}
+                                    margin="dense"
+                                    label={strings.FILE_NAME}
+                                    fullWidth
+                                />
+                            </FormControl>
+
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={this.handleCloseNewGalleryDialog} color="primary">
+                                {strings.CANCEL}
+                            </Button>
+                            <Button type="submit" variant="contained" color="primary">
+                                {strings.EDIT_FILENAME}
+                            </Button>
+                        </DialogActions>
+                    </form>
+                </Dialog>
+
+                <Dialog
+                    open={this.state.confirmDelete}
+                    onClose={this.closeConfirm}
+                    fullWidth
+                    >
+                    <DialogTitle>{strings.REMOVE_FILE}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {strings.REMOVE_FILE_DESC}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.closeConfirm} autoFocus color="primary">
+                            {strings.CANCEL}
+                        </Button>
+                        <Button className="button-danger" onClick={this.removeFile}>
+                            {strings.DELETE}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         );
     }

@@ -185,7 +185,11 @@ const strings = {
         "DELETE_VIDEO": "Supprimer la vidéo",
         "CONFIRM_DELETE_VIDEO_DESC": "Vous êtes sur le point du supprimer une vidéo. Êtes-vous certain(e) ?",
         "IMPORT_FILE": "Importer",
-        "COPY_URL": "Copier le lien"
+        "COPY_URL": "Copier le lien",
+        "REMOVE_FILE": "Supprimer le fichier",
+        "REMOVE_FILE_DESC": "Vous êtes sur le point de supprimer un fichier. Êtes-vous certain(e) ?",
+        "EDIT_FILENAME": "Modifier le nom du fichier",
+        "FILE_NAME": "Nom du fichier"
     },
     en: {
         "CANCEL": "Cancel",
@@ -369,7 +373,11 @@ const strings = {
         "DELETE_VIDEO": "Delete video",
         "CONFIRM_DELETE_VIDEO_DESC": "You are about to delete a video. Are you sure?",
         "IMPORT_FILE": "Import file",
-        "COPY_URL": "Copy url"
+        "COPY_URL": "Copy url",
+        "REMOVE_FILE": "Delete file",
+        "REMOVE_FILE_DESC": "You are about to delete a file. Are you sure?",
+        "EDIT_FILENAME": "Edit filename",
+        "FILE_NAME": "Filename"
 
     }
 };

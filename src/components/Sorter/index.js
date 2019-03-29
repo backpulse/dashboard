@@ -1,8 +1,7 @@
 import React from 'react';
 
-import {reorder, sortByIndex} from 'utils';
+import {reorder} from 'utils';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
 
 class Sorter extends React.Component {
 
