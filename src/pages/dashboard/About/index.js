@@ -13,6 +13,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import RemoveCircle from '@material-ui/icons/RemoveCircle';
 import strings from 'strings';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { withSnackbar } from 'notistack';
 
 import './styles.scss';
 
@@ -59,6 +60,7 @@ class About extends React.Component {
             descriptions: this.state.descriptions
         }).then(response => {
             console.log(response.data);
+            this.props.enqueueSnackbar(strings.SAVED, {variant: "success"})
         }).catch(err => {
             this.checkError(err);
             if(err) throw err;
@@ -190,4 +192,4 @@ class About extends React.Component {
     }
 }
 
-export default withRouter(About);
+export default withRouter(withSnackbar(About));

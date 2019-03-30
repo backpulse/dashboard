@@ -3,7 +3,8 @@
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        margin-left: -12px;
+        
+        padding-bottom: 25px;
         @media screen and (max-width: 600px) {
             position: relative;
         }

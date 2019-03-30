@@ -3,6 +3,13 @@
     min-height: 150px;
     position: relative;
     
+    margin: 15px 0;
+    position: relative;
+    @media screen and (max-width: 600px) {
+        width: 100%;
+        margin-left: 0;
+    }
+
     .videogroup-content {
         height: 100px;
         position: relative;

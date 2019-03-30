@@ -11,6 +11,7 @@ import strings from 'strings';
 
 import client from 'services/client';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { withSnackbar } from 'notistack';
 
 class Contact extends React.Component {
 
@@ -51,6 +52,7 @@ class Contact extends React.Component {
             ...this.state
         }).then(response => {
             this.setState({error: false, errorField: "", errorMsg: ""});
+            this.props.enqueueSnackbar(strings.SAVED, {variant: "success"})
         }).catch(err => {
             this.checkError(err);
             if(err) throw err;
@@ -219,4 +221,4 @@ class Contact extends React.Component {
     }
 }
 
-export default withRouter(Contact);
+export default withRouter(withSnackbar(Contact));

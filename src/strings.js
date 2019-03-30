@@ -189,7 +189,11 @@ const strings = {
         "REMOVE_FILE": "Supprimer le fichier",
         "REMOVE_FILE_DESC": "Vous êtes sur le point de supprimer un fichier. Êtes-vous certain(e) ?",
         "EDIT_FILENAME": "Modifier le nom du fichier",
-        "FILE_NAME": "Nom du fichier"
+        "FILE_NAME": "Nom du fichier",
+        "ARTICLE_SAVED": "Article sauvegardé.",
+        "SAVED": "Modifications enregistrées.",
+        "IMPORT_FILES": "Import des fichiers",
+        "IMPORT_FILES_DESCRIPTION": "Merci d'importer au moins un fichier.",
     },
     en: {
         "CANCEL": "Cancel",
@@ -377,7 +381,9 @@ const strings = {
         "REMOVE_FILE": "Delete file",
         "REMOVE_FILE_DESC": "You are about to delete a file. Are you sure?",
         "EDIT_FILENAME": "Edit filename",
-        "FILE_NAME": "Filename"
+        "FILE_NAME": "Filename",
+        "ARTICLE_SAVED": "Article saved.",
+        "SAVED": "Changes saved."
 
     }
 };

@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core/styles';
 
 import { getJWT, getUser, removeJWT } from 'utils/token';
+import { SnackbarProvider } from 'notistack';
 
 import {
 	MySites, 
@@ -126,7 +127,9 @@ class App extends React.Component {
 		return (
 			<Router>
 				<div className="app-container">
+				
 					<div className={["app", getTheme()].join(" ")}>
+					<SnackbarProvider maxSnack={3}>
 						<MuiThemeProvider theme={themeLight}>
 							<Route path="/signup" render={() => this.noAuth(<Authentication type="signup" />)} />
 							<Route path="/login" render={() => this.noAuth(<Authentication type="login" />)} />
@@ -172,6 +175,7 @@ class App extends React.Component {
 								</React.Fragment>
 							)}/>
 						</MuiThemeProvider>}
+					</SnackbarProvider>
 					</div>
 				</div>
 			</Router>

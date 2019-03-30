@@ -152,7 +152,7 @@ class Storage extends React.Component {
 
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={this.handleCloseNewGalleryDialog} color="primary">
+                            <Button onClick={this.closeEdit} color="primary">
                                 {strings.CANCEL}
                             </Button>
                             <Button type="submit" variant="contained" color="primary">

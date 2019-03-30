@@ -3,5 +3,9 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+        margin-left: -12px;
+        @media screen and(max-width: 960px) {
+            margin-left: -22px;
+        }
     }
 }

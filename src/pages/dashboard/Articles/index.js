@@ -35,6 +35,9 @@ class Articles extends React.Component {
         this.setState({fetched: false});
         client.get('/articles/'+this.props.match.params.name).then(response => {
             const articles = response.data.payload || [];
+            articles.sort(function(a,b){
+                return new Date(b.updated_at) - new Date(a.updated_at);
+            });
             console.log(articles);
             this.setState({articles, fetched: true});
         }).catch(err => {

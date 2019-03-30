@@ -19,6 +19,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import client from 'services/client';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { withSnackbar } from 'notistack';
 
 class EditArticle extends React.Component {
     
@@ -57,9 +58,10 @@ class EditArticle extends React.Component {
     }
 
     onType = e => {
-        this.setState({content: e.target.value}, () => this.showColors());
-        
+        this.setState({content: e.target.value});
     }
+
+    
 
     showColors = () => {
         const elements = document.getElementsByTagName("code");
@@ -67,6 +69,9 @@ class EditArticle extends React.Component {
             const element = elements[i];
             highlight.highlightBlock(element);
         }
+        setTimeout(() => {
+            this.showColors();
+        }, 2000);
     }
 
     handleSave = () => {
@@ -80,6 +85,8 @@ class EditArticle extends React.Component {
         }
         client.put('/articles/'+this.props.match.params.name, article).then(response => {
             console.log(response.data);
+            this.props.history.push('/site/' + this.props.match.params.name + '/articles/edit/' + response.data.payload.short_id);
+            this.props.enqueueSnackbar(strings.ARTICLE_SAVED, {variant: "success"})
         }).catch(err => {
             if(err) throw err;
         });
@@ -122,7 +129,6 @@ class EditArticle extends React.Component {
                         <Grid spacing={16} container>
                             <Grid item md={6} xs={12}>
                                 <TextField
-                                    className="overflow-hidden"
                                     error={this.state.errorField === "content"}
                                     label={strings.CONTENT}
                                     value={this.state.content}
@@ -131,7 +137,7 @@ class EditArticle extends React.Component {
                                     onChange={this.onType}
                                     margin="normal"
                                     rows={25}
-                                    rowsMax={50}
+                                    rowsMax={100}
                                     onKeyDown={e => {
                                         console.log(e.keyCode)
                                         if(e.keyCode === 9) {
@@ -183,4 +189,4 @@ class EditArticle extends React.Component {
     }
 }
 
-export default withRouter(EditArticle);
+export default withRouter(withSnackbar(EditArticle));

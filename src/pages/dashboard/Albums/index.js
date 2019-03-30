@@ -2,7 +2,31 @@ import React from 'react';
 
 import strings from 'strings';
 
+import client from 'services/client';
+import {withRouter} from 'react-router';
+
 class Albums extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            albums: []
+        }
+    }
+
+    fetchAlbums = () => {
+        client.get('/albums/' + this.props.match.params.name).then(response => {
+            const albums = response.data.payload;
+            this.setState({albums});
+            console.log(albums);
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
+
+    componentDidMount() {
+        this.fetchAlbums();
+    }
 
     render() {
         return (
@@ -13,4 +37,4 @@ class Albums extends React.Component {
     }
 }
 
-export default Albums;
+export default withRouter(Albums);
