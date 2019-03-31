@@ -19,7 +19,7 @@ class PhotoBox extends React.Component {
                 <CardMedia
                     className="photobox-preview-media"
                     image={this.props.src}
-                    />
+                />
                 {this.props.editing && <CardActions disableActionSpacing>
                     <Checkbox
                         checked={this.props.checked}

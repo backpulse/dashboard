@@ -78,7 +78,8 @@ class DrawerMenu extends React.Component {
                 show: true
             },
             {
-                divider: true
+                divider: true,
+                show: true
             },
             {
                 path: "/site/" + this.props.match.params.name + "/articles",
@@ -114,7 +115,8 @@ class DrawerMenu extends React.Component {
                 show: this.hasModule("music")
             },
             {  
-                divider: true
+                divider: true,
+                show: this.props.site.modules.length > 0
             },
             {
                 path: "/site/" + this.props.match.params.name + "/about",
@@ -135,7 +137,8 @@ class DrawerMenu extends React.Component {
                 show: true
             },
             {
-                divider: true
+                divider: true,
+                show: true
             },
             {
                 path: "/site/" + this.props.match.params.name + "/modules",
@@ -157,7 +160,8 @@ class DrawerMenu extends React.Component {
                 show: this.props.site.role === "owner"
             },
             {
-                divider: true
+                divider: true,
+                show: true
             },
             {
                 path: "/",
@@ -171,7 +175,7 @@ class DrawerMenu extends React.Component {
                 <Divider />
                 <List>
                     {routes.map((route, i) => {
-                        if(route.divider) {
+                        if(route.divider && route.show) {
                             return <Divider style={{marginBottom: 10, marginTop: 10}} key={i}/>
                         } else if(route.show) {
                             return <Link key={i} to={route.path}>

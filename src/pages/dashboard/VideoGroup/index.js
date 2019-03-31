@@ -24,6 +24,12 @@ import Video from 'components/Video';
 import {sortByIndex} from 'utils';
 
 import Sorter from 'components/Sorter';
+import FileSelector from 'components/FileSelector';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import StorageIcon from '@material-ui/icons/Storage';
+import IconButton from '@material-ui/core/IconButton';
+import { withSnackbar } from 'notistack';
+
 class VideoGroup extends React.Component {
 
     constructor(props) {
@@ -39,7 +45,13 @@ class VideoGroup extends React.Component {
             error: false,
             errorMsg: "",
             videoToDelete: {},
-            confirmDelete: false
+            confirmDelete: false,
+
+            fileSelector: false,
+            editGroup: false,
+
+            newTitle: "",
+            newImage: ""
         }
     }
 
@@ -51,7 +63,12 @@ class VideoGroup extends React.Component {
             group.videos = group.videos || [];
 
             sortByIndex(group.videos);
-            this.setState({group, fetched: true});
+            this.setState({
+                group,
+                newImage: group.image || "",
+                newTitle: group.title,
+                fetched: true
+            });
         }).catch(err => {
             if(err) throw err;
         });
@@ -118,16 +135,61 @@ class VideoGroup extends React.Component {
 
     }
 
+    onImageSelected = file => {
+        console.log(file);
+        this.setState({newImage: file.url});
+        this.closeFileSelector();
+    }
+
+    closeFileSelector = () => this.setState({
+        fileSelector: false
+    });
+
+    openFileSelector = () => this.setState({
+        fileSelector: true
+    });
+
+    editVideoGroup = () => this.setState({
+        editGroup: true
+    });
+
+    closeEdit = () => this.setState({
+        editGroup: false
+    });
+
+    saveGroup = () => {
+        client.put('/videogroups/' + this.props.match.params.name + '/' + this.props.match.params.id, {
+            title: this.state.newTitle,
+            image: this.state.newImage
+        }).then(response => {
+            console.log(response.data);
+            this.closeEdit();
+            this.props.enqueueSnackbar(strings.SAVED, {variant: "success"});
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
+
     render() {
         return (
             <div className="page dashboard-videogroup">
-                <h1>{this.state.group.title}</h1>
+                {this.state.fetched && <div className="title-div"> 
+                    <h1>{this.state.group.title}</h1>
+                    <Button onClick={this.editVideoGroup} size="small" color="primary" variant="contained">
+                        {strings.EDIT}
+                    </Button>
+                </div>}
                 <Fab onClick={this.addVideo} className="fab" variant="extended" color="primary" aria-label="Add">
                     <AddIcon />
                     {strings.ADD_VIDEO}
                 </Fab>
                 {!this.state.fetched && <CircularProgress className="progress"/>}
 
+                <FileSelector 
+                    close={this.closeFileSelector} 
+                    open={this.state.fileSelector}
+                    onFileSelected={this.onImageSelected}
+                    />
 
                 <Sorter 
                     className="videos-container" 
@@ -144,13 +206,58 @@ class VideoGroup extends React.Component {
                 />
 
                 <Dialog
+                    open={this.state.editGroup}
+                    onClose={this.closeEdit}
+                    fullWidth
+                    className="edit-group-dialog"
+                    >
+                    <DialogTitle>{strings.EDIT_VIDEO_GROUP}</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            value={this.state.newTitle}
+                            onChange={e => this.setState({
+                                newTitle: e.target.value
+                            })}
+                            label={strings.TITLE}
+                            fullWidth
+                        />
+                        <TextField
+                            error={this.state.errorField === "name"}
+                            label={strings.IMAGE}
+                            value={this.state.newImage}
+                            onChange={e=>this.setState({newImage: e.target.value})}
+                            margin="normal"
+                            fullWidth
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end">
+                                    <IconButton onClick={this.openFileSelector}>
+                                        <StorageIcon/>
+                                    </IconButton>
+                                </InputAdornment>,
+                            }}
+                        />
+                        <img src={this.state.newImage}/>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.closeEdit} color="primary" autoFocus>
+                            {strings.CANCEL}
+                        </Button>
+                        <Button onClick={this.saveGroup} color="primary" variant="contained">
+                            {strings.SAVE}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
                     open={this.state.addVideo}
                     onClose={this.closeAddVideo}
                     fullWidth
                     >
                     <DialogTitle>{strings.ADD_VIDEO}</DialogTitle>
                     <DialogContent>
-                    <TextField
+                        <TextField
                             autoFocus
                             margin="dense"
                             value={this.state.url}
@@ -160,7 +267,7 @@ class VideoGroup extends React.Component {
                             label={strings.YOUTUBE_URL}
                             fullWidth
                             error={this.state.error}
-                        />   
+                        />
                         {this.state.error && <FormHelperText error={true}>
                             {this.state.errorMsg}
                         </FormHelperText>}
@@ -199,4 +306,4 @@ class VideoGroup extends React.Component {
     }
 }
 
-export default withRouter(VideoGroup);
+export default withRouter(withSnackbar(VideoGroup));

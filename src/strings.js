@@ -194,6 +194,11 @@ const strings = {
         "SAVED": "Modifications enregistrées.",
         "IMPORT_FILES": "Import des fichiers",
         "IMPORT_FILES_DESCRIPTION": "Merci d'importer au moins un fichier.",
+        "SELECT_IMAGE": "Sélectionner une image",
+        "SELECT": "Sélectionner",
+        "EDIT_VIDEO_GROUP": "Modifier le groupe",
+        "IMAGE": "Image"
+
     },
     en: {
         "CANCEL": "Cancel",
@@ -383,7 +388,11 @@ const strings = {
         "EDIT_FILENAME": "Edit filename",
         "FILE_NAME": "Filename",
         "ARTICLE_SAVED": "Article saved.",
-        "SAVED": "Changes saved."
+        "SAVED": "Changes saved.",
+        "SELECT_IMAGE": "Select image",
+        "SELECT": "Select",
+        "EDIT_VIDEO_GROUP": "Edit group",
+        "IMAGE": "Image"
 
     }
 };

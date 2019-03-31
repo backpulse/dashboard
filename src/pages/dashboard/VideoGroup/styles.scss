@@ -1,8 +1,15 @@
 .page.dashboard-videogroup {
+
     .videos-container {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         margin-left: -12px
+    }
+}
+
+.edit-group-dialog {
+    img {
+        max-width: 50%;
     }
 }

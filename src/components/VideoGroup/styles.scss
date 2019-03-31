@@ -2,12 +2,17 @@
     width: 350px;
     min-height: 150px;
     position: relative;
-    
-    margin: 15px 0;
+
+    margin: 0px 0;
     position: relative;
+
     @media screen and (max-width: 600px) {
         width: 100%;
         margin-left: 0;
+    }
+
+    .videogroup-preview-media {
+        padding-top: 56.25%;
     }
 
     .videogroup-content {
@@ -17,6 +22,7 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+
         .type-icon {
             svg {
                 position: absolute;
@@ -50,6 +56,7 @@
         span.updated-at {
             margin-left: 6px;
         }
+
         .open-button {
             margin-left: auto;
             margin-right: 20px;

@@ -24,6 +24,10 @@ body, html, #root,.app,.app-container {
     }
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .dark {
     input,textarea {
         color: white!important;
@@ -178,7 +182,7 @@ a {
 }
 
 .draggable {
-    margin: 15px;
+    margin: 10px;
 }
 
 .fit-content {
