@@ -4,7 +4,7 @@
 [![Donate](https://img.shields.io/badge/Donate-Crypto-blue.svg)](https://commerce.coinbase.com/checkout/b4d64264-dda8-41d0-9f15-0843f969fa79)
 [![Donate](https://img.shields.io/badge/Donate-Patreon-orange.svg)](https://www.patreon.com/backpulse)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/aureleoules)  
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bed0c1f7-2fcc-4040-9da3-33e86689eb11/deploy-status)](https://app.netlify.com/sites/backpulsedash/deploys)  
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bed0c1f7-2fcc-4040-9da3-33e86689eb11/deploy-status)](https://dashboard.backpulse.io)  
 
 ![Backpulse](https://files.backpulse.io/backpulse.png#cache2 "Backpulse.io")
 
