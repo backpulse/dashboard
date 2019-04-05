@@ -130,51 +130,53 @@ class App extends React.Component {
 				
 					<div className={["app", getTheme()].join(" ")}>
 					<SnackbarProvider maxSnack={3}>
-						<MuiThemeProvider theme={themeLight}>
-							<Route path="/signup" render={() => this.noAuth(<Authentication type="signup" />)} />
-							<Route path="/login" render={() => this.noAuth(<Authentication type="login" />)} />
-							{!getJWT() && <Route exact path="/" render={() => <Redirect to="/login"/>}/>}
-						</MuiThemeProvider>
+						<React.Fragment>
+							<MuiThemeProvider theme={themeLight}>
+								<Route path="/signup" render={() => this.noAuth(<Authentication type="signup" />)} />
+								<Route path="/login" render={() => this.noAuth(<Authentication type="login" />)} />
+								{!getJWT() && <Route exact path="/" render={() => <Redirect to="/login"/>}/>}
+							</MuiThemeProvider>
 
-						{getJWT() && <MuiThemeProvider theme={getTheme() === "dark" ? theme : themeLight}>
-							<Route exact path="/" render={() => <MySites updateTheme={this.updateTheme}/>}/>
-							<Route exact path="/account" render={() => this.requireAuth(<MyAccount updateTheme={this.updateTheme}/>)}/>
-							<Route path="/site/:name" render={({ match: { url } }) => (
-								<React.Fragment>
-									<Route path="/site/:name" render={() => this.requireAuth(<SiteEditor updateTheme={this.updateTheme}/>)}/>
-									<Route exact path="/site/:name" render={() => this.requireAuth(<Overview/>)}/>
-									
-									<Route path="/site/:name/projects" render={() => this.requireAuth(<Projects/>)}/>
-									<Route path="/site/:name/access" render={() => this.requireAuth(<Access/>)}/>
-									<Route path="/site/:name/modules" render={() => this.requireAuth(<Modules forceRender={() => this.forceUpdate}/>)}/>
-									
-									<Route path="/site/:name/projects/new" render={() => this.requireAuth(<EditProject new/>)}/>
-									<Route path="/site/:name/projects/edit/:id" render={() => this.requireAuth(<EditProject/>)}/>
+							{getJWT() && <MuiThemeProvider theme={getTheme() === "dark" ? theme : themeLight}>
+								<Route exact path="/" render={() => <MySites updateTheme={this.updateTheme}/>}/>
+								<Route exact path="/account" render={() => this.requireAuth(<MyAccount updateTheme={this.updateTheme}/>)}/>
+								<Route path="/site/:name" render={({ match: { url } }) => (
+									<React.Fragment>
+										<Route path="/site/:name" render={() => this.requireAuth(<SiteEditor updateTheme={this.updateTheme}/>)}/>
+										<Route exact path="/site/:name" render={() => this.requireAuth(<Overview/>)}/>
+										
+										<Route path="/site/:name/projects" render={() => this.requireAuth(<Projects/>)}/>
+										<Route path="/site/:name/access" render={() => this.requireAuth(<Access/>)}/>
+										<Route path="/site/:name/modules" render={() => this.requireAuth(<Modules forceRender={() => this.forceUpdate}/>)}/>
+										
+										<Route path="/site/:name/projects/new" render={() => this.requireAuth(<EditProject new/>)}/>
+										<Route path="/site/:name/projects/edit/:id" render={() => this.requireAuth(<EditProject/>)}/>
 
-									<Route exact path="/site/:name/videogroups" render={() => this.requireAuth(<VideoGroups/>)}/>
-									<Route exact path="/site/:name/videogroups/:id" render={() => this.requireAuth(<VideoGroup/>)}/>
-									<Route exact path="/site/:name/videogroups/:id/:videoid" render={() => this.requireAuth(<Video/>)}/>
+										<Route exact path="/site/:name/videogroups" render={() => this.requireAuth(<VideoGroups/>)}/>
+										<Route exact path="/site/:name/videogroups/:id" render={() => this.requireAuth(<VideoGroup/>)}/>
+										<Route exact path="/site/:name/videogroups/:id/:videoid" render={() => this.requireAuth(<Video/>)}/>
 
-									<Route exact path="/site/:name/albums" render={() => this.requireAuth(<Albums/>)}/>
-									{/* <Route exact path="/site/:name/albums/:id" render={() => this.requireAuth(<Album/>)}/>
-									<Route exact path="/site/:name/albums/:id/:musicid" render={() => this.requireAuth(<Music/>)}/> */}
+										<Route exact path="/site/:name/albums" render={() => this.requireAuth(<Albums/>)}/>
+										{/* <Route exact path="/site/:name/albums/:id" render={() => this.requireAuth(<Album/>)}/>
+										<Route exact path="/site/:name/albums/:id/:musicid" render={() => this.requireAuth(<Music/>)}/> */}
 
-									<Route exact path="/site/:name/storage" render={() => this.requireAuth(<Storage/>)}/>
+										<Route exact path="/site/:name/storage" render={() => this.requireAuth(<Storage/>)}/>
 
 
-									<Route path="/site/:name/galleries" render={() => this.requireAuth(<Galleries/>)}/>
-									<Route path="/site/:name/galleries/:id" render={() => this.requireAuth(<EditGallery/>)}/>
+										<Route path="/site/:name/galleries" render={() => this.requireAuth(<Galleries/>)}/>
+										<Route path="/site/:name/galleries/:id" render={() => this.requireAuth(<EditGallery/>)}/>
 
-									<Route exact path="/site/:name/articles" render={() => this.requireAuth(<Articles/>)}/>
-									<Route path="/site/:name/articles/new" render={() => this.requireAuth(<EditArticle new/>)}/>
-									<Route path="/site/:name/articles/edit/:id" render={() => this.requireAuth(<EditArticle/>)}/>
+										<Route exact path="/site/:name/articles" render={() => this.requireAuth(<Articles/>)}/>
+										<Route path="/site/:name/articles/new" render={() => this.requireAuth(<EditArticle new/>)}/>
+										<Route path="/site/:name/articles/edit/:id" render={() => this.requireAuth(<EditArticle/>)}/>
 
-									<Route path="/site/:name/about" render={() => this.requireAuth(<About/>)}/>
-									<Route path="/site/:name/contact" render={() => this.requireAuth(<Contact/>)}/>
-									<Route path="/site/:name/settings" render={() => this.requireAuth(<Settings/>)}/>
-								</React.Fragment>
-							)}/>
-						</MuiThemeProvider>}
+										<Route path="/site/:name/about" render={() => this.requireAuth(<About/>)}/>
+										<Route path="/site/:name/contact" render={() => this.requireAuth(<Contact/>)}/>
+										<Route path="/site/:name/settings" render={() => this.requireAuth(<Settings/>)}/>
+									</React.Fragment>
+								)}/>
+							</MuiThemeProvider>}
+						</React.Fragment>
 					</SnackbarProvider>
 					</div>
 				</div>

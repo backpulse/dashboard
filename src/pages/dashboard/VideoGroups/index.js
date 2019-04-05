@@ -111,12 +111,18 @@ class Videos extends React.Component {
     render() {
         return (
             <div className="page dashboard-videogroups">
-                <h1>{strings.VIDEO_GROUPS}</h1>
+                <div className="title-div">
+                    <h1>{strings.VIDEO_GROUPS}</h1>
+                </div>
                 {!this.state.fetched && <CircularProgress className="progress"/>}
                 <Fab onClick={this.openAddVideoGroup} className="fab" variant="extended" color="primary" aria-label="Add">
                     <AddIcon />
                     {strings.ADD_VIDEO_GROUP}
                 </Fab>
+                {this.state.groups.length < 1 && this.state.fetched && <Button onClick={this.openAddVideoGroup} variant="contained" color="primary" aria-label="Add">
+                    <AddIcon />
+                    {strings.ADD_VIDEO_GROUP}
+                </Button>}
 
                 <Sorter 
                     className="groups-container" 

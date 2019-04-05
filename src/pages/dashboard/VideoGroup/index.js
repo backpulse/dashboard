@@ -189,7 +189,7 @@ class VideoGroup extends React.Component {
                     close={this.closeFileSelector} 
                     open={this.state.fileSelector}
                     onFileSelected={this.onImageSelected}
-                    />
+                />
 
                 <Sorter 
                     className="videos-container" 
@@ -238,7 +238,7 @@ class VideoGroup extends React.Component {
                                 </InputAdornment>,
                             }}
                         />
-                        <img src={this.state.newImage}/>
+                        <img alt="preview" src={this.state.newImage}/>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.closeEdit} color="primary" autoFocus>

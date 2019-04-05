@@ -197,7 +197,12 @@ const strings = {
         "SELECT_IMAGE": "Sélectionner une image",
         "SELECT": "Sélectionner",
         "EDIT_VIDEO_GROUP": "Modifier le groupe",
-        "IMAGE": "Image"
+        "IMAGE": "Image",
+        "CREATE_ALBUM": "Créer un album",
+        "CREATE_ALBUM_DESC": "Merci d'entrer un titre.",
+        "COVER": "Couverture",
+        "DELETE_ALBUM": "Supprimer l'album",
+        "CONFIRM_DELETE_ALBUM_DESC": "Vous êtes sur le point de supprimer l'album. Êtes-vous certain(e) ?"
 
     },
     en: {
@@ -392,7 +397,13 @@ const strings = {
         "SELECT_IMAGE": "Select image",
         "SELECT": "Select",
         "EDIT_VIDEO_GROUP": "Edit group",
-        "IMAGE": "Image"
+        "IMAGE": "Image",
+        "CREATE_ALBUM": "Create album",
+        "CREATE_ALBUM_DESC": "Please enter a title.",
+        "COVER": "Cover",
+        "DELETE_ALBUM": "Delete album",
+        "CONFIRM_DELETE_ALBUM_DESC": "You are about to delete this album. Are you sure?"
+
 
     }
 };

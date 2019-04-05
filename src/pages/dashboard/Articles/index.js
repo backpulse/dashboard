@@ -82,7 +82,14 @@ class Articles extends React.Component {
                     <AddIcon />
                     {strings.NEW_ARTICLE}
                 </Fab>
-                <h1>{strings.DRAWER_ARTICLES}</h1>
+                <div className="title-div">
+                    <h1>{strings.DRAWER_ARTICLES}</h1>
+                </div>
+                {this.state.articles.length < 1 && this.state.fetched && <Button onClick={this.handleCreateArticle} variant="contained" color="primary" aria-label="Add">
+                    <AddIcon />
+                    {strings.CREATE_ALBUM}
+                </Button>}
+
                 {!this.state.fetched && <CircularProgress/>}
                 <div className="articles-container">
                     {this.state.articles.map((article, i) => {
