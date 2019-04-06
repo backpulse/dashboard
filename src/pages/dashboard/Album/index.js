@@ -18,8 +18,6 @@ import client from 'services/client';
 
 import strings from 'strings';
 
-import Album from '../../../components/Album';
-
 import './styles.scss';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {sortByIndex} from 'utils';
@@ -29,74 +27,56 @@ import StorageIcon from '@material-ui/icons/Storage';
 import IconButton from '@material-ui/core/IconButton';
 import Sorter from 'components/Sorter';
 
-class Albums extends React.Component {
+import Track from 'components/Track';
+
+class Album extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            albums: [],
             fetched: false,
             createAlbum: false,
 
             title: "",
             cover: "",
-            fileSelector: false,
 
+            trackTitle: "",
+            trackImage: "",
+
+
+            fileSelector: false,
+            tracks: [],
             confirmDelete: false
         }
     }
 
-    fetchAlbums = () => {
+    fetchAlbum = () => {
         this.setState({fetched: false});
-        client.get('/albums/' + this.props.match.params.name).then(response => {
-            const albums = response.data.payload || [];
-            sortByIndex(albums);
-            this.setState({albums, fetched: true});
-            console.log(albums);
+        client.get('/albums/' + this.props.match.params.name + '/' + this.props.match.params.id).then(response => {
+            const album = response.data.payload;
+            album.tracks = album.tracks || [];
+            this.setState({...album, fetched: true});
+            console.log(album);
         }).catch(err => {
             if(err) throw err;
         });
     }
 
     componentDidMount() {
-        this.fetchAlbums();
+        this.fetchAlbum();
     }
 
-    handleClose = () => this.setState({
-        createAlbum: false
-    });
-
-    openCreateDialog = () => this.setState({
-        createAlbum: true
-    });
-
-
-    onDragEnd = albums => {
-        this.setState({albums});
-        client.put('/albums/' + this.props.match.params.name + '/indexes', albums).then(response => {
-            console.log(response.data);
-        }).catch(err => {
-            if(err) throw err;
-        });
-
-    }
-
-    createAlbum = e => {
-        e.preventDefault();
-        client.post('/albums/' + this.props.match.params.name, {
-            title: this.state.title,
-            cover: this.state.cover,
-        }).then(response => {
-            console.log(response.data);
-            this.fetchAlbums();
-            this.handleClose();
-        }).catch(err => {
-            if(err) throw err;
-        });
-    }
+    // onDragEnd = tracks => {
+    //     this.setState({tracks});
+    //     client.put('/albums/' + this.props.match.params.name + '/indexes', albums).then(response => {
+    //         console.log(response.data);
+    //     }).catch(err => {
+    //         if(err) throw err;
+    //     });
+    // }
 
     onImageSelected = file => {
-        this.setState({cover: file.url});
+        this.setState({trackImage: file.url});
         this.closeFileSelector();
     }
 
@@ -112,46 +92,64 @@ class Albums extends React.Component {
         confirmDelete: false
     });
 
-    deleteAlbum = () => {
-        client.delete('/albums/' + this.props.match.params.name + '/' + this.state.albumToDelete.id).then(response => {
+    deleteTrack = () => {
+        client.delete('/tracks/' + this.props.match.params.name + '/' + this.state.trackToDelete.id).then(response => {
             console.log(response.data);
-            this.fetchAlbums();
+            this.fetchAlbum();
             this.closeDelete();
         }).catch(err => {
             if(err) throw err;
         });
     }
 
-    editAlbum = album => {
-        this.props.history.push('/site/' + this.props.match.params.name + '/albums/' + album.id);
+    openCreateDialog = () => this.setState({
+        createTrack: true
+    });
+
+    handleClose = () => this.setState({
+        createTrack: false
+    });
+
+    createTrack = e => {
+        e.preventDefault();
+        client.post('/tracks/' + this.props.match.params.name + '/' + this.props.match.params.id, {
+            title: this.state.trackTitle,
+            image: this.state.trackImage,
+        }).then(response => {
+            console.log(response.data);
+            this.fetchAlbum();
+            this.handleClose();
+        }).catch(err => {
+            if(err) throw err;
+        });
     }
 
     render() {
         return (
-            <div className="page dashboard-albums">
+            <div className="page dashboard-album">
                 <div className="title-div">
-                    <h1>{strings.MODULE_MUSIC}</h1>
+                    <h1>{strings.EDIT_ALBUM}</h1>
                 </div>
                 {!this.state.fetched && <CircularProgress className="progress"/>}
                 <Fab onClick={this.openCreateDialog} className="fab" variant="extended" color="primary" aria-label="Add">
                     <AddIcon />
-                    {strings.CREATE_ALBUM}
+                    {strings.ADD_TRACK}
                 </Fab>
-                {this.state.albums.length < 1 && this.state.fetched && <Button onClick={this.openCreateDialog} variant="contained" color="primary" aria-label="Add">
+                {this.state.tracks.length < 1 && this.state.fetched && <Button onClick={this.openCreateDialog} variant="contained" color="primary" aria-label="Add">
                     <AddIcon />
-                    {strings.CREATE_ALBUM}
+                    {strings.ADD_TRACK}
                 </Button>}
                 <Sorter 
-                    className="albums-container" 
+                    className="tracks-container" 
                 
                     onDragEnd={this.onDragEnd} 
-                    component={Album} 
-                    items={this.state.albums}
+                    component={Track} 
+                    items={this.state.tracks}
 
-                    onEdit={this.editAlbum}
-                    onDelete={a => this.setState({
+                    onEdit={this.editTrack}
+                    onDelete={t => this.setState({
                         confirmDelete: true,
-                        albumToDelete: a,
+                        trackToDelete: t,
                     })} 
                 />
 
@@ -163,31 +161,31 @@ class Albums extends React.Component {
 
                 <Dialog
                     fullWidth
-                    open={this.state.createAlbum}
+                    open={this.state.createTrack}
                     onClose={this.handleClose}
-                    className="edit-album-dialog"
+                    className="edit-track-dialog"
                     >
-                    <form onSubmit={this.createAlbum}>
-                        <DialogTitle>{strings.CREATE_ALBUM}</DialogTitle>
+                    <form onSubmit={this.createTrack}>
+                        <DialogTitle>{strings.ADD_TRACK}</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                                {strings.CREATE_ALBUM_DESC}
+                                {strings.ADD_TRACK_DESC}
                             </DialogContentText>
                             <TextField
+                                required
                                 autoFocus
                                 margin="dense"
-                                value={this.state.title}
+                                value={this.state.trackTitle}
                                 onChange={e => this.setState({
-                                    title: e.target.value
+                                    trackTitle: e.target.value
                                 })}
                                 label={strings.TITLE}
                                 fullWidth
-                                required
                             />
                             <TextField
-                                label={strings.COVER}
-                                value={this.state.cover}
-                                onChange={e=>this.setState({cover: e.target.value})}
+                                label={strings.IMAGE}
+                                value={this.state.trackImage}
+                                onChange={e=>this.setState({trackImage: e.target.value})}
                                 margin="normal"
                                 fullWidth
                                 InputProps={{
@@ -198,14 +196,14 @@ class Albums extends React.Component {
                                     </InputAdornment>,
                                 }}
                             />
-                        {this.state.cover.length > 2 && <img alt="cover" src={this.state.cover}/>}
+                        {this.state.trackImage.length > 2 && <img alt="cover" src={this.state.trackImage}/>}
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={this.handleClose} color="primary">
                                 {strings.CANCEL}
                             </Button>
                             <Button type="submit" variant="contained" color="primary">
-                                {strings.CREATE_ALBUM}
+                                {strings.ADD_TRACK}
                             </Button>
                         </DialogActions>
                     </form>
@@ -215,17 +213,17 @@ class Albums extends React.Component {
                     open={this.state.confirmDelete}
                     onClose={this.closeDelete}
                     >
-                    <DialogTitle>{strings.DELETE_ALBUM}</DialogTitle>
+                    <DialogTitle>{strings.DELETE_TRACK}</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            {strings.CONFIRM_DELETE_ALBUM_DESC}             
+                            {strings.DELETE_TRACK_DESC}             
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.closeDelete} color="primary" autoFocus>
                             {strings.CANCEL}
                         </Button>
-                        <Button onClick={this.deleteAlbum} className="button-danger">
+                        <Button onClick={this.deleteTrack} className="button-danger">
                             {strings.DELETE}
                         </Button>
                     </DialogActions>
@@ -235,4 +233,4 @@ class Albums extends React.Component {
     }
 }
 
-export default withRouter(Albums);
+export default withRouter(Album);

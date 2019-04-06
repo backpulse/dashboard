@@ -35,7 +35,7 @@ import {
 	Video,
 	Albums,
 	Album,
-	Music,
+	Track,
 	Storage
 } from 'pages/dashboard';
 
@@ -157,8 +157,8 @@ class App extends React.Component {
 										<Route exact path="/site/:name/videogroups/:id/:videoid" render={() => this.requireAuth(<Video/>)}/>
 
 										<Route exact path="/site/:name/albums" render={() => this.requireAuth(<Albums/>)}/>
-										{/* <Route exact path="/site/:name/albums/:id" render={() => this.requireAuth(<Album/>)}/>
-										<Route exact path="/site/:name/albums/:id/:musicid" render={() => this.requireAuth(<Music/>)}/> */}
+										<Route exact path="/site/:name/albums/:id" render={() => this.requireAuth(<Album/>)}/>
+										<Route exact path="/site/:name/albums/:id/:musicid" render={() => this.requireAuth(<Track/>)}/>
 
 										<Route exact path="/site/:name/storage" render={() => this.requireAuth(<Storage/>)}/>
 

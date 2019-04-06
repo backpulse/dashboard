@@ -87,7 +87,7 @@ class Articles extends React.Component {
                 </div>
                 {this.state.articles.length < 1 && this.state.fetched && <Button onClick={this.handleCreateArticle} variant="contained" color="primary" aria-label="Add">
                     <AddIcon />
-                    {strings.CREATE_ALBUM}
+                    {strings.NEW_ARTICLE}
                 </Button>}
 
                 {!this.state.fetched && <CircularProgress/>}

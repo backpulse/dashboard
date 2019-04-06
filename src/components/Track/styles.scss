@@ -1,0 +1,17 @@
+.track {
+    width: 350px;
+    min-height: 150px;
+    position: relative;
+
+    margin: 0px 0;
+    position: relative;
+
+    @media screen and (max-width: 600px) {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .track-preview-media {
+        padding-top: 56.25%;
+    }
+}

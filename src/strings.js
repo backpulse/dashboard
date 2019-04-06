@@ -202,8 +202,12 @@ const strings = {
         "CREATE_ALBUM_DESC": "Merci d'entrer un titre.",
         "COVER": "Couverture",
         "DELETE_ALBUM": "Supprimer l'album",
-        "CONFIRM_DELETE_ALBUM_DESC": "Vous êtes sur le point de supprimer l'album. Êtes-vous certain(e) ?"
-
+        "CONFIRM_DELETE_ALBUM_DESC": "Vous êtes sur le point de supprimer l'album. Êtes-vous certain(e) ?",
+        "EDIT_ALBUM": "Modifier l'album",
+        "ADD_TRACK": "Ajouter une piste",
+        "ADD_TRACK_DESC": "Merci d'indiquer un titre et de déposer votre fichier.",
+        "DELETE_TRACK": "Supprimer la piste",
+        "DELETE_TRACK_DESC": "Vous êtes sur le point de supprimer cette piste de cet album. Êtes-vous certain(e) ?"
     },
     en: {
         "CANCEL": "Cancel",
@@ -402,9 +406,12 @@ const strings = {
         "CREATE_ALBUM_DESC": "Please enter a title.",
         "COVER": "Cover",
         "DELETE_ALBUM": "Delete album",
-        "CONFIRM_DELETE_ALBUM_DESC": "You are about to delete this album. Are you sure?"
-
-
+        "CONFIRM_DELETE_ALBUM_DESC": "You are about to delete this album. Are you sure?",
+        "EDIT_ALBUM": "Edit album",
+        "ADD_TRACK": "Add track",
+        "ADD_TRACK_DESC": "Please enter a title and upload your file.",
+        "DELETE_TRACK": "Delete track",
+        "DELETE_TRACK_DESC": "You are about to remove a track from this album. Are you sure?",
     }
 };
 

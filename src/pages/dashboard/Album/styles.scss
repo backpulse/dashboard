@@ -1,0 +1,14 @@
+.page.dashboard-album {
+    .tracks-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-left: -12px
+    }
+}
+
+.edit-track-dialog {
+    img {
+        max-width: 50%;
+    }
+}

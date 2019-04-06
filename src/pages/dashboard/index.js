@@ -18,6 +18,8 @@ import VideoGroup from './VideoGroup';
 import Video from './Video';
 import Albums from './Albums';
 import Storage from './Storage';
+import Album from './Album';
+import Track from './Track';
 
 export {
     MySites,
@@ -39,5 +41,7 @@ export {
     VideoGroup,
     Video,
     Albums,
-    Storage
+    Album,
+    Track,
+    Storage,
 }
