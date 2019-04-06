@@ -46,9 +46,10 @@ class FileSelector extends React.Component {
     }
 
     filterFiles = files => {
+        const filter = this.props.accept || "image";
         const filtered = []
         files.forEach(file => {
-            if(file.type.startsWith("image")) filtered.push(file);
+            if(file.type.startsWith(filter)) filtered.push(file);
         });
         return filtered;
     }
@@ -79,33 +80,47 @@ class FileSelector extends React.Component {
                 className="file-selector"
                 maxWidth={"md"}
             >
-            <DialogTitle>{strings.SELECT_IMAGE}</DialogTitle>
+            <DialogTitle>{strings.SELECT_FILE}</DialogTitle>
             <DialogContent>
                 {!this.state.fetched && <CircularProgress className="progress"/>}
+                {this.state.files.length < 1 && 
+                    <Button onClick={this.goToStorage} color="primary" variant="contained">
+                        {strings.IMPORT_FILES}
+                    </Button>
+                }
                 <GridList cellHeight={180}>
-                    <GridListTile cols={2} style={{ height: 'auto' }}>
-                    </GridListTile>
-                    {this.state.files.map((file, i) => (
-                        <GridListTile className={(this.state.selected.id !== file.id && this.state.selected.id !== "") ? "disabled": "pointer"} onClick={() => this.selectImage(file)} key={i}>
-                            <img src={file.url} alt={file.name} />
-                            <GridListTileBar
-                                title={file.name}
-                                subtitle={<span>{dayjs(file.created_at).fromNow()}</span>}
-                                actionIcon={
-                                    <IconButton onClick={() => this.selectImage(file)}>
-                                        {this.state.selected.id === file.id ? <Clear/> : <CheckCircle />}
-                                    </IconButton>
-                                }
-                            />
-                        </GridListTile>
-                    ))}
-            </GridList>
+                    {this.state.files.length > 0 && 
+                        this.state.files.map((file, i) => (
+                            <GridListTile 
+                                className={
+                                    [
+                                        (this.state.selected.id !== file.id && this.state.selected.id !== "") ? "disabled": "pointer", 
+                                        file.type.startsWith("image") ? "file-is-image" : "file-is-any"
+                                    ].join(" ")
+                                } 
+                                onClick={() => this.selectImage(file)} 
+                                key={i}>
+
+                                {file.type.startsWith("image") && <img src={file.url} alt={file.name} />}
+                                <GridListTileBar
+                                    title={file.name}
+                                    subtitle={<span>{dayjs(file.created_at).fromNow()}</span>}
+                                    actionIcon={
+                                        <IconButton onClick={() => this.selectImage(file)}>
+                                            {this.state.selected.id === file.id ? <Clear/> : <CheckCircle />}
+                                        </IconButton>
+                                    }
+                                />
+                            </GridListTile>
+                        ))
+                    }
+                </GridList>
             </DialogContent>
             <DialogActions>
 
-                <Button onClick={this.goToStorage} style={{left: 15, position: "absolute"}} color="primary">
+                {this.state.files.length > 0 && <Button onClick={this.goToStorage} style={{left: 15, position: "absolute"}} color="primary">
                     {strings.IMPORT_FILES}
-                </Button>
+                </Button>}
                 <Button onClick={this.props.close} color="primary">
                     {strings.CANCEL}
                 </Button>

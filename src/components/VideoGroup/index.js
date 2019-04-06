@@ -12,7 +12,6 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import strings from 'strings';
 import CardMedia from '@material-ui/core/CardMedia';
 
@@ -30,18 +29,18 @@ class VideoGroup extends React.Component {
                     image={this.props.data.image}
                 />}
                 <CardActions disableActionSpacing>
-                    <Tooltip title={strings.OPEN}>
+                    {/* <Tooltip title={strings.OPEN}>
                         <IconButton onClick={this.props.open}>
                             <OpenInNewIcon />
                         </IconButton>
-                    </Tooltip>
+                    </Tooltip> */}
                     <Tooltip title={strings.EDIT}>
                         <IconButton onClick={this.props.onEdit}>
                             <EditIcon />
                         </IconButton>
                     </Tooltip>
                     <Tooltip title={strings.DELETE}>
-                        <IconButton onClick={this.props.onDelete} style={{marginLeft: "auto"}}>
+                        <IconButton onClick={this.props.onDelete} >
                             <DeleteIcon />
                         </IconButton>
                     </Tooltip> 

@@ -42,8 +42,8 @@ class Album extends React.Component {
 
             trackTitle: "",
             trackImage: "",
-
-
+            trackUrl: "",
+            
             fileSelector: false,
             tracks: [],
             confirmDelete: false
@@ -54,7 +54,7 @@ class Album extends React.Component {
         this.setState({fetched: false});
         client.get('/albums/' + this.props.match.params.name + '/' + this.props.match.params.id).then(response => {
             const album = response.data.payload;
-            album.tracks = album.tracks || [];
+            album.tracks = sortByIndex(album.tracks) || [];
             this.setState({...album, fetched: true});
             console.log(album);
         }).catch(err => {
@@ -66,18 +66,23 @@ class Album extends React.Component {
         this.fetchAlbum();
     }
 
-    // onDragEnd = tracks => {
-    //     this.setState({tracks});
-    //     client.put('/albums/' + this.props.match.params.name + '/indexes', albums).then(response => {
-    //         console.log(response.data);
-    //     }).catch(err => {
-    //         if(err) throw err;
-    //     });
-    // }
+    onDragEnd = tracks => {
+        this.setState({tracks});
+        client.put('/tracks/' + this.props.match.params.name + '/indexes', tracks).then(response => {
+            console.log(response.data);
+        }).catch(err => {
+            if(err) throw err;
+        });
+    }
 
     onImageSelected = file => {
         this.setState({trackImage: file.url});
         this.closeFileSelector();
+    }
+
+    onAudioSelected = file => {
+        this.setState({trackUrl: file.url});
+        this.closeAudioSelector();
     }
 
     closeFileSelector = () => this.setState({
@@ -86,6 +91,14 @@ class Album extends React.Component {
 
     openFileSelector = () => this.setState({
         fileSelector: true
+    });
+
+    closeAudioSelector = () => this.setState({
+        audioSelector: false
+    });
+
+    openAudioSelector = () => this.setState({
+        audioSelector: true
     });
 
     closeDelete = () => this.setState({
@@ -115,6 +128,7 @@ class Album extends React.Component {
         client.post('/tracks/' + this.props.match.params.name + '/' + this.props.match.params.id, {
             title: this.state.trackTitle,
             image: this.state.trackImage,
+            url: this.state.trackUrl
         }).then(response => {
             console.log(response.data);
             this.fetchAlbum();
@@ -157,6 +171,13 @@ class Album extends React.Component {
                     close={this.closeFileSelector} 
                     open={this.state.fileSelector}
                     onFileSelected={this.onImageSelected}
+                    accept={"image"}
+                />
+                <FileSelector 
+                    close={this.closeAudioSelector} 
+                    open={this.state.audioSelector}
+                    onFileSelected={this.onAudioSelected}
+                    accept={"audio"}
                 />
 
                 <Dialog
@@ -181,6 +202,21 @@ class Album extends React.Component {
                                 })}
                                 label={strings.TITLE}
                                 fullWidth
+                            />
+                            <TextField
+                                label={strings.AUDIO_FILE}
+                                value={this.state.trackUrl}
+                                onChange={e=>this.setState({trackUrl: e.target.value})}
+                                margin="normal"
+                                fullWidth
+                                required
+                                InputProps={{
+                                    endAdornment: <InputAdornment position="end">
+                                        <IconButton onClick={this.openAudioSelector}>
+                                            <StorageIcon/>
+                                        </IconButton>
+                                    </InputAdornment>,
+                                }}
                             />
                             <TextField
                                 label={strings.IMAGE}

@@ -74,7 +74,8 @@ class EditArticle extends React.Component {
         }, 2000);
     }
 
-    handleSave = () => {
+    handleSave = e => {
+        e.preventDefault();
         console.log("isUpdate?", !this.props.new);
         console.log(this.props.match.params);
         const article = {
@@ -115,7 +116,7 @@ class EditArticle extends React.Component {
                 <h1>{this.props.new ? strings.NEW_ARTICLE : strings.EDIT_ARTICLE}</h1>
                 {!this.state.fetched && !this.props.new && <CircularProgress/>}
                 {(this.props.new || this.state.fetched) && (
-                    <React.Fragment>
+                    <form onSubmit={this.handleSave}>
                         <TextField
                             error={this.state.errorField === "title"}
                             label={strings.TITLE}
@@ -125,10 +126,12 @@ class EditArticle extends React.Component {
                             margin="normal"
                             variant={"outlined"}
                             fullWidth
+                            required
                         />
                         <Grid spacing={16} container>
                             <Grid item md={6} xs={12}>
                                 <TextField
+                                    required
                                     error={this.state.errorField === "content"}
                                     label={strings.CONTENT}
                                     value={this.state.content}
@@ -153,7 +156,7 @@ class EditArticle extends React.Component {
                             </Grid>
                         </Grid>
                         <Grid item xs={12} md={3}>
-                            <Button fullWidth color="primary" variant="contained" style={{marginTop: 15}} onClick={this.handleSave}>
+                            <Button fullWidth color="primary" variant="contained" style={{marginTop: 15}} type="submit">
                                 {strings.SAVE}
                             </Button>
                         </Grid>
@@ -162,7 +165,7 @@ class EditArticle extends React.Component {
                                 {strings.DELETE}
                             </Button>
                         </Grid>
-                    </React.Fragment>
+                    </form>
                 )}
 
                 <Dialog

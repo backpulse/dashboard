@@ -207,7 +207,10 @@ const strings = {
         "ADD_TRACK": "Ajouter une piste",
         "ADD_TRACK_DESC": "Merci d'indiquer un titre et de déposer votre fichier.",
         "DELETE_TRACK": "Supprimer la piste",
-        "DELETE_TRACK_DESC": "Vous êtes sur le point de supprimer cette piste de cet album. Êtes-vous certain(e) ?"
+        "DELETE_TRACK_DESC": "Vous êtes sur le point de supprimer cette piste de cet album. Êtes-vous certain(e) ?",
+        "PLAY": "Lire",
+        "AUDIO_FILE": "Fichier audio",
+        "SELECT_FILE": "Sélectionner un fichier"
     },
     en: {
         "CANCEL": "Cancel",
@@ -412,6 +415,9 @@ const strings = {
         "ADD_TRACK_DESC": "Please enter a title and upload your file.",
         "DELETE_TRACK": "Delete track",
         "DELETE_TRACK_DESC": "You are about to remove a track from this album. Are you sure?",
+        "PLAY": "Play",
+        "AUDIO_FILE": "Audio file",
+        "SELECT_FILE": "Select file"
     }
 };
 

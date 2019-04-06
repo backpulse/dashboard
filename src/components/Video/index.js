@@ -24,15 +24,19 @@ class Video extends React.Component {
                     title={<Typography variant="body1">{this.props.data.title || strings.NO_NAME}</Typography>}
                     subheader={<Typography className="updated-at" variant="caption"> {dayjs(this.props.data.updated_at).format("DD/MM/YYYY HH:mm")}</Typography>}
                 />
-                <CardMedia
-                    className="media"
-                    image={"https://img.youtube.com/vi/" + youtubeParser(this.props.data.youtube_url) + "/maxresdefault.jpg"}
-                />
+                <a rel="noopener noreferrer" target="_blank" href={this.props.data.youtube_url}>
+                    <CardMedia
+                        className="media"
+                        image={"https://img.youtube.com/vi/" + youtubeParser(this.props.data.youtube_url) + "/maxresdefault.jpg"}
+                    />
+                </a>
                 <CardActions disableActionSpacing>
                     <Tooltip title={strings.OPEN}>
-                        <IconButton onClick={this.props.open}>
-                            <OpenInNewIcon />
-                        </IconButton>
+                        <a rel="noopener noreferrer" target="_blank" href={this.props.data.youtube_url}>
+                            <IconButton>
+                                <OpenInNewIcon />
+                            </IconButton>
+                        </a>
                     </Tooltip>
                     <Tooltip title={strings.EDIT}>
                         <IconButton onClick={this.props.onEdit}>
