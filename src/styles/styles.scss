@@ -5,6 +5,12 @@ body, html, #root,.app,.app-container {
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif
 }
 
+.page {
+    button[type="submit"] {
+        margin-bottom: 15px;
+    }
+}
+
 .app {
     div.page {
         padding-top: 85px;

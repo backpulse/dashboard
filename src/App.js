@@ -159,6 +159,7 @@ class App extends React.Component {
 										<Route exact path="/site/:name/albums" render={() => this.requireAuth(<Albums/>)}/>
 										<Route exact path="/site/:name/albums/:id" render={() => this.requireAuth(<Album/>)}/>
 										<Route exact path="/site/:name/albums/:id/:musicid" render={() => this.requireAuth(<Track/>)}/>
+										<Route exact path="/site/:name/track/:id" render={() => this.requireAuth(<Track/>)}/>
 
 										<Route exact path="/site/:name/storage" render={() => this.requireAuth(<Storage/>)}/>
 

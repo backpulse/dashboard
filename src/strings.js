@@ -210,7 +210,9 @@ const strings = {
         "DELETE_TRACK_DESC": "Vous êtes sur le point de supprimer cette piste de cet album. Êtes-vous certain(e) ?",
         "PLAY": "Lire",
         "AUDIO_FILE": "Fichier audio",
-        "SELECT_FILE": "Sélectionner un fichier"
+        "SELECT_FILE": "Sélectionner un fichier",
+        "EDIT_TRACK": "Modifier la piste",
+        "SAVE_TRACK": "Sauvegarder la piste"
     },
     en: {
         "CANCEL": "Cancel",
@@ -417,7 +419,9 @@ const strings = {
         "DELETE_TRACK_DESC": "You are about to remove a track from this album. Are you sure?",
         "PLAY": "Play",
         "AUDIO_FILE": "Audio file",
-        "SELECT_FILE": "Select file"
+        "SELECT_FILE": "Select file",
+        "EDIT_TRACK": "Edit track",
+        "SAVE_TRACK": "Save track"
     }
 };
 

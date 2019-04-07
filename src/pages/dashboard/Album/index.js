@@ -138,6 +138,10 @@ class Album extends React.Component {
         });
     }
 
+    onEdit = a => {
+        this.props.history.push('/site/' + this.props.match.params.name + '/track/' + a.id);
+    }
+
     render() {
         return (
             <div className="page dashboard-album">
@@ -160,7 +164,7 @@ class Album extends React.Component {
                     component={Track} 
                     items={this.state.tracks}
 
-                    onEdit={this.editTrack}
+                    onEdit={this.onEdit}
                     onDelete={t => this.setState({
                         confirmDelete: true,
                         trackToDelete: t,
