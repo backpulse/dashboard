@@ -421,7 +421,7 @@ const strings = {
         "AUDIO_FILE": "Audio file",
         "SELECT_FILE": "Select file",
         "EDIT_TRACK": "Edit track",
-        "SAVE_TRACK": "Save track"
+        "SAVE_TRACK": "Save track",
     }
 };
 
