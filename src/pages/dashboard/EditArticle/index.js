@@ -34,8 +34,7 @@ class EditArticle extends React.Component {
             title: "",
             content: "## My new article",
             // meta
-            id: "",
-            short_id: ""
+            id: ""
         }
     }
 
@@ -81,12 +80,11 @@ class EditArticle extends React.Component {
         const article = {
             title: this.state.title,
             content: this.state.content,
-            short_id: this.state.short_id,
             id: this.state.id
         }
         client.put('/articles/'+this.props.match.params.name, article).then(response => {
             console.log(response.data);
-            this.props.history.push('/site/' + this.props.match.params.name + '/articles/edit/' + response.data.payload.short_id);
+            this.props.history.push('/site/' + this.props.match.params.name + '/articles/edit/' + response.data.payload.id);
             this.props.enqueueSnackbar(strings.ARTICLE_SAVED, {variant: "success"})
         }).catch(err => {
             if(err) throw err;
@@ -102,7 +100,7 @@ class EditArticle extends React.Component {
     });
 
     deleteArticle = () => {
-        client.delete('/articles/' + this.props.match.params.name + '/' + this.state.short_id).then(response => {
+        client.delete('/articles/' + this.props.match.params.name + '/' + this.state.id).then(response => {
             this.closeConfirmDelete();
             this.props.history.push('/site/' + this.props.match.params.name + '/articles');
         }).catch(err => {

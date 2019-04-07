@@ -44,7 +44,6 @@ class EditProject extends React.Component {
             descriptions: [],
             url: "",
             id: "",
-            short_id: ""
         }
     }
 
@@ -61,7 +60,6 @@ class EditProject extends React.Component {
         this.setState({
             url: "",
             id: "",
-            short_id: "",
             titles: [{
                 "language_name": "English",
                 "language_code": "en",
@@ -167,7 +165,6 @@ class EditProject extends React.Component {
             titles: this.state.titles,
             descriptions: this.state.descriptions,
             id: this.state.id,
-            short_id: this.state.short_id,
             url: this.state.url
         }).then(response => {
             this.handleClose();
@@ -186,7 +183,7 @@ class EditProject extends React.Component {
     });
 
     deleteProject = () => {
-        client.delete('/project/' + this.state.short_id).then(response => {
+        client.delete('/project/' + this.state.id).then(response => {
             this.handleClose();
         }).catch(err => {
             if(err) throw err;

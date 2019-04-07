@@ -114,7 +114,7 @@ class Galleries extends React.Component {
     }
 
     editGallery = gallery => {
-        this.props.history.push('/site/' + this.props.match.params.name + '/galleries/' + gallery.short_id);
+        this.props.history.push('/site/' + this.props.match.params.name + '/galleries/' + gallery.id);
     }
 
     handleNameChange = e => this.setState({
@@ -140,7 +140,7 @@ class Galleries extends React.Component {
     });
 
     deleteGallery = () => {
-        client.delete('/gallery/' + this.state.galleryToDelete.short_id).then(response => {
+        client.delete('/gallery/' + this.state.galleryToDelete.id).then(response => {
             this.closeConfirmDelete();
             this.fetchGalleries();
         }).catch(err => {
@@ -149,7 +149,7 @@ class Galleries extends React.Component {
     }
 
     onDefaultSet = gallery => {
-        client.put('/galleries/' + this.props.match.params.name + '/default/' + gallery.short_id).then(response => {
+        client.put('/galleries/' + this.props.match.params.name + '/default/' + gallery.id).then(response => {
             console.log(response.data);
             this.fetchGalleries();
         }).catch(err => {

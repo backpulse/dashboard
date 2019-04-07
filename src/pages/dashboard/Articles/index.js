@@ -67,7 +67,7 @@ class Articles extends React.Component {
     });
 
     deleteArticle = () => {
-        client.delete('/articles/' + this.props.match.params.name + '/' + this.state.articleToDelete.short_id).then(response => {
+        client.delete('/articles/' + this.props.match.params.name + '/' + this.state.articleToDelete.id).then(response => {
             this.closeConfirmDelete();
             this.fetchArticles();
         }).catch(err => {
@@ -93,7 +93,7 @@ class Articles extends React.Component {
                 {!this.state.fetched && <CircularProgress/>}
                 <div className="articles-container">
                     {this.state.articles.map((article, i) => {
-                        return <ArticleBox onDelete={() => this.confirmDelete(article)} key={i} onOpen={() => this.editArticle(article.short_id)} article={article}/>;
+                        return <ArticleBox onDelete={() => this.confirmDelete(article)} key={i} onOpen={() => this.editArticle(article.id)} article={article}/>;
                     })}
                 </div>
 

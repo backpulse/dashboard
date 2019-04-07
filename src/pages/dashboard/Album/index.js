@@ -54,7 +54,7 @@ class Album extends React.Component {
         this.setState({fetched: false});
         client.get('/albums/' + this.props.match.params.name + '/' + this.props.match.params.id).then(response => {
             const album = response.data.payload;
-            album.tracks = sortByIndex(album.tracks) || [];
+            album.tracks = sortByIndex(album.tracks || []);
             this.setState({...album, fetched: true});
             console.log(album);
         }).catch(err => {

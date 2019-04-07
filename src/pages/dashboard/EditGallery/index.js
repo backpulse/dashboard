@@ -81,7 +81,7 @@ class EditGallery extends React.Component {
     }
     
     deleteGallery = () => {
-        client.delete('/gallery/' + this.state.short_id).then(response => {
+        client.delete('/gallery/' + this.state.id).then(response => {
             this.handleClose();
         }).catch(err => {
             if(err) throw err;
@@ -216,7 +216,7 @@ class EditGallery extends React.Component {
     }
 
     handleSave = () => {
-        client.put('/gallery/' + this.state.short_id, {
+        client.put('/gallery/' + this.state.id, {
             titles: this.state.titles,
             descriptions: this.state.descriptions
         }).then(response => {
@@ -456,7 +456,7 @@ class EditGallery extends React.Component {
                                     <FileUploader 
                                         siteName={this.props.match.params.name} 
                                         isGallery
-                                        galleryID={this.state.short_id} 
+                                        galleryID={this.state.id} 
                                         onDone={this.onUploadFinished} 
                                         open={this.state.importDialog} 
                                         close={this.toggleImport}

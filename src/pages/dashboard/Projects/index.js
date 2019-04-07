@@ -43,7 +43,7 @@ class Projects extends React.Component {
     }
 
     editProject = project => {
-        this.props.history.push('/site/' + this.props.match.params.name + '/projects/edit/' + project.short_id);
+        this.props.history.push('/site/' + this.props.match.params.name + '/projects/edit/' + project.id);
     }
 
     handleNewProject = () => {
