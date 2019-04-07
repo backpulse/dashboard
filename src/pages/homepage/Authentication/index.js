@@ -12,6 +12,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 
 import client from 'services/client';
 import { saveJWT } from '../../../utils/token';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class Authentication extends React.Component {
     
@@ -24,13 +25,16 @@ class Authentication extends React.Component {
             errorMsg: "",
             error: false,
             emailHasError: false,
-            passHasError: false
+            passHasError: false,
+
+            authenticating: false
         }
     }
 
     onSubmit = e => {
         e.preventDefault();
 
+        this.setState({authenticating: true});
         client.post(this.props.type === "login" ? "/users/authenticate" : "/users", {
             email: this.state.email,
             password: this.state.password
@@ -39,6 +43,7 @@ class Authentication extends React.Component {
             window.location = "/";
         }).catch(err => {
             this.checkError(err);
+            this.setState({authenticating: false});
             if(err) throw err;
         });
     }
@@ -124,11 +129,18 @@ class Authentication extends React.Component {
                                 {this.state.errorMsg}
                             </FormHelperText>}
                             <FormControl fullWidth>
-                                <Button style={{color: "white"}} type="submit" variant="contained" color="secondary">
+                                <Button disabled={this.state.authenticating} style={{color: "white"}} type="submit" variant="contained" color="secondary">
+                                    {this.state.authenticating && <CircularProgress style={{marginRight: 15}} />}
                                     {this.props.type === "login" ? strings.AUTHENTICATION_LOGIN : strings.AUTHENTICATION_SIGN_UP}
                                 </Button>
                             </FormControl>
                         </form>
+                        {this.props.type === "login" && <a href="/signup">
+                            {strings.NOT_REGISTERED_YET}
+                        </a>}
+                        {this.props.type !== "login" && <a href="/login">
+                            {strings.ALREADY_REGISTERED}
+                        </a>}
                     </Paper>
                 </div>
             </div>

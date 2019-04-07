@@ -4,6 +4,8 @@ import {
 
 const strings = {
     fr: {
+        "ALREADY_REGISTERED": "Déjà inscrit? Se connecter ici.",
+        "NOT_REGISTERED_YET": "Pas encore de compte ? Se créer un compte ici.",
         "CANCEL": "Annuler",
         "CREATE": "Créer",
         "EMAIL": "Adresse email",
@@ -215,6 +217,8 @@ const strings = {
         "SAVE_TRACK": "Sauvegarder la piste"
     },
     en: {
+        "ALREADY_REGISTERED": "Already have an account? Sign in here.",
+        "NOT_REGISTERED_YET": "You don't have an account yet? Sign up here.",
         "CANCEL": "Cancel",
         "CREATE": "Create",
         "EMAIL": "Email address",
