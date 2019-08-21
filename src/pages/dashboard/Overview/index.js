@@ -1,7 +1,5 @@
 import React from 'react';
 
-import strings from 'strings';
-
 import client from 'services/client';
 
 import {withRouter}from 'react-router';

@@ -3,7 +3,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
-import AddIcon from '@material-ui/icons/Add';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,18 +17,11 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import RemoveCircle from '@material-ui/icons/RemoveCircle';
 import strings from 'strings';
 import Selector from 'components/Selector';
-import Fab from '@material-ui/core/Fab';
-
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
-import PhotoBox from 'components/PhotoBox';
-
-import FileUploader from 'components/FileUploader';
 
 import client from 'services/client';
 
@@ -354,15 +346,15 @@ class EditGallery extends React.Component {
                         </Button>
                         </Toolbar>
                     </AppBar>
-                        <Fab className="fab" onClick={this.toggleImport} variant="extended" color="primary">
+                        {/* <Fab className="fab" onClick={this.toggleImport} variant="extended" color="primary">
                             <AddIcon/>
                             {strings.IMPORT}
-                        </Fab>
+                        </Fab> */}
                     <DialogContent className="dialog-content dialog-gallery-edit">
                         <Grid container spacing={16}>
-                            <Grid item lg={7} md={12} xs={12}>
+                            <Grid item lg={12} md={12} xs={12}>
                                 <Grid container direction="column">
-                                    <Grid item xs={12} md={10}>
+                                    <Grid item xs={12} md={12}>
                                         <div className="title-div">
                                             <h1>{strings.TITLES}</h1>
                                             <FormControl fullWidth>
@@ -376,7 +368,7 @@ class EditGallery extends React.Component {
                                         </div>
                                     </Grid>
                                     {this.state.titles.map((title, i) => (
-                                        <Grid key={i} item md={10}>
+                                        <Grid key={i} item md={12}>
                                             <TextField
                                                 label={title.language_name}
                                                 variant="outlined"
@@ -442,61 +434,6 @@ class EditGallery extends React.Component {
                                     {this.state.error && <FormHelperText error={true}>
                                         {this.state.errorMsg}
                                     </FormHelperText>}
-                                </Grid>
-                            </Grid>
-                            <Grid item lg={5} xs={12}>
-                                <Grid container direction="column">
-                                    <Grid item xs={12} lg={8} md={6}>
-                                        <div className="title-div">
-                                            <h1>{strings.PHOTOS}</h1>
-                                            <Button onClick={this.toggleEdit} variant="outlined" color="primary">Options</Button>
-                                        </div>
-                                        {this.state.checkedPhotos.length > 0 && <Button onClick={this.handleDelete} variant="contained" className="button-danger">{strings.DELETE} ({this.state.checkedPhotos.length})</Button>}
-                                    </Grid>
-                                    <FileUploader 
-                                        siteName={this.props.match.params.name} 
-                                        isGallery
-                                        galleryID={this.state.id} 
-                                        onDone={this.onUploadFinished} 
-                                        open={this.state.importDialog} 
-                                        close={this.toggleImport}
-                                    />
-                                    {/* <div className="gallery-photos-container"> */}
-                                        <DragDropContext onDragEnd={this.onDragEnd}>
-                                            <Droppable droppableId="droppable">
-                                                {provided => (
-                                                    <div ref={provided.innerRef} className="galleries-container">
-                                                        {this.state.photos.map((photo, i) => (
-                                                            <Draggable key={i} draggableId={photo.id} index={i}>
-                                                                {provided => (
-                                                                    <div
-                                                                    className="margintop"
-                                                                    ref={provided.innerRef} 
-                                                                    {...provided.draggableProps} 
-                                                                    {...provided.dragHandleProps}>
-                                                                    <Grid item xs={12} md={10}>
-                                                                        <PhotoBox 
-                                                                            onDelete={() => this.handleSingleDelete(photo)} 
-                                                                            previewButton
-                                                                            setPreview={() => this.setPreviewPhoto(photo)}
-                                                                            preview={photo.id === this.state.preview_photo_id} 
-                                                                            checked={this.isChecked(photo)}
-                                                                            toggleCheck={() => this.toggleCheck(photo)}
-                                                                            className="padding-10" 
-                                                                            editing={this.state.editing} 
-                                                                            src={photo.url}
-                                                                        />
-                                                                    </Grid>
-                                                                </div>
-                                                                )}
-                                                            </Draggable>
-                                                        )
-                                                        )}
-                                                    </div>
-                                                )}
-                                            </Droppable>
-                                        </DragDropContext>
-                                    {/* </div> */}
                                 </Grid>
                             </Grid>
                         </Grid>

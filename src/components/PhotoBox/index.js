@@ -3,10 +3,10 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
+import CardHeader from '@material-ui/core/CardHeader';
 
 import strings from 'strings';
 
@@ -16,24 +16,23 @@ class PhotoBox extends React.Component {
     render() {
         return (
             <Card className="photobox">
-                <CardMedia
+                <CardHeader title={this.props.data.title || "No name"}/>
+                {this.props.data.url && <CardMedia
                     className="photobox-preview-media"
-                    image={this.props.src}
-                />
-                {this.props.editing && <CardActions disableActionSpacing>
-                    <Checkbox
-                        checked={this.props.checked}
-                        onChange={this.props.toggleCheck}
-                        color="primary"
-                    />
+                    image={this.props.data.url}
+                />}
+                <CardActions disableActionSpacing>
+                    <Tooltip title={strings.EDIT}>
+                        <IconButton onClick={this.props.onEdit} aria-label="Edit">
+                            <EditIcon />
+                        </IconButton>
+                    </Tooltip>
                     <Tooltip title={strings.DELETE}>
-                        <IconButton onClick={this.props.onDelete} aria-label="Delete">
+                        <IconButton onClick={this.props.onDelete} aria-label="Edit">
                             <DeleteIcon />
                         </IconButton>
                     </Tooltip>
-                    {this.props.previewButton && <Button onClick={this.props.setPreview} color="primary" style={{marginLeft: "auto", cursor: this.props.preview ? "default": "pointer"}} size="small" variant={this.props.preview ? "contained" : "outlined"}>{strings.GALLERY_PREVIEW_IMAGE}</Button>}
-
-                </CardActions>}
+                </CardActions>
             </Card>
         )
     }

@@ -34,7 +34,6 @@ class FileUploader extends React.Component {
     upload = (file, cb) => {
         const formData = new FormData();
         
-
         if(this.props.isStorage) {
             formData.append("file", file, file.name);
             client.post('/files/' + this.props.siteName, formData, {headers: {"Content-Type": "multipart/form-data"}}).then(response => cb(response.data)).catch(err => {
@@ -42,6 +41,19 @@ class FileUploader extends React.Component {
                     this.setState({publishing: false, error: err.message});
                 }
             })
+        } else if(this.props.isPhoto) {
+            formData.append("image", file, file.name);
+            client.post("/photos/" + this.props.siteName + "/" + this.props.photoID, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(response => {
+                cb(response.data);
+            }).catch(err => {
+                if(err) {
+                    this.setState({publishing: false, error: err.message});
+                }
+            });
         } else {
             formData.append("image", file, file.name);
             formData.append("is_gallery", this.props.isGallery);
@@ -115,7 +127,7 @@ class FileUploader extends React.Component {
             <DialogContent>
 
                 <DialogContentText variant="body1">
-                    {strings.IMPORT_FILES_DESCRIPTION}
+                    {this.props.max > 1 ? strings.IMPORT_FILES_DESCRIPTION : strings.IMPORT_FILE}
                 </DialogContentText>
 
                 <div style={{display: "flex", alignItems:"center"}}>

@@ -36,7 +36,9 @@ import {
 	Albums,
 	Album,
 	Track,
-	Storage
+	Storage,
+	Photos,
+	EditPhoto
 } from 'pages/dashboard';
 
 import {
@@ -166,6 +168,8 @@ class App extends React.Component {
 
 										<Route path="/site/:name/galleries" render={() => this.requireAuth(<Galleries/>)}/>
 										<Route path="/site/:name/galleries/:id" render={() => this.requireAuth(<EditGallery/>)}/>
+										<Route exact path="/site/:name/photos" render={() => this.requireAuth(<Photos/>)}/>
+										<Route exact path="/site/:name/photos/:id" render={() => this.requireAuth(<EditPhoto/>)}/>
 
 										<Route exact path="/site/:name/articles" render={() => this.requireAuth(<Articles/>)}/>
 										<Route path="/site/:name/articles/new" render={() => this.requireAuth(<EditArticle new/>)}/>

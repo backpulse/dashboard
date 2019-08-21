@@ -20,6 +20,8 @@ import Albums from './Albums';
 import Storage from './Storage';
 import Album from './Album';
 import Track from './Track';
+import Photos from './Photos';
+import EditPhoto from './EditPhoto';
 
 export {
     MySites,
@@ -44,4 +46,6 @@ export {
     Album,
     Track,
     Storage,
+    Photos,
+    EditPhoto
 }

@@ -74,12 +74,12 @@ const strings = {
         "ADD_TRANSLATION": "Ajouter une traduction",
         "PROJECT_EDIT": "Modifier le projet",
         "DESCRIPTIONS": "Descriptions",
-        "DELETE": "Supprimer",
         "CONFIRM_DELETE_PROJECT_DESCRIPTION": "Êtes-vous certain(e) de vouloir supprimer ce projet ?",
         "DELETE_PROJECT": "Supprimer le projet",
         "PROJECT_URL": "Lien du projet",
         "ABOUT": "À propos",
         "NEW_GALLERY": "Nouvelle galerie",
+        "NEW_PHOTO": "Nouvelle photo",
         "EDIT_GALLERY": "Modifier la galerie",
         "PHOTOS": "Photos",
         "IMPORT_PHOTOS": "Importer des photographies",
@@ -214,7 +214,11 @@ const strings = {
         "AUDIO_FILE": "Fichier audio",
         "SELECT_FILE": "Sélectionner un fichier",
         "EDIT_TRACK": "Modifier la piste",
-        "SAVE_TRACK": "Sauvegarder la piste"
+        "SAVE_TRACK": "Sauvegarder la piste",
+        "GALLERY": "Gallerie",
+        "NONE": "Aucune",
+        "DELETE": "Supprimer",
+        "CONFIRM_DELETE_PHOTO": "Êtes-vous certain(e) de vouloir supprimer cette photo ?"
     },
     en: {
         "ALREADY_REGISTERED": "Already have an account? Sign in here.",
@@ -294,6 +298,7 @@ const strings = {
         "PROJECT_URL": "Project url",
         "ABOUT": "About",
         "NEW_GALLERY": "New gallery",
+        "NEW_PHOTO": "New photo",
         "EDIT_GALLERY": "Edit gallery",
         "PHOTOS": "Photos",
         "IMPORT_FILES": "Import files",
@@ -384,6 +389,7 @@ const strings = {
         "CONTENT": "Content",
         "PREVIEW": "Preview",
         "DELETE_ARTICLE": "Delete article?",
+        "GALLERY": "Gallery",
         
         "CONFIRM_DELETE_ARTICLE_DESCRIPTION": "Are you sure you want to permanently remove this article?",
         "ADD_VIDEO": "Add a video",
@@ -426,6 +432,8 @@ const strings = {
         "SELECT_FILE": "Select file",
         "EDIT_TRACK": "Edit track",
         "SAVE_TRACK": "Save track",
+        "NONE": "None",
+        "CONFIRM_DELETE_PHOTO": "You are about to delete this photo. Are you sure?"
     }
 };
 
