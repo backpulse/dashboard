@@ -70,8 +70,12 @@ class Photos extends React.Component {
     fetchPhotos = () => {
         client.get('/photos/' + this.props.match.params.name).then(response => {
             const photos = response.data.payload || [];
-            console.log(photos);
-            photos.reverse();
+            photos.sort(function(a,b){
+                // Turn your strings into dates, and then subtract them
+                // to get a value that is either negative, positive, or zero.
+                return new Date(b.created_at) - new Date(a.created_at);
+              });
+            // photos.reverse();
             // sortByIndex(photos);
             this.setState({photos, fetched: true});
         }).catch(err => {
@@ -93,8 +97,9 @@ class Photos extends React.Component {
 
         client.post('/photos/' + this.props.match.params.name + '/create', data).then(response => {
             console.log(response.data.payload);
-            this.handleCloseNewPhotoDialog();
             this.fetchPhotos();
+            this.props.history.push('/site/' + this.props.match.params.name + '/photos/' + response.data.payload.id);
+            this.handleCloseNewPhotoDialog();
         }).catch(err => {
             if(err) throw err;
         });
