@@ -7,7 +7,7 @@
     "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",
     "dayjs": "^1.8.0",
-    "highlight.js": "^9.15.6",
+    "highlight.js": "^10.4.1",
     "node-sass": "^4.11.0",
     "notistack": "^0.5.1",
     "react": "^16.7.0",
